@@ -1,0 +1,35 @@
+.navbar {
+  overflow: hidden;
+}
+
+.navbar-menu {
+  list-style-type: none;
+  padding-right: 50px;
+  float: right;
+}
+
+.navbar-menu-item {
+  float: left;
+}
+
+.navbar-menu-item a {
+  display: block;
+  color: brown;
+  padding: 20px 10px;
+  text-align: center;
+  text-decoration: solid;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-size: x-large;
+}
+
+.navbar-menu-item a:hover {
+  color: black;
+}
+.navbar-logo {
+  display: inline-block;
+  padding: 10px;
+}
+
+.navbar-logo img {
+  height: 110px; /* Adjust the height of the logo as needed */
+}
