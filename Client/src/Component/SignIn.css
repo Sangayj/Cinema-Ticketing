@@ -1,0 +1,42 @@
+.signin-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.signin-form h2 {
+  margin-bottom: 1rem;
+}
+
+.signin-form label {
+  margin-top: 1rem;
+}
+
+.signin-form input,
+.signin-form select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.signin-form button {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  background-color: #0077ff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}

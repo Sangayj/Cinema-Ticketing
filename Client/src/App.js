@@ -1,7 +1,7 @@
 import "./App.css";
-// this is comment by jd
+
 function App() {
-  return <div className="App"></div>;
+  return <div className="App">Hello! Start coding</div>;
 }
 
 export default App;
