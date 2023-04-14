@@ -9,7 +9,6 @@ import View from "./Component/View";
 function App() {
   return (
     <div>
-      <View />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
