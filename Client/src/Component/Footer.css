@@ -1,5 +1,5 @@
 .main-footer{
-    background-color: #0081C9;
+    background-color: #161616;
     text-align: center;
     color: aliceblue;
 }
@@ -7,3 +7,6 @@
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
+.social-icons > *:not(:last-child) {
+    margin-right: 20px;
+  }
