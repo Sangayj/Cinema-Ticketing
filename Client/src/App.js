@@ -4,7 +4,7 @@ import Navbar from "./Component/Navbar";
 import Home from "./Component/Home";
 import SignIn from "./Component/SignIn";
 import Login from "./Component/Login";
-import Footer from "./Component/Footer";
+
 function App() {
   return (
     <div>
