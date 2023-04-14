@@ -16,7 +16,7 @@ export default function Footer() {
             <div className='social-icons'>
                         <FaFacebook size={40} color='#2F58CD'/>
                         <FaTwitter size={40} color='#5BC0F8'/>
-                        <FaInstagram size={40} color='#CE5959'/>
+                        <FaInstagram size={40} color='#E4405F'/>
                         </div> 
         </div>
             </div>
