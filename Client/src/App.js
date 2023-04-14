@@ -1,7 +1,12 @@
 import "./App.css";
+import Navigation from "./Component/Navigation";
+import Homepage from "./Component/Homepage";
 
 function App() {
-  return <div className="App">Hello! Start coding</div>;
+  return <>
+  <Navigation/>
+  <Homepage/>
+  </>;
 }
 
 export default App;
