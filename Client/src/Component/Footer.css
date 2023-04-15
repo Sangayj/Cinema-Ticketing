@@ -1,12 +1,16 @@
-.main-footer{
-    background-color: #161616;
-    text-align: center;
-    color: aliceblue;
+.main-footer {
+  background-color: #408e91;
+  text-align: center;
+  color: aliceblue;
 }
-.col{
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+.col {
+  padding-top: 0rem;
+  padding-bottom: 2rem;
 }
 .social-icons > *:not(:last-child) {
-    margin-right: 20px;
-  }
+  margin-right: 30px;
+}
+
+.hr {
+  color: orangered;
+}
