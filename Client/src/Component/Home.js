@@ -1,20 +1,19 @@
 import React from "react";
 import "./Home.css";
+import image from "./c.jpg";
+// import image1 from "./jamtsho.jpg"
 const Home = () => {
   return (
-    <div>
-      <div className="search-bar-container">
-        <input
-          type="text"
-          placeholder="Search for movies"
-          className="search-bar-input"
-        />
-        <button className="search-bar-button">Search </button>
+    <>
+      <div>
+        <img src={image} alt="jangchub" />
+        <div class="parent">
+          <div class="child"></div>
+          <div class="child">2</div>
+          <div class="child">3</div>
+        </div>
       </div>
-      <div className="allmovieslist">
-        <p>All Movies List</p>
-      </div>
-    </div>
+    </>
   );
 };
 

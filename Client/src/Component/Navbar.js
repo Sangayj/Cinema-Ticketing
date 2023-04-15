@@ -9,14 +9,14 @@ function Navbar() {
       </a>
       <ul className="navbar-menu">
         <li className="navbar-menu-item">
-          <a href="/#">Home</a>
+          <a href="/#"><b>Home</b></a>
         </li>
 
         <li className="navbar-menu-item">
-          <a href="/SignIn">Sign In</a>
+          <a href="/SignIn"><b>Sign In</b></a>
         </li>
         <li className="navbar-menu-item">
-          <a href="/Login">Login</a>
+          <a href="/Login"><b>Login</b></a>
         </li>
       </ul>
     </nav>
