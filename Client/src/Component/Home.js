@@ -39,6 +39,7 @@ const Home = () => {
         },
       }}
     >
+    
       <Slide
         background={{
           backgroundColor: "black",
@@ -80,16 +81,40 @@ const Home = () => {
         <FaArrowRight size={32} />
       </div>  
     </HeroSlider>
+    <div class="Heading">
+      <p>All Movies List</p>
+      <form>
+        <input type="text" placeholder="Search for any Movies" />
+        <button type="submit"><i className="fa fa-search"></i>Search</button>
+      </form>
+    </div>
 
     <p></p>
     <p></p>
     <div className="parent-container">
-      <div className="child-container">Column 1, Row 1</div>
-      <div className="child-container">Column 2, Row 1</div>
-      <div className="child-container">Column 3, Row 1</div>
-      <div className="child-container">Column 1, Row 2</div>
-      <div className="child-container">Column 2, Row 2</div>
-      <div className="child-container">Column 3, Row 2</div>
+      <div className="child-container">Column 1, Row 1
+      <button class="view-details-btn">View Details</button>
+      </div>
+
+      <div className="child-container">Column 2, Row 1
+      <button class="view-details-btn">View Details</button>
+      </div>
+
+      <div className="child-container">Column 3, Row 1
+      <button class="view-details-btn">View Details</button>
+      </div>
+
+      <div className="child-container">Column 1, Row 2
+      <button class="view-details-btn">View Details</button>
+      </div>
+
+      <div className="child-container">Column 2, Row 2
+      <button class="view-details-btn">View Details</button>
+      </div>
+
+      <div className="child-container">Column 3, Row 2
+      <button class="view-details-btn">View Details</button>
+      </div>
     </div>
     
     </>
