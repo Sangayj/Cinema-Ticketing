@@ -92,7 +92,8 @@ const Home = () => {
     <p></p>
     <p></p>
     <div className="parent-container">
-      <div className="child-container">Column 1, Row 1
+      <div className="child-container">
+        <img src="" alt="img" />
       <button class="view-details-btn">View Details</button>
       </div>
 
