@@ -108,7 +108,8 @@ const Home = () => {
       <button class="view-details-btn">View Details</button>
       </div>
 
-      <div className="child-container">Column 2, Row 2
+      <div className="child-container">
+      <img src="" alt="" />
       <button class="view-details-btn">View Details</button>
       </div>
 
