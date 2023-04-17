@@ -5,9 +5,9 @@ import { FaTwitter } from 'react-icons/fa';
 import { FaInstagram } from 'react-icons/fa';
 export default function Footer() {
   return (
-    <div className='main-footer'>
+    <div className='footer'>
         <div className='container'>
-        <div className='row'>
+        <div className='row-footer'>
             {/*column*/}
           <div className='col'>
 
@@ -22,7 +22,7 @@ export default function Footer() {
                         <FaInstagram size={40} color='#FFFFFF'/>
                         </div> 
 
-            <div className='row'>
+            <div className='row-footer'>
               <hr style={{ height: '0.5px', color: '#ccc', backgroundColor: '#E86A33' }} />
             <p className='col-sm'>
               &copy;{new Date().getFullYear()}.All Rights Reserved.Filmassociation of Bhutan

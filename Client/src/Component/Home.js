@@ -7,12 +7,8 @@ const Home = () => {
     <>
       <div>
         <img src={image} alt='jangchub' />
-        <div class="parent">
-        <div class="child">
-        </div>
-        <div class="child">2</div>
-        <div class="child">3</div>
-        </div>
+     <a href="/View" ><button className="btn btn-info">View</button></a>
+
       </div>
       </>
       

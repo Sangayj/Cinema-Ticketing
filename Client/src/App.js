@@ -5,7 +5,8 @@ import Home from "./Component/Home";
 import SignIn from "./Component/SignIn";
 import Login from "./Component/Login";
 import Footer from "./Component/Footer";
-
+import View from "./Component/View";
+import Ticket from "./Component/Ticket";
 function App() {
   return (
     <div>
@@ -13,9 +14,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/SignIn" element={<SignIn />} />
-        <Route path="/Login" element={<Login />} S />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/View" element={<View />} />
+        <Route path="/Ticket" element={<Ticket />} />
       </Routes>
-      <Home/>
       <div>
         <Footer/>
       </div>
