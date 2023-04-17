@@ -11,7 +11,6 @@ function Navbar() {
         <li className="navbar-menu-item">
           <a href="/#">Home</a>
         </li>
-
         <li className="navbar-menu-item">
           <a href="/SignIn">Sign In</a>
         </li>
