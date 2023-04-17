@@ -48,17 +48,17 @@ function MovieList() {
       theater: 'Lugar theater, Thimphu',
       ticketPrice: 'Nu.300'
     },
-    // {
-    //   movieName: 'Another Movie',
-    //   actors: 'Actor 1, Actor 2, Actor 3',
-    //   director: 'Director Name',
-    //   producer: 'Producer Name',
-    //   description: 'Movie Description',
-    //   showDate: '3rd september',
-    //   showTime: '7pm',
-    //   theater: 'Theater Name',
-    //   ticketPrice: 'Nu.200'
-    // }
+    {
+      movieName: 'Nga Kinley Choegi Superman',
+      actors: 'Actor 1, Actor 2, Actor 3',
+      director: 'Director Name',
+      producer: 'Producer Name',
+      description: 'Movie Description dksbvbvsdfjkbvfjk;bv;d fvieawgfiuv ergvuiegirgvbyin',
+      showDate: '3rd september',
+      showTime: '7pm',
+      theater: 'City Cinema',
+      ticketPrice: 'Nu.350'
+    }
   ];
 
   return (

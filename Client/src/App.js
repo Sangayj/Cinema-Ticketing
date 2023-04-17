@@ -8,11 +8,15 @@ import Login from "./Component/Login";
 import Footer from "./Component/Footer";
 import View from "./Component/View";
 import Ticket from "./Component/Ticket";
+import Class_Props from "./Component/Class_Props";
+import React_Props from "./Component/React_Props";
+import Movie1 from "./Component/Movie1";
+
 
 function App() {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/SignIn" element={<SignIn />} />
@@ -22,7 +26,10 @@ function App() {
       </Routes>
       <div>
       <Footer />
-      </div>
+      </div> */}
+      {/* <React_Props />
+      <View /> */}
+      <Movie1 />
     </div>
   );
 }
