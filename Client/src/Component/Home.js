@@ -85,6 +85,7 @@ const Home = () => {
     <div class="Heading">
       <p><b>All Movies List</b></p>
       <form>
+       
         <input type="text" placeholder="Search for any Movies" />
         <button type="submit"><i className="fa fa-search"></i>Search</button>
       </form>
@@ -95,7 +96,9 @@ const Home = () => {
     <div className="parent-container">
       <div className="child-container">
         <img src="../Image/dorozam.jpg" alt="img" />
+        < a href="/View">
       <button class="view-details-btn">View Details</button>
+        </a>
       </div>
 
       <div className="child-container">
