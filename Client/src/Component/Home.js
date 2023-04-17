@@ -93,7 +93,7 @@ const Home = () => {
     <p></p>
     <div className="parent-container">
       <div className="child-container">
-        <img src="" alt="img" />
+        <img src="../Image/dorozam.jpg" alt="img" />
       <button class="view-details-btn">View Details</button>
       </div>
 
@@ -105,7 +105,8 @@ const Home = () => {
       <button class="view-details-btn">View Details</button>
       </div>
 
-      <div className="child-container">Column 1, Row 2
+      <div className="child-container">
+      <img src="../Image/superman.jpg" alt="img" />
       <button class="view-details-btn">View Details</button>
       </div>
 
