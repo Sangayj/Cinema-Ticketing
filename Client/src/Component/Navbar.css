@@ -20,9 +20,8 @@
   padding: 20px 10px;
   text-align: center;
   text-decoration: solid;
-  font-family: sans-serif;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   font-size: x-large;
-  font-weight: 300;
 }
 
 .navbar-menu-item a:hover {

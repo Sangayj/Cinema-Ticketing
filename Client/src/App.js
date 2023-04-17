@@ -6,6 +6,8 @@ import SignIn from "./Component/SignIn";
 import Login from "./Component/Login";
 //import View from "./Component/View";
 import Footer from "./Component/Footer";
+import View from "./Component/View";
+import Ticket from "./Component/Ticket";
 
 function App() {
   return (
@@ -14,7 +16,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/SignIn" element={<SignIn />} />
-        <Route path="/Login" element={<Login />} S />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/View" element={<View />} />
+        <Route path="/Ticket" element={<Ticket />} />
       </Routes>
       <div>
       <Footer />
