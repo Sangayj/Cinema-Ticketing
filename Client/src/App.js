@@ -4,9 +4,11 @@ import Navbar from "./Component/Navbar";
 import Home from "./Component/Home";
 import SignIn from "./Component/SignIn";
 import Login from "./Component/Login";
+//import View from "./Component/View";
 import Footer from "./Component/Footer";
 import View from "./Component/View";
 import Ticket from "./Component/Ticket";
+
 function App() {
   return (
     <div>
@@ -19,7 +21,7 @@ function App() {
         <Route path="/Ticket" element={<Ticket />} />
       </Routes>
       <div>
-        <Footer/>
+      <Footer />
       </div>
     </div>
   );
