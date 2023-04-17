@@ -83,7 +83,7 @@ const Home = () => {
       </div>  
     </HeroSlider>
     <div class="Heading">
-      <p>All Movies List</p>
+      <p><b>All Movies List</b></p>
       <form>
         <input type="text" placeholder="Search for any Movies" />
         <button type="submit"><i className="fa fa-search"></i>Search</button>
@@ -98,11 +98,13 @@ const Home = () => {
       <button class="view-details-btn">View Details</button>
       </div>
 
-      <div className="child-container">Column 2, Row 1
+      <div className="child-container">
+      <img src="../Image/dorozam.jpg" alt="img" />
       <button class="view-details-btn">View Details</button>
       </div>
 
-      <div className="child-container">Column 3, Row 1
+      <div className="child-container">
+      <img src="../Image/superman.jpg" alt="img" />
       <button class="view-details-btn">View Details</button>
       </div>
 
@@ -116,7 +118,8 @@ const Home = () => {
       <button class="view-details-btn">View Details</button>
       </div>
 
-      <div className="child-container">Column 3, Row 2
+      <div className="child-container">
+      <img src="../Image/lottery.jfif" alt="img" />
       <button class="view-details-btn">View Details</button>
       </div>
     </div>
