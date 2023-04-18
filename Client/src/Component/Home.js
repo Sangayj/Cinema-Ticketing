@@ -82,6 +82,7 @@ const Home = () => {
     <div class="Heading">
       <p><b>All Movies List</b></p>
       <form>
+       
         <input type="text" placeholder="Search for any Movies" />
         <button type="submit"><i className="fa fa-search"></i>Search</button>
       </form>
