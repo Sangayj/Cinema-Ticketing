@@ -4,10 +4,6 @@ import { Link } from "react-router-dom";
 import "./Home.css";
 import HeroSlider, { Slide } from "hero-slider";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
-import image1 from "../Image/image1.jpg";
-import image2 from "../Image/image2.jpg";
-import image3 from "../Image/image3.jpg";
-import image4 from "../Image/image4.jpg";
 
 const Home = () => {
   return (
@@ -47,28 +43,28 @@ const Home = () => {
           backgroundColor: "black",
         }}
       >
-        <img src={image1} alt="slide-image" />
+        <img src='./Image/image1.jpg' alt="slide-image" />
       </Slide>
       <Slide
         background={{
           backgroundColor: "black",
         }}
       >
-        <img src={image2} alt="slide-image" />
+        <img src='./Image/image2.jpg' alt="slide-image" />
       </Slide>
       <Slide
         background={{
           backgroundColor: "black",
         }}
       >
-        <img src={image3} alt="slide-image" />
+        <img src='./Image/image3.jpg'alt="slide-image" />
       </Slide>
       <Slide
         background={{
           backgroundColor: "black",
         }}
       >
-        <img src={image4} alt="slide-image" />
+        <img src='./Image/image4.jpg' alt="slide-image" />
       </Slide>
       <div
         className="slider-button slider-button-left"

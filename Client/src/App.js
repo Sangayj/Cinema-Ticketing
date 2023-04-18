@@ -36,9 +36,7 @@ function App() {
         <Route path="/Movie5" element={<Movie5 />} />
         <Route path="/Movie6" element={<Movie6 />} />
       </Routes>
-      <div>
       <Footer />
-      </div>
       {/* <React_Props />
       <View /> */}
     </div>
