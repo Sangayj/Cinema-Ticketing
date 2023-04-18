@@ -21,7 +21,7 @@ import Movie1 from "./Component/Movie1";
 function App() {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/SignIn" element={<SignIn />} />
@@ -35,9 +35,10 @@ function App() {
         <Route path="/Movie5" element={<Movie5 />} />
         <Route path="/Movie6" element={<Movie6 />} />
       </Routes>
-      <Footer />
+      <Footer /> */}
       {/* <React_Props />
       <View /> */}
+      <Ticket />
     </div>
   );
 }
