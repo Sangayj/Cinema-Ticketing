@@ -4,11 +4,8 @@ import Navbar from "./Component/Navbar";
 import Home from "./Component/Home";
 import SignIn from "./Component/SignIn";
 import Login from "./Component/Login";
-import View from "./Component/View";
 import Footer from "./Component/Footer";
 import Ticket from "./Component/Ticket";
-import Class_Props from "./Component/Class_Props";
-import React_Props from "./Component/React_Props";
 
 import Movie2 from "./Component/Movie2";
 import Movie3 from "./Component/Movie3";
@@ -25,7 +22,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/SignIn" element={<SignIn />} />
         <Route path="/Login" element={<Login />} />
-        <Route path="/View" element={<View />} />
         <Route path="/Ticket" element={<Ticket />} />
         <Route path="/Movie1" element={<Movie1 />} />
         <Route path="/Movie2" element={<Movie2 />} />
