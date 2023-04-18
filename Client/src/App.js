@@ -10,26 +10,37 @@ import View from "./Component/View";
 import Ticket from "./Component/Ticket";
 import Class_Props from "./Component/Class_Props";
 import React_Props from "./Component/React_Props";
+
+import Movie2 from "./Component/Movie2";
+import Movie3 from "./Component/Movie3";
+import Movie4 from "./Component/Movie4";
+import Movie5 from "./Component/Movie5";
+import Movie6 from "./Component/Movie6";
 import Movie1 from "./Component/Movie1";
 
 
 function App() {
   return (
     <div>
-      {/* <Navbar />
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/SignIn" element={<SignIn />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/View" element={<View />} />
         <Route path="/Ticket" element={<Ticket />} />
+        <Route path="/Movie1" element={<Movie1 />} />
+        <Route path="/Movie2" element={<Movie2 />} />
+        <Route path="/Movie3" element={<Movie3 />} />
+        <Route path="/Movie4" element={<Movie4 />} />
+        <Route path="/Movie5" element={<Movie5 />} />
+        <Route path="/Movie6" element={<Movie6 />} />
       </Routes>
       <div>
       <Footer />
-      </div> */}
+      </div>
       {/* <React_Props />
       <View /> */}
-      <Movie1 />
     </div>
   );
 }

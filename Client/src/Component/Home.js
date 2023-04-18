@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Home.css";
 import HeroSlider, { Slide } from "hero-slider";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
@@ -95,32 +96,44 @@ const Home = () => {
     <div className="parent-container">
       <div className="child-container">
         <img src="../Image/dorozam.jpg" alt="img" />
-      <button class="view-details-btn">View Details</button>
+        <Link to='/Movie1'>
+        <button class="view-details-btn">View Details</button>
+        </Link>
       </div>
 
       <div className="child-container">
-      <img src="../Image/dorozam.jpg" alt="img" />
-      <button class="view-details-btn">View Details</button>
+        <img src="../Image/dorozam.jpg" alt="img" />
+        <Link to='/Movie2'>
+        <button class="view-details-btn">View Details</button>
+        </Link>
       </div>
 
       <div className="child-container">
-      <img src="../Image/superman.jpg" alt="img" />
-      <button class="view-details-btn">View Details</button>
+        <img src="../Image/dorozam.jpg" alt="img" />
+        <Link to='/Movie3'>
+        <button class="view-details-btn">View Details</button>
+        </Link>
       </div>
 
       <div className="child-container">
-      <img src="../Image/superman.jpg" alt="img" />
-      <button class="view-details-btn">View Details</button>
+        <img src="../Image/dorozam.jpg" alt="img" />
+        <Link to='/Movie4'>
+        <button class="view-details-btn">View Details</button>
+        </Link>
       </div>
 
       <div className="child-container">
-      <img src="" alt="" />
-      <button class="view-details-btn">View Details</button>
+        <img src="../Image/dorozam.jpg" alt="img" />
+        <Link to='/Movie5'>
+        <button class="view-details-btn">View Details</button>
+        </Link>
       </div>
 
       <div className="child-container">
-      <img src="../Image/lottery.jfif" alt="img" />
-      <button class="view-details-btn">View Details</button>
+        <img src="../Image/dorozam.jpg" alt="img" />
+        <Link to='/Movie6'>
+        <button class="view-details-btn">View Details</button>
+        </Link>
       </div>
     </div>
     

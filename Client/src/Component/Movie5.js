@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 import './Movie1.css';
 
-function MovieDetails() {
+function Movie5() {
   return (
     <div classname='overall'>
     <div className="movie-details-container">
@@ -39,7 +39,7 @@ function MovieDetails() {
     </div>
 
     </div>
-  );
+  )
 }
 
-export default MovieDetails;
+export default Movie5
