@@ -17,7 +17,6 @@ import Movie5 from "./Component/Movie5";
 import Movie6 from "./Component/Movie6";
 import Movie1 from "./Component/Movie1";
 
-
 function App() {
   return (
     <div>
@@ -36,9 +35,6 @@ function App() {
         <Route path="/Movie6" element={<Movie6 />} />
       </Routes>
       <Footer />
-      </div>
-      {/* <React_Props />
-      <View /> */}
     </div>
   );
 }
