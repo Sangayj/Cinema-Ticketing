@@ -11,7 +11,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <a href="/#" className="navbar-logo">
-        <img src="./Images/logo.png" alt="Logo" />
+        <img src="./Image/logo.jpg" alt="Logo" />
       </a>
       <ul>
         <li>
