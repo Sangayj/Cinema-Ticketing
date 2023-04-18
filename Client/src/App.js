@@ -4,9 +4,8 @@ import Navbar from "./Component/Navbar";
 import Home from "./Component/Home";
 import SignIn from "./Component/SignIn";
 import Login from "./Component/Login";
-//import View from "./Component/View";
-import Footer from "./Component/Footer";
 import View from "./Component/View";
+import Footer from "./Component/Footer";
 import Ticket from "./Component/Ticket";
 import Class_Props from "./Component/Class_Props";
 import React_Props from "./Component/React_Props";
@@ -36,7 +35,6 @@ function App() {
         <Route path="/Movie5" element={<Movie5 />} />
         <Route path="/Movie6" element={<Movie6 />} />
       </Routes>
-      <div>
       <Footer />
       </div>
       {/* <React_Props />
