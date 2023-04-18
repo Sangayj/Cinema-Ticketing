@@ -19,9 +19,8 @@ function App() {
         <Route path="/View" element={<View />} />
         <Route path="/Ticket" element={<Ticket />} />
       </Routes>
-      <div>
       <Footer />
-      </div>
+
     </div>
   );
 }

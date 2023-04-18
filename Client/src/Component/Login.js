@@ -1,37 +1,63 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 import "./Login.css";
 
 const Login = () => {
+  const history = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  async function submit(e) {
     e.preventDefault();
+    try {
+      await axios
+        .post("http://localhost:8000/", {
+          email,
+          password,
+        })
+        .then((res) => {
+          if (res.data == "exist") {
+            history("/#");
+          } else if (res.data == "not exist") {
+            alert("User have not sign up");
+          }
+        })
+        .catch((e) => {
+          alert("wrong details");
+          console.log(e);
+        });
+    } catch (e) {
+      console.log(e);
+    }
     // Add your login logic here
-  };
+  }
 
   return (
     <div className="login-form-container">
-      <form className="login-form" onSubmit={handleSubmit}>
-        <h2>Login</h2>
-        <label htmlFor="email">Username:</label>
+      <form className="login-form" action="post">
         <input
           type="email"
+          name="email"
           id="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          required
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
         />
-        <label htmlFor="password">Password:</label>
         <input
           type="password"
+          name="password"
           id="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          required
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
         />
-        <button type="submit">Login</button>
-        <a href="/#" className="forgot-password-link">
-          Forgot password?
-        </a>
+        <input type="submit" onClick={submit} />
       </form>
     </div>
   );

@@ -24,7 +24,7 @@ export default function Ticket() {
         <ul className='showcase'>
           <li>
             <div className='seat'></div>
-            <small>Avaliable</small>
+            <small>Available</small>
           </li>
           <li>
             <div className='seat selected'></div>
