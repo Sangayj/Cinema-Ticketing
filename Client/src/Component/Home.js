@@ -4,10 +4,6 @@ import { Link } from "react-router-dom";
 import "./Home.css";
 import HeroSlider, { Slide } from "hero-slider";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
-import image1 from "../Image/image1.jpg";
-import image2 from "../Image/image2.jpg";
-import image3 from "../Image/image3.jpg";
-import image4 from "../Image/image4.jpg";
 
 const Home = () => {
   return (

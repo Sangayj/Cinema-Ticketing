@@ -17,7 +17,7 @@ import Movie1 from "./Component/Movie1";
 function App() {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/SignIn" element={<SignIn />} />
