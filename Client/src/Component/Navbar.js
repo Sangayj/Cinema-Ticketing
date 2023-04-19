@@ -10,8 +10,8 @@ function Navbar() {
   };
   return (
     <nav className="navbar">
-      <a href="/#" className="navbar-logo">
-        <img src="./Image/logo.jpg" alt="Logo" />
+      <a href="/" className="navbar-logo">
+        <img src="./Image/logo.png" alt="Logo" />
       </a>
       <ul>
         <li>

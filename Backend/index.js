@@ -26,9 +26,11 @@ app.post("/", async (req, res) => {
 });
 
 app.post("/SignIn", async (req, res) => {
-  const { email, password } = req.body;
+  const { name, gender, email, password } = req.body;
 
   const data = {
+    name: name,
+    gender: gender,
     email: email,
     password: password,
   };
@@ -39,7 +41,7 @@ app.post("/SignIn", async (req, res) => {
       password: password,
     });
     if (check) {
-      res.json("exist");
+      return res.json("exist");
     } else {
       res.json("not exist");
       await collection.insertMany([data]);

@@ -42,28 +42,28 @@ const Home = () => {
             backgroundColor: "black",
           }}
         >
-          <img src={image1} alt="slide-image" />
+          <img src="./Image/image1.jpg" alt="slide-image" />
         </Slide>
         <Slide
           background={{
             backgroundColor: "black",
           }}
         >
-          <img src={image2} alt="slide-image" />
+          <img src="./Image/image2.jpg" alt="slide-image" />
         </Slide>
         <Slide
           background={{
             backgroundColor: "black",
           }}
         >
-          <img src={image3} alt="slide-image" />
+          <img src="./Image/image3.jpg" alt="slide-image" />
         </Slide>
         <Slide
           background={{
             backgroundColor: "black",
           }}
         >
-          <img src={image4} alt="slide-image" />
+          <img src="./Image/image4.jpg" alt="slide-image" />
         </Slide>
         <div
           className="slider-button slider-button-left"
@@ -78,7 +78,7 @@ const Home = () => {
           <FaArrowRight size={32} />
         </div>
       </HeroSlider>
-      <div class="Heading">
+      <div className="Heading">
         <p>
           <b>All Movies List</b>
         </p>
@@ -95,41 +95,41 @@ const Home = () => {
       <div className="parent-container">
         <div className="child-container">
           <img src="../Image/dorozam.jpg" alt="img" />
-          <button class="view-details-btn">View Details</button>
+          <button className="view-details-btn">View Details</button>
         </div>
 
         <div className="child-container">
           <img src="../Image/dorozam.jpg" alt="img" />
           <Link to="/Movie2">
-            <button class="view-details-btn">View Details</button>
+            <button className="view-details-btn">View Details</button>
           </Link>
         </div>
 
         <div className="child-container">
           <img src="../Image/dorozam.jpg" alt="img" />
           <Link to="/Movie3">
-            <button class="view-details-btn">View Details</button>
+            <button className="view-details-btn">View Details</button>
           </Link>
         </div>
 
         <div className="child-container">
           <img src="../Image/dorozam.jpg" alt="img" />
           <Link to="/Movie4">
-            <button class="view-details-btn">View Details</button>
+            <button className="view-details-btn">View Details</button>
           </Link>
         </div>
 
         <div className="child-container">
           <img src="../Image/dorozam.jpg" alt="img" />
           <Link to="/Movie5">
-            <button class="view-details-btn">View Details</button>
+            <button className="view-details-btn">View Details</button>
           </Link>
         </div>
 
         <div className="child-container">
           <img src="../Image/dorozam.jpg" alt="img" />
           <Link to="/Movie6">
-            <button class="view-details-btn">View Details</button>
+            <button className="view-details-btn">View Details</button>
           </Link>
         </div>
       </div>

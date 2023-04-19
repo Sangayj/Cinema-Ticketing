@@ -18,9 +18,9 @@ const Login = () => {
           password,
         })
         .then((res) => {
-          if (res.data == "exist") {
+          if (res.data === "exist") {
             history("/#");
-          } else if (res.data == "not exist") {
+          } else if (res.data === "not exist") {
             alert("User have not sign up");
           }
         })
@@ -40,6 +40,7 @@ const Login = () => {
         <input
           type="email"
           name="email"
+          placeholder="email"
           id="email"
           value={email}
           required
@@ -50,6 +51,7 @@ const Login = () => {
         <input
           type="password"
           name="password"
+          placeholder="password"
           id="password"
           value={password}
           required
