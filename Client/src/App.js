@@ -7,8 +7,6 @@ import Login from "./Component/Login";
 import View from "./Component/View";
 import Footer from "./Component/Footer";
 import Ticket from "./Component/Ticket";
-import Class_Props from "./Component/Class_Props";
-import React_Props from "./Component/React_Props";
 
 import Movie2 from "./Component/Movie2";
 import Movie3 from "./Component/Movie3";
@@ -21,7 +19,7 @@ import Movie1 from "./Component/Movie1";
 function App() {
   return (
     <div>
-      {/* <Navbar />
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/SignIn" element={<SignIn />} />
@@ -35,9 +33,8 @@ function App() {
         <Route path="/Movie5" element={<Movie5 />} />
         <Route path="/Movie6" element={<Movie6 />} />
       </Routes>
-      <Footer /> */}
-      {/* <React_Props />
-      <View /> */}
+      <Footer />
+      <View />
       <Ticket />
     </div>
   );
