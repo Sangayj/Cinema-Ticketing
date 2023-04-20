@@ -9,6 +9,7 @@ import image3 from "../Image/image3.jpg";
 import image4 from "../Image/image4.jpg";
 
 const Home = () => {
+  
   return (
     <>
     <HeroSlider
@@ -81,7 +82,7 @@ const Home = () => {
       >
         <FaArrowRight size={32} />
       </div>  
-    </HeroSlider>
+    </HeroSlider> 
     <div class="Heading">
       <p><b>All Movies List</b></p>
       <form>
@@ -89,44 +90,31 @@ const Home = () => {
         <input type="text" placeholder="Search for any Movies" />
         <button type="submit"><i className="fa fa-search"></i>Search</button>
       </form>
-    </div>
+    </div> 
+   
+   <div className="grid-container">
+  <div className="card">
+    <img src={image1} alt="Image1" className="poster"/>
+    <a href="/View"><button>View</button></a>
+  </div>
+  <div className="card">
+    <img src={image2} alt="Image 2" className="poster"/>
+  </div>
+  <div className="card" >
+    <img  src={image3} alt="Image 3" className="poster" style={{padding:"10px"}}/>
+  </div>
+  <div className="card">
+    <img src={image4} alt="Image 3" className="image"/>
+  </div>
+  <div className="card">
+    <img src={image1} alt="Image 3" className="image"/>
+  </div>
+  <div className="card">
+    <img src={image3} alt="Image 3" className="image"/>
+  </div>
+</div>
 
-    <p></p>
-    <p></p>
-    <div className="parent-container">
-      <div className="child-container">
-        <img src="../Image/dorozam.jpg" alt="img" />
-        < a href="/View">
-      <button class="view-details-btn">View Details</button>
-        </a>
-      </div>
 
-      <div className="child-container">
-      <img src="../Image/dorozam.jpg" alt="img" />
-      <button class="view-details-btn">View Details</button>
-      </div>
-
-      <div className="child-container">
-      <img src="../Image/superman.jpg" alt="img" />
-      <button class="view-details-btn">View Details</button>
-      </div>
-
-      <div className="child-container">
-      <img src="../Image/superman.jpg" alt="img" />
-      <button class="view-details-btn">View Details</button>
-      </div>
-
-      <div className="child-container">
-      <img src="" alt="" />
-      <button class="view-details-btn">View Details</button>
-      </div>
-
-      <div className="child-container">
-      <img src="../Image/lottery.jfif" alt="img" />
-      <button class="view-details-btn">View Details</button>
-      </div>
-    </div>
-    
     </>
   );
 };
