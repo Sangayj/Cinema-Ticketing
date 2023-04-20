@@ -1,12 +1,9 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Home.css";
 import HeroSlider, { Slide } from "hero-slider";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
-import image1 from "../Image/image1.jpg";
-import image2 from "../Image/image2.jpg";
-import image3 from "../Image/image3.jpg";
-import image4 from "../Image/image4.jpg";
 
 const Home = () => {
   
@@ -47,28 +44,28 @@ const Home = () => {
           backgroundColor: "black",
         }}
       >
-        <img src={image1} alt="slide-image" />
+        <img src='./Image/image1.jpg' alt="slide-image" />
       </Slide>
       <Slide
         background={{
           backgroundColor: "black",
         }}
       >
-        <img src={image2} alt="slide-image" />
+        <img src='./Image/image2.jpg' alt="slide-image" />
       </Slide>
       <Slide
         background={{
           backgroundColor: "black",
         }}
       >
-        <img src={image3} alt="slide-image" />
+        <img src='./Image/image3.jpg'alt="slide-image" />
       </Slide>
       <Slide
         background={{
           backgroundColor: "black",
         }}
       >
-        <img src={image4} alt="slide-image" />
+        <img src='./Image/image4.jpg' alt="slide-image" />
       </Slide>
       <div
         className="slider-button slider-button-left"
@@ -114,7 +111,52 @@ const Home = () => {
   </div>
 </div>
 
+    <p></p>
+    <p></p>
+    <div className="parent-container">
+      <div className="child-container">
+        <img src="../Image/dorozam.jpg" alt="img" />
+        <Link to='/Movie1'>
+        <button class="view-details-btn">View Details</button>
+        </Link>
+      </div>
 
+      <div className="child-container">
+        <img src="../Image/dorozam.jpg" alt="img" />
+        <Link to='/Movie2'>
+        <button class="view-details-btn">View Details</button>
+        </Link>
+      </div>
+
+      <div className="child-container">
+        <img src="../Image/dorozam.jpg" alt="img" />
+        <Link to='/Movie3'>
+        <button class="view-details-btn">View Details</button>
+        </Link>
+      </div>
+
+      <div className="child-container">
+        <img src="../Image/dorozam.jpg" alt="img" />
+        <Link to='/Movie4'>
+        <button class="view-details-btn">View Details</button>
+        </Link>
+      </div>
+
+      <div className="child-container">
+        <img src="../Image/dorozam.jpg" alt="img" />
+        <Link to='/Movie5'>
+        <button class="view-details-btn">View Details</button>
+        </Link>
+      </div>
+
+      <div className="child-container">
+        <img src="../Image/dorozam.jpg" alt="img" />
+        <Link to='/Movie6'>
+        <button class="view-details-btn">View Details</button>
+        </Link>
+      </div>
+    </div>
+    
     </>
   );
 };
