@@ -1,21 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 function Navbar() {
+  const [activeLink, setActiveLink] = useState("");
+
+  const handleLinkClick = (link) => {
+    setActiveLink(link);
+  };
   return (
     <nav className="navbar">
-      <a href="/#" className="navbar-logo">
-        <img src="./Images/logo.jpg" alt="Logo" />
+      <a href="/" className="navbar-logo">
+        <img src="./Image/logo.png" alt="Logo" />
       </a>
-      <ul className="navbar-menu">
-        <li className="navbar-menu-item">
-          <a href="/#">Home</a>
+      <ul>
+        <li>
+          <Link
+            to="/"
+            onClick={() => {
+              handleLinkClick("home");
+            }}
+            className={activeLink === "home" ? "active" : ""}
+          >
+            Home
+          </Link>
         </li>
+<<<<<<< HEAD
         <li className="navbar-menu-item">
           <a href="/SignIn">Sign In</a>
+=======
+        <li>
+          <Link
+            to="/signin"
+            onClick={() => {
+              handleLinkClick("signin");
+            }}
+            className={activeLink === "signin" ? "active" : ""}
+          >
+            Sign In
+          </Link>
+>>>>>>> Sangayj/master
         </li>
-        <li className="navbar-menu-item">
-          <a href="/Login">Login</a>
+        <li>
+          <Link
+            to="/login"
+            onClick={() => {
+              handleLinkClick("login");
+            }}
+            className={activeLink === "login" ? "active" : ""}
+          >
+            Login
+          </Link>
         </li>
       </ul>
     </nav>

@@ -8,11 +8,10 @@
 .login-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
   padding: 2rem;
   border: 1px solid #ccc;
   border-radius: 4px;
-  text-align: left;
 }
 
 .login-form h2 {
@@ -23,7 +22,8 @@
   margin-top: 1rem;
 }
 
-.login-form input {
+.login-form input,
+.login-form select {
   width: 100%;
   padding: 0.5rem;
   margin-top: 0.5rem;
@@ -41,8 +41,6 @@
   cursor: pointer;
 }
 
-.forgot-password-link {
-  margin-top: 1rem;
-  font-size: 0.8rem;
-  color: #0077ff;
+.login-form button:hover {
+  background-color: #3e8e41;
 }
