@@ -89,27 +89,6 @@ const Home = () => {
       </form>
     </div> 
    
-   {/* <div className="grid-container">
-  <div className="card">
-    <img src="./Image/image3.jpg" alt="Image1" className="poster"/>
-    <a href="/View"><button>View</button></a>
-  </div>
-  <div className="card">
-    <img src="./Image/image3.jpg"  alt="Image 2" className="poster"/>
-  </div>
-  <div className="card" >
-    <img  src="./Image/image3.jpg" alt="Image 3" className="poster" style={{padding:"10px"}}/>
-  </div>
-  <div className="card">
-    <img src="./Image/image3.jpg"  alt="Image 3" className="image"/>
-  </div>
-  <div className="card">
-    <img src="./Image/image3.jpg" alt="Image 3" className="image"/>
-  </div>
-  <div className="card">
-    <img src="./Image/image3.jpg" alt="Image 3" className="image"/>
-  </div>
-</div> */}
 
     <p></p>
     <p></p>
