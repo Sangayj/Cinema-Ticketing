@@ -7,7 +7,6 @@ import Login from "./Component/Login";
 import View from "./Component/View";
 import Footer from "./Component/Footer";
 import Ticket from "./Component/Ticket";
-
 import Movie2 from "./Component/Movie2";
 import Movie3 from "./Component/Movie3";
 import Movie4 from "./Component/Movie4";
@@ -34,8 +33,6 @@ function App() {
         <Route path="/Movie6" element={<Movie6 />} />
       </Routes>
       <Footer />
-      <View />
-      <Ticket />
     </div>
   );
 }

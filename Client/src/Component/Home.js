@@ -89,7 +89,7 @@ const Home = () => {
       </form>
     </div> 
    
-   <div className="grid-container">
+   {/* <div className="grid-container">
   <div className="card">
     <img src="./Image/image3.jpg" alt="Image1" className="poster"/>
     <a href="/View"><button>View</button></a>
@@ -109,7 +109,7 @@ const Home = () => {
   <div className="card">
     <img src="./Image/image3.jpg" alt="Image 3" className="image"/>
   </div>
-</div>
+</div> */}
 
     <p></p>
     <p></p>
@@ -122,14 +122,14 @@ const Home = () => {
       </div>
 
       <div className="child-container">
-        <img src="../Image/dorozam.jpg" alt="img" />
+        <img src="../Image/image4.jpg" alt="img" />
         <Link to='/Movie2'>
         <button class="view-details-btn">View Details</button>
         </Link>
       </div>
 
       <div className="child-container">
-        <img src="../Image/dorozam.jpg" alt="img" />
+        <img src="../Image/image3.jpg" alt="img" />
         <Link to='/Movie3'>
         <button class="view-details-btn">View Details</button>
         </Link>
@@ -143,14 +143,14 @@ const Home = () => {
       </div>
 
       <div className="child-container">
-        <img src="../Image/dorozam.jpg" alt="img" />
+        <img src="../Image/image1.jpg" alt="img" />
         <Link to='/Movie5'>
         <button class="view-details-btn">View Details</button>
         </Link>
       </div>
 
       <div className="child-container">
-        <img src="../Image/dorozam.jpg" alt="img" />
+        <img src="../Image/image2.jpg" alt="img" />
         <Link to='/Movie6'>
         <button class="view-details-btn">View Details</button>
         </Link>
