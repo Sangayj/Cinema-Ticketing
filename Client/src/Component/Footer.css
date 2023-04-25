@@ -31,6 +31,10 @@
 .social-icons > *:not(:last-child){
   margin-right: 30px;
 }
+.social-icons > *:hover {
+  transform: scale(1.5);
+  
+}
 
 .col-sm {
   text-align: center;

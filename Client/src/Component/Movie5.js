@@ -34,7 +34,8 @@ function Movie5() {
         <p className="theater">Theater: ABC Cinema Hall</p>
         <p className="ticket-price">Ticket Price: $10</p>
         <p className="warning"><b><i>Note: You must Log in to Book the Tickets</i></b></p>
-        <button className="login-btn">Log In</button>
+        <a href='/Login' ><button className="login-btn">Log In</button></a>
+        <a href='/Ticket' ><button className="login-btn">Book</button></a>
       </div>
     </div>
 

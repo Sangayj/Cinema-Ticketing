@@ -1,30 +1,29 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./Component/Navbar";
-import Home from "./Component/Home";
-import SignIn from "./Component/SignIn";
+import Landing from "./Component/Landing";
+import Signin from "./Component/Signin";
 import Login from "./Component/Login";
 import View from "./Component/View";
 import Footer from "./Component/Footer";
 import Ticket from "./Component/Ticket";
-import Class_Props from "./Component/Class_Props";
-import React_Props from "./Component/React_Props";
-
 import Movie2 from "./Component/Movie2";
 import Movie3 from "./Component/Movie3";
 import Movie4 from "./Component/Movie4";
 import Movie5 from "./Component/Movie5";
 import Movie6 from "./Component/Movie6";
 import Movie1 from "./Component/Movie1";
-
+import Home from "./Component/Home";
 
 function App() {
+  
   return (
     <div>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/SignIn" element={<SignIn />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/Home" element={<Home />} />
+        <Route path="/Signin" element={<Signin />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/View" element={<View />} />
         <Route path="/Ticket" element={<Ticket />} />

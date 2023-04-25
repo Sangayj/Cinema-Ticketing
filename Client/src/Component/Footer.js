@@ -18,7 +18,6 @@ export default function Footer() {
           <FaInstagram size={40} color="#FFFFFF" />
         </div>
         <div className="row">
-        <hr style={{ border: "none", borderTop: "1px solid #ccc", marginTop: "1rem" }} />
           <p className="col-sm" style={{ marginTop: "0rem" }}>
             &copy;{new Date().getFullYear()}. All Rights Reserved. Filmassociation of Bhutan.
           </p>
