@@ -1,46 +1,36 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useRef } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
 import "./Navbar.css";
 
 function Navbar() {
-  const [activeLink, setActiveLink] = useState("");
+  const navRef = useRef();
 
-  const handleLinkClick = (link) => {
-    setActiveLink(link);
+  const showNavbar = () => {
+    navRef.current.classList.toggle("responsive_nav");
   };
   return (
-    <nav className="navbar">
-      <a href="/" className="navbar-logo">
+    <header>
+      <a href="/#" className="navbar-logo">
         <img src="./Image/logo.png" alt="Logo" />
       </a>
-      <ul>
-        <li>
-          <Link
-            to="/"
-            onClick={() => {
-              handleLinkClick("home");
-            }}
-            className={activeLink === "home" ? "active" : ""}
-          >
-            Home
-          </Link>
-        </li>
-        <li className="navbar-menu-item">
-          <a href="/SignIn">Sign In</a>
-        </li>
-        <li>
-          <Link
-            to="/login"
-            onClick={() => {
-              handleLinkClick("login");
-            }}
-            className={activeLink === "login" ? "active" : ""}
-          >
-            Login
-          </Link>
-        </li>
-      </ul>
-    </nav>
+      <nav ref={navRef} className="navbar">
+        <a className="nav-item" href="/#">
+          Home
+        </a>
+        <a className="nav-item" href="/SignIn">
+          Sign In
+        </a>
+        <a className="nav-item" href="/SignIn">
+          Login
+        </a>
+        <button className="nav-btn nav-close-btn" onClick={showNavbar}>
+          <FaTimes />
+        </button>
+      </nav>
+      <button className="nav-btn" onClick={showNavbar}>
+        <FaBars />
+      </button>
+    </header>
   );
 }
 
