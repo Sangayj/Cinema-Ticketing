@@ -1,143 +1,76 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
-import React from "react";
-import { Link } from "react-router-dom";
-import "./Home.css";
-import HeroSlider, { Slide } from "hero-slider";
-import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
+import React from 'react';
+import './Home.css';
 
-const Home = () => {
-  
+const movieData = [
+  {
+    title: 'Doro Zam',
+    imageUrl: './Image/image1.jpg',
+  },
+  {
+    title: 'Dema Tsho',
+    imageUrl: './Image/Dema.jpg',
+  },
+  {
+    title: 'Nigthob',
+    imageUrl: './Image/Nigtob.jpg',
+  },
+  {
+    title: 'Super Star',
+    imageUrl: './Image/Star.jpg',
+  },
+  {
+    title: 'Rolong',
+    imageUrl: './Image/rolong.jpg',
+  },
+  {
+    title: 'Lekzin',
+    imageUrl: './Image/one.jpg',
+  },
+  {
+    title: 'Dorozam',
+    imageUrl: './Image/dorozam.jpg',
+  },
+  {
+    title: 'Upalama',
+    imageUrl: './Image/image1  .jpg',
+  },
+  {
+    title: 'Yalama Nga',
+    imageUrl: './Image/Yalama.jpg',
+  },
+  {
+    title: 'One Night In Thimphu',
+    imageUrl: './Image/one.jpg',
+  },
+];
+
+function MovieCard({ title, imageUrl }) {
+  const [isHovering, setIsHovering] = React.useState(false);
+
   return (
-    <>
-    <HeroSlider
-      slidingAnimation="left_to_right"
-      orientation="horizontal"
-      initialSlide={1}
-      onBeforeChange={(previousSlide, nextSlide) =>
-        console.log("onBeforeChange", previousSlide, nextSlide)
-      }
-      onChange={(nextSlide) => console.log("onChange", nextSlide)}
-      onAfterChange={(nextSlide) => console.log("onAfterChange", nextSlide)}
-      style={{
-        backgroundColor: "rgba(0, 0, 0, 0.33)",
-        marginTop: "-64px",
-      }}
-      settings={{
-        slidingDuration: 250,
-        slidingDelay: 100,
-        shouldAutoplay: true,
-        shouldDisplayButtons: true,
-        autoplayDuration: 5000,
-        height: "100vh",
-        buttonStyles: {
-          backgroundColor: "transparent",
-          border: "none",
-        },
-        buttonIconStyles: {
-          fill: "white",
-        },
-      }}
+    <div
+      className='card'
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
     >
-    
-      <Slide
-        background={{
-          backgroundColor: "black",
-        }}
-      >
-        <img src='./Image/image1.jpg' alt="slide-image" />
-      </Slide>
-      <Slide
-        background={{
-          backgroundColor: "black",
-        }}
-      >
-        <img src='./Image/image2.jpg' alt="slide-image" />
-      </Slide>
-      <Slide
-        background={{
-          backgroundColor: "black",
-        }}
-      >
-        <img src='./Image/image3.jpg'alt="slide-image" />
-      </Slide>
-      <Slide
-        background={{
-          backgroundColor: "black",
-        }}
-      >
-        <img src='./Image/image4.jpg' alt="slide-image" />
-      </Slide>
-      <div
-        className="slider-button slider-button-left"
-        style={{ left: "5%" }}
-      >
-        <FaArrowLeft size={32} />
-      </div>
-      <div
-        className="slider-button slider-button-right"
-        style={{ right: "5%" }}
-      >
-        <FaArrowRight size={32} />
-      </div>  
-    </HeroSlider> 
-    <div class="Heading">
-      <p><b>All Movies List</b></p>
-      <form>
-       
-        <input type="text" placeholder="Search for any Movies" />
-        <button type="submit"><i className="fa fa-search"></i>Search</button>
-      </form>
-    </div> 
-   
+      <img
+        src={imageUrl}
+        alt={title}
+        className={isHovering ? 'card-img zoom-in' : 'card-img'}
+      />
+      <h4>{title}</h4>
 
-    <p></p>
-    <p></p>
-    <div className="parent-container">
-      <div className="child-container">
-        <img src="../Image/dorozam.jpg" alt="img" />
-        <Link to='/Movie1'>
-        <button class="view-details-btn">View Details</button>
-        </Link>
-      </div>
-
-      <div className="child-container">
-        <img src="../Image/image4.jpg" alt="img" />
-        <Link to='/Movie2'>
-        <button class="view-details-btn">View Details</button>
-        </Link>
-      </div>
-
-      <div className="child-container">
-        <img src="../Image/image3.jpg" alt="img" />
-        <Link to='/Movie3'>
-        <button class="view-details-btn">View Details</button>
-        </Link>
-      </div>
-
-      <div className="child-container">
-        <img src="../Image/dorozam.jpg" alt="img" />
-        <Link to='/Movie4'>
-        <button class="view-details-btn">View Details</button>
-        </Link>
-      </div>
-
-      <div className="child-container">
-        <img src="../Image/image1.jpg" alt="img" />
-        <Link to='/Movie5'>
-        <button class="view-details-btn">View Details</button>
-        </Link>
-      </div>
-
-      <div className="child-container">
-        <img src="../Image/image2.jpg" alt="img" />
-        <Link to='/Movie6'>
-        <button class="view-details-btn">View Details</button>
-        </Link>
-      </div>
     </div>
-    
-    </>
   );
-};
+}
 
-export default Home;
+export default function Home() {
+  return (
+    <div className='movie-container'>
+      {movieData.map((movie) => (
+        <MovieCard key={movie.title} title={movie.title} imageUrl={movie.imageUrl} />
+      ))}
+    </div> 
+  );
+}
+

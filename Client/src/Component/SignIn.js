@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-import "./SignIn.css";
+import "./Signin.css";
 
-const SignIn = () => {
+const Signin = () => {
   const history = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -64,4 +64,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Signin;

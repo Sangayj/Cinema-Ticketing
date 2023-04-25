@@ -1,128 +1,33 @@
-img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  display: block;
-}
-.Heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #e5ffe5;
-  padding: 10px;
-}
 
-.Heading {
-  margin-top: 30px;
-}
-
-.Heading p {
-  margin: 0;
-  font-size: 24px;
-  text-align: center;
-  width: 75%;
-}
-
-.Heading form {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: 25%;
-}
-
-.Heading input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  margin-right: 5px;
-}
-
-.Heading button[type="submit"] {
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.Heading button[type="submit"]:hover {
-  background-color: #3e8e41;
-}
-
-
-
-.parent-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-
-.child-container {
-  width: 300px;
-  height: 400px;
-  margin: 20px;
-  padding: 10px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-  margin-bottom: 20px;
-  border-color: black;
-}
-
-.child-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.child-container:hover img {
-  opacity: 0.8;
-}
-
-.child-container:hover img {
-  opacity: 0.8;
-}
-
-.child-container:hover .view-details-btn {
-  opacity: 1;
-  z-index: 2;
-  transform: scale(1.1);
-  z-index: 1;
-}
-.view-details-btn {
-  background-color: green;
-  color: white;
-  border: none;
-  padding: 10px;
-  margin: 10px;
-  width: 50%;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 0.5rem;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-}
-
-@media screen and (max-width: 768px) {
-  .child-container {
-    width: 100%;
-    margin: 20px 0px;
-    height: auto;
-    max-width: 400px;
-    margin-bottom: 40px;
+  .movie-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
-}
-
-
+  
+  .card {
+    margin: 20px;
+    width: 200px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .zoom-in {
+    transform: scale(1.1);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  h4 {
+    margin-top: 10px;
+  }
+  
