@@ -25,21 +25,8 @@ function Navbar() {
             Home
           </Link>
         </li>
-<<<<<<< HEAD
         <li className="navbar-menu-item">
           <a href="/SignIn">Sign In</a>
-=======
-        <li>
-          <Link
-            to="/signin"
-            onClick={() => {
-              handleLinkClick("signin");
-            }}
-            className={activeLink === "signin" ? "active" : ""}
-          >
-            Sign In
-          </Link>
->>>>>>> Sangayj/master
         </li>
         <li>
           <Link
