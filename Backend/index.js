@@ -9,10 +9,10 @@ app.use(cors());
 app.get("/", cors(), (req, res) => {});
 
 app.post("/", async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
   try {
     const check = await collection.findOne({
-      email: email,
+      username: username,
       password: password,
     });
     if (check) {
@@ -25,30 +25,31 @@ app.post("/", async (req, res) => {
   }
 });
 
-app.post("/SignIn", async (req, res) => {
-  const { name, gender, email, password } = req.body;
+app.post("/Signup", async (req, res) => {
+  const { name, username, gender, email, phone, password, confirmPassword } =
+    req.body;
 
   const data = {
     name: name,
+    username: username,
     gender: gender,
     email: email,
+    phone: phone,
     password: password,
+    confirmPassword: confirmPassword,
   };
 
   try {
     const check = await collection.findOne({
-      email: email,
-      password: password,
+      username: username,
     });
     if (check) {
-      return res.json("exist");
+      res.json("exist");
     } else {
       res.json("not exist");
       await collection.insertMany([data]);
     }
-  } catch (e) {
-    res.json("not exist");
-  }
+  } catch (e) {}
 });
 
 app.listen(8000, () => {

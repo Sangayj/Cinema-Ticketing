@@ -8,7 +8,6 @@ export default function Footer() {
     <div className="main-footer">
       <div className="container">
         <div className="row">
-<<<<<<< HEAD
           <div className="col-ms">
             <h4>Email Address: filmassociationofbhutan2021@gmail.com</h4>
             <h4>Mobile No: 2 333 779</h4>
@@ -32,11 +31,6 @@ export default function Footer() {
               </p>
             </div>
           </div>
-=======
-          <p className="col-sm" style={{ marginTop: "0rem" }}>
-            &copy;{new Date().getFullYear()}. All Rights Reserved. Filmassociation of Bhutan.
-          </p>
->>>>>>> 34e467ab1c3c2b178cd04ea0a1845f595a4c3621
         </div>
       </div>
     </div>

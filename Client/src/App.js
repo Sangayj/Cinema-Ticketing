@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./Component/Navbar";
 import Landing from "./Component/Landing";
-import Signin from "./Component/Signin";
+import SignUp from "./Component/SignUp";
 import Login from "./Component/Login";
 import Footer from "./Component/Footer";
 import Ticket from "./Component/Ticket";
@@ -21,7 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/Home" element={<Home />} />
-        <Route path="/Signin" element={<Signin />} />
+        <Route path="/SignUp" element={<SignUp />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Ticket" element={<Ticket />} />
         <Route path="/Movie1" element={<Movie1 />} />

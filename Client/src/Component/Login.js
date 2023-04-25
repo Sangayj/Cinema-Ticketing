@@ -6,7 +6,7 @@ import "./Login.css";
 
 const Login = () => {
   const history = useNavigate();
-  const [email, setEmail] = useState("");
+  const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
   async function submit(e) {
@@ -14,12 +14,12 @@ const Login = () => {
     try {
       await axios
         .post("http://localhost:8000/", {
-          email,
+          username,
           password,
         })
         .then((res) => {
           if (res.data === "exist") {
-            history("/#");
+            history("/");
           } else if (res.data === "not exist") {
             alert("User have not sign up");
           }
@@ -37,29 +37,31 @@ const Login = () => {
   return (
     <div className="login-form-container">
       <form className="login-form" action="post">
+        <label htmlFor="username">Username</label>
         <input
-          type="email"
-          name="email"
-          placeholder="email"
-          id="email"
-          value={email}
-          required
+          type="text"
+          id="username"
+          name="username"
+          value={username}
           onChange={(e) => {
-            setEmail(e.target.value);
+            setUserName(e.target.value);
           }}
+          required
         />
+        <label htmlFor="password">Password</label>
         <input
           type="password"
-          name="password"
-          placeholder="password"
           id="password"
+          name="password"
           value={password}
-          required
           onChange={(e) => {
             setPassword(e.target.value);
           }}
+          required
         />
-        <input type="submit" onClick={submit} />
+        <button type="submit" onClick={submit}>
+          Login
+        </button>{" "}
       </form>
     </div>
   );

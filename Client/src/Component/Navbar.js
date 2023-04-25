@@ -14,13 +14,13 @@ function Navbar() {
         <img src="./Image/logo.png" alt="Logo" />
       </a>
       <nav ref={navRef} className="navbar">
-        <a className="nav-item" href="/#">
+        <a className="nav-item" href="/">
           Home
         </a>
-        <a className="nav-item" href="/SignIn">
+        <a className="nav-item" href="/SignUp">
           Sign In
         </a>
-        <a className="nav-item" href="/SignIn">
+        <a className="nav-item" href="/Login">
           Login
         </a>
         <button className="nav-btn nav-close-btn" onClick={showNavbar}>
