@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./Component/Navbar";
 import Landing from "./Component/Landing";
-import Signin from "./Component/Signin";
+import SignIn from "./Component/SignIn";
 import Login from "./Component/Login";
 import View from "./Component/View";
 import Footer from "./Component/Footer";
@@ -23,7 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/Home" element={<Home />} />
-        <Route path="/Signin" element={<Signin />} />
+        <Route path="/SignIn" element={<SignIn />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/View" element={<View />} />
         <Route path="/Ticket" element={<Ticket />} />
