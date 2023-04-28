@@ -18,7 +18,7 @@ function Navbar() {
           Home
         </a>
         <a className="nav-item" href="/SignUp">
-          Sign In
+          Sign Up
         </a>
         <a className="nav-item" href="/Login">
           Login

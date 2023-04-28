@@ -1,57 +1,34 @@
+// server.js
+
 const express = require("express");
-const collection = require("./mongo");
+const mongoose = require("mongoose");
 const cors = require("cors");
+const authRoutes = require("./routes/authRoutes");
+
 const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
 app.use(cors());
 
-app.get("/", cors(), (req, res) => {});
+app.use(express.json());
 
-app.post("/", async (req, res) => {
-  const { username, password } = req.body;
-  try {
-    const check = await collection.findOne({
-      username: username,
-      password: password,
-    });
-    if (check) {
-      res.json("exist");
-    } else {
-      res.json("not exist");
-    }
-  } catch (e) {
-    res.json("not exist");
-  }
-});
+// Connect to the database
+mongoose
+  .connect("mongodb+srv://jamtsho:sangay@cinema.cupetj2.mongodb.net/data", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Connected to MongoDB");
+    // Start the server after successful database connection
+  })
+  .catch((error) => {
+    console.error("Error connecting to MongoDB:", error);
+  });
 
-app.post("/Signup", async (req, res) => {
-  const { name, username, gender, email, phone, password, confirmPassword } =
-    req.body;
+// Routes
+app.use("/api", authRoutes);
 
-  const data = {
-    name: name,
-    username: username,
-    gender: gender,
-    email: email,
-    phone: phone,
-    password: password,
-    confirmPassword: confirmPassword,
-  };
-
-  try {
-    const check = await collection.findOne({
-      username: username,
-    });
-    if (check) {
-      res.json("exist");
-    } else {
-      res.json("not exist");
-      await collection.insertMany([data]);
-    }
-  } catch (e) {}
-});
-
+// Start the server
 app.listen(8000, () => {
-  console.log("Port connected");
+  console.log("Server listening on port 8000");
 });

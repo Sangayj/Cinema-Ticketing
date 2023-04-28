@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 import "./Login.css";
@@ -9,31 +8,38 @@ const Login = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
-  async function submit(e) {
+  const submit = async (e) => {
     e.preventDefault();
-    try {
-      await axios
-        .post("http://localhost:8000/", {
-          username,
-          password,
-        })
-        .then((res) => {
-          if (res.data === "exist") {
-            history("/");
-          } else if (res.data === "not exist") {
-            alert("User have not sign up");
-          }
-        })
-        .catch((e) => {
-          alert("wrong details");
-          console.log(e);
-        });
-    } catch (e) {
-      console.log(e);
-    }
-    // Add your login logic here
-  }
 
+    try {
+      const response = await fetch("http://localhost:8000/api/Login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        history("/");
+        // Successful login
+        console.log(data);
+      } else {
+        // Login failed
+        if (response.status === 404) {
+          alert("User not found.");
+        } else if (response.status === 401) {
+          alert("Incorrect password.");
+        } else {
+          alert("Login failed.");
+        }
+      }
+    } catch (error) {
+      console.error("Error logging in:", error);
+    }
+  };
   return (
     <div className="login-form-container">
       <form className="login-form" action="post">
@@ -61,7 +67,7 @@ const Login = () => {
         />
         <button type="submit" onClick={submit}>
           Login
-        </button>{" "}
+        </button>
       </form>
     </div>
   );
