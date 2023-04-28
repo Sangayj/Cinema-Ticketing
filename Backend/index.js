@@ -49,6 +49,21 @@ app.post("/SignIn", async (req, res) => {
   }
 });
 
+app.post('/MovieForm', async (req, res) => {
+  const movieData = req.body;
+  try {
+    // Save the movieData to the database
+    await collection.insertOne(movieData);
+
+    // Send a success response back to the client
+    res.status(200).json({ message: "Movie data saved successfully" });
+  } catch (e) {
+    // Send an error response back to the client
+    res.status(500).json({ message: "An error occurred while saving movie data" });
+  }
+});
+
+
 app.listen(8000, () => {
   console.log("Port connected");
 });

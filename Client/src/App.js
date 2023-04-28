@@ -1,5 +1,4 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./Component/Navbar";
 import Landing from "./Component/Landing";
 import SignIn from "./Component/SignIn";
@@ -14,12 +13,15 @@ import Movie5 from "./Component/Movie5";
 import Movie6 from "./Component/Movie6";
 import Movie1 from "./Component/Movie1";
 import Home from "./Component/Home";
+import Adminpage from "./Admin/Adminpage";
 
 function App() {
-  
+  const location = useLocation();
+  const isAdminPage = location.pathname === "/admin";
+
   return (
     <div>
-      <Navbar />
+      {isAdminPage ? null : <Navbar />}
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/Home" element={<Home />} />
@@ -33,11 +35,9 @@ function App() {
         <Route path="/Movie4" element={<Movie4 />} />
         <Route path="/Movie5" element={<Movie5 />} />
         <Route path="/Movie6" element={<Movie6 />} />
+        <Route path="/admin" element={<Adminpage />} />
       </Routes>
-      <Footer />
-      {/* <React_Props />
-      <View /> */}
-      {/* <Ticket /> */}
+      {isAdminPage ? null : <Footer />}
     </div>
   );
 }
