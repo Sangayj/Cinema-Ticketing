@@ -28,13 +28,11 @@ const Login = () => {
 
         // Login successful
       } else if (response.status === 400) {
-        // Incorrect password or invalid credentials
         alert("Incorrect password");
       } else if (response.status === 404) {
         // User does not exist
         alert("User does not exist");
       } else {
-        // Other errors
         alert("An error occurred");
       }
 
