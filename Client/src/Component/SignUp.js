@@ -110,7 +110,7 @@ const SignUp = () => {
           <option value="female">Female</option>
           <option value="other">Other</option>
         </select>
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email">Email (Optional)</label>
         <input
           type="email"
           id="email"
@@ -120,7 +120,7 @@ const SignUp = () => {
             setEmail(e.target.value);
           }}
         />
-        <label htmlFor="phone">Phone</label>
+        <label htmlFor="phone">Phone (Optional)</label>
         <input
           type="tel"
           id="phone"
