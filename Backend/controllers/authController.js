@@ -1,4 +1,6 @@
 // controllers/authController.js
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const User = require("../models/Users");
 
@@ -13,6 +15,11 @@ async function SignUp(req, res) {
       return res.status(409).json({ error: "Email already exists" });
     }
 
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    const encrypt = await bcrypt.genSalt(10);
+    const hashedconfirmPassword = await bcrypt.hash(confirmPassword, encrypt);
+
     // Create a new user
     const newUser = new User({
       name,
@@ -20,8 +27,8 @@ async function SignUp(req, res) {
       gender,
       email,
       phone,
-      password,
-      confirmPassword,
+      password: hashedPassword,
+      confirmPassword: hashedconfirmPassword,
     });
     await newUser.save();
 
@@ -39,16 +46,21 @@ async function Login(req, res) {
     // Check if the user exists
     const user = await User.findOne({ username });
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(404).json({ message: "User does not exist" });
     }
 
-    // Check if the password is correct
-    if (user.password !== password) {
-      return res.status(401).json({ error: "Incorrect password" });
+    // Compare passwords
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    // Check if passwords match
+    if (!isMatch) {
+      return res.status(400).json({ message: "Incorrect password" });
     }
 
-    // Login successful
-    return res.status(200).json({ message: "Login successful" });
+    const { _id, name, role } = user;
+
+    const jwtToken = jwt.sign({ userId: _id }, process.env.JWT_SECRET);
+    res.json({ user: { id: _id, name, username, role, token: jwtToken } });
   } catch (error) {
     console.error("Error logging in:", error);
     return res.status(500).json({ error: "Login failed" });

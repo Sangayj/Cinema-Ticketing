@@ -4,6 +4,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
+const movieRouter = require("./routes/movie");
+
+require("dotenv").config();
 
 const app = express();
 
@@ -13,7 +16,7 @@ app.use(express.json());
 
 // Connect to the database
 mongoose
-  .connect("mongodb+srv://jamtsho:sangay@cinema.cupetj2.mongodb.net/data", {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -27,6 +30,7 @@ mongoose
 
 // Routes
 app.use("/api", authRoutes);
+app.use("/api/movie", movieRouter);
 
 // Start the server
 app.listen(8000, () => {

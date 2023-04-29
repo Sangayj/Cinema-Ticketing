@@ -23,21 +23,24 @@ const Login = () => {
       const data = await response.json();
 
       if (response.ok) {
-        history("/");
-        // Successful login
         console.log(data);
+        history("/");
+
+        // Login successful
+      } else if (response.status === 400) {
+        // Incorrect password or invalid credentials
+        alert("Incorrect password");
+      } else if (response.status === 404) {
+        // User does not exist
+        alert("User does not exist");
       } else {
-        // Login failed
-        if (response.status === 404) {
-          alert("User not found.");
-        } else if (response.status === 401) {
-          alert("Incorrect password.");
-        } else {
-          alert("Login failed.");
-        }
+        // Other errors
+        alert("An error occurred");
       }
-    } catch (error) {
-      console.error("Error logging in:", error);
+
+      console.log(data);
+    } catch (err) {
+      console.error(err);
     }
   };
   return (
