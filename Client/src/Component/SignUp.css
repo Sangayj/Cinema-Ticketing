@@ -44,3 +44,10 @@
 .signin-form button:hover {
   background-color: #3e8e41;
 }
+
+.radio {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 6rem;
+}

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 import "./SignUp.css";
@@ -36,15 +35,16 @@ const SignUp = () => {
     }
   };
 
-  async function Submit(e) {
+  const submit = async (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
-    } else {
-      setPasswordError("Passwords do not match");
-    }
+
     try {
-      await axios
-        .post("http://localhost:8000/Signup", {
+      const response = await fetch("http://localhost:8000/api/SignUp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
           name,
           username,
           gender,
@@ -52,27 +52,31 @@ const SignUp = () => {
           phone,
           password,
           confirmPassword,
-        })
-        .then((res) => {
-          if (res.data === "exist") {
-            alert("user already exist");
-          } else if (res.data === "not exist") {
-            history("/");
-          }
-        })
-        .catch((e) => {
-          alert("wrong details");
-          console.log(e);
-        });
-    } catch (e) {
-      console.log(e);
-    }
+        }),
+      });
 
-    // Add your sign-in logic here
-  }
+      const data = await response.json();
+
+      if (response.ok) {
+        // Successful signup
+        console.log(data);
+        history("/Login");
+      } else {
+        // Signup failed
+        if (response.status === 409) {
+          alert("User already exists.");
+        } else {
+          alert("Signup failed.");
+        }
+      }
+    } catch (error) {
+      console.error("Error signing up:", error);
+    }
+  };
+
   return (
     <div className="signin-form-container">
-      <form className="signin-form " action="post" onSubmit={Submit}>
+      <form className="signin-form " action="post" onSubmit={submit}>
         <label htmlFor="name">Name</label>
         <input
           type="text"
@@ -156,5 +160,4 @@ const SignUp = () => {
     </div>
   );
 };
-
 export default SignUp;
