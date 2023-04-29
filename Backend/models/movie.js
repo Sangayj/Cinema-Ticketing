@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const movieSchema = mongoose.Schema(
   {
-    movie_name: {
+    movieName: {
       type: String,
       required: true,
     },
@@ -20,7 +20,7 @@ const movieSchema = mongoose.Schema(
       required: true,
     },
 
-    release_date: {
+    releaseDate: {
       type: Date,
       required: true,
     },
@@ -41,10 +41,13 @@ const movieSchema = mongoose.Schema(
       public_id: { type: String, required: true },
       required: true,
     },
-
+    tags: {
+      type: String,
+      required: true,
+    },
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("movie", movieSchema);
+module.exports = mongoose.model("Movie", movieSchema);
