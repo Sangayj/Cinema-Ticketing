@@ -1,69 +1,34 @@
+// server.js
+
 const express = require("express");
-const collection = require("./mongo");
+const mongoose = require("mongoose");
 const cors = require("cors");
+const authRoutes = require("./routes/authRoutes");
+
 const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
 app.use(cors());
 
-app.get("/", cors(), (req, res) => {});
+app.use(express.json());
 
-app.post("/", async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    const check = await collection.findOne({
-      email: email,
-      password: password,
-    });
-    if (check) {
-      res.json("exist");
-    } else {
-      res.json("not exist");
-    }
-  } catch (e) {
-    res.json("not exist");
-  }
-});
+// Connect to the database
+mongoose
+  .connect("mongodb+srv://jamtsho:sangay@cinema.cupetj2.mongodb.net/data", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Connected to MongoDB");
+    // Start the server after successful database connection
+  })
+  .catch((error) => {
+    console.error("Error connecting to MongoDB:", error);
+  });
 
-app.post("/SignIn", async (req, res) => {
-  const { email, password } = req.body;
+// Routes
+app.use("/api", authRoutes);
 
-  const data = {
-    email: email,
-    password: password,
-  };
-
-  try {
-    const check = await collection.findOne({
-      email: email,
-      password: password,
-    });
-    if (check) {
-      res.json("exist");
-    } else {
-      res.json("not exist");
-      await collection.insertMany([data]);
-    }
-  } catch (e) {
-    res.json("not exist");
-  }
-});
-
-app.post('/MovieForm', async (req, res) => {
-  const movieData = req.body;
-  try {
-    // Save the movieData to the database
-    await collection.insertOne(movieData);
-
-    // Send a success response back to the client
-    res.status(200).json({ message: "Movie data saved successfully" });
-  } catch (e) {
-    // Send an error response back to the client
-    res.status(500).json({ message: "An error occurred while saving movie data" });
-  }
-});
-
-
+// Start the server
 app.listen(8000, () => {
-  console.log("Port connected");
+  console.log("Server listening on port 8000");
 });

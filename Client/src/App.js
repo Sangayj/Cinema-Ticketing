@@ -1,9 +1,8 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./Component/Navbar";
 import Landing from "./Component/Landing";
-import SignIn from "./Component/SignIn";
+import SignUp from "./Component/SignUp";
 import Login from "./Component/Login";
-import View from "./Component/View";
 import Footer from "./Component/Footer";
 import Ticket from "./Component/Ticket";
 import Movie2 from "./Component/Movie2";
@@ -16,18 +15,14 @@ import Home from "./Component/Home";
 import Adminpage from "./Admin/Adminpage";
 
 function App() {
-  const location = useLocation();
-  const isAdminPage = location.pathname === "/admin";
-
   return (
     <div>
       {isAdminPage ? null : <Navbar />}
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/Home" element={<Home />} />
-        <Route path="/SignIn" element={<SignIn />} />
+        <Route path="/SignUp" element={<SignUp />} />
         <Route path="/Login" element={<Login />} />
-        <Route path="/View" element={<View />} />
         <Route path="/Ticket" element={<Ticket />} />
         <Route path="/Movie1" element={<Movie1 />} />
         <Route path="/Movie2" element={<Movie2 />} />
