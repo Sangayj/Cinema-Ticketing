@@ -1,12 +1,25 @@
-const User = require("../models/Users");
+// backend/middleware/authMiddleware.js
+const jwt = require("jsonwebtoken");
 
-exports.isAdmin = (req, res, next) => {
-  if (req.user && req.user.role === "admin") {
-    // User is an admin
-    next();
-  } else {
-    // User is not an admin
-    // Handle unauthorized access, e.g., send an error response
-    res.status(401).json({ error: "Unauthorized" });
+exports.verifyToken = (req, res, next) => {
+  const token = req.headers.authorization;
+
+  if (!token) {
+    return res.status(401).json({ error: "Unauthorized" });
   }
+
+  try {
+    const decoded = jwt.verify(token, "cjnvrt5487ryudbhnfn978eagyfbhn23878");
+    req.user = decoded;
+    next();
+  } catch (error) {
+    return res.status(401).json({ error: "Invalid token" });
+  }
+};
+
+exports.checkAdmin = (req, res, next) => {
+  if (!req.user.isAdmin) {
+    return res.status(403).json({ error: "Access denied" });
+  }
+  next();
 };
