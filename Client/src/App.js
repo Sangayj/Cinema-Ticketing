@@ -12,9 +12,12 @@ import Movie5 from "./Component/Movie5";
 import Movie6 from "./Component/Movie6";
 import Movie1 from "./Component/Movie1";
 import Home from "./Component/Home";
-import Adminpage from "./Admin/Adminpage";
+import Adminpage from "./Adminpage";
+import AddMovieForm from './AddMovieForm';
 
 function App() {
+  const isAdminPage = false; // Define isAdminPage as a boolean variable
+
   return (
     <div>
       {isAdminPage ? null : <Navbar />}
@@ -31,6 +34,7 @@ function App() {
         <Route path="/Movie5" element={<Movie5 />} />
         <Route path="/Movie6" element={<Movie6 />} />
         <Route path="/admin" element={<Adminpage />} />
+        <Route path="/movieform" element={<AddMovieForm />} />
       </Routes>
       {isAdminPage ? null : <Footer />}
     </div>

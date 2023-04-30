@@ -10,4 +10,6 @@ router.post("/SignUp", authController.SignUp);
 // Login route
 router.post("/Login", authController.Login);
 
+
+
 module.exports = router;
