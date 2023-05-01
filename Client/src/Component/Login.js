@@ -1,63 +1,73 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 import "./Login.css";
 
 const Login = () => {
   const history = useNavigate();
-  const [email, setEmail] = useState("");
+  const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
-  async function submit(e) {
+  const submit = async (e) => {
     e.preventDefault();
-    try {
-      await axios
-        .post("http://localhost:8000/", {
-          email,
-          password,
-        })
-        .then((res) => {
-          if (res.data == "exist") {
-            history("/#");
-          } else if (res.data == "not exist") {
-            alert("User have not sign up");
-          }
-        })
-        .catch((e) => {
-          alert("wrong details");
-          console.log(e);
-        });
-    } catch (e) {
-      console.log(e);
-    }
-    // Add your login logic here
-  }
 
+    try {
+      const response = await fetch("http://localhost:8000/api/Login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        history("/");
+        // Successful login
+        console.log(data);
+      } else {
+        // Login failed
+        if (response.status === 404) {
+          alert("User not found.");
+        } else if (response.status === 401) {
+          alert("Incorrect password.");
+        } else {
+          alert("Login failed.");
+        }
+      }
+    } catch (error) {
+      console.error("Error logging in:", error);
+    }
+  };
   return (
     <div className="login-form-container">
       <form className="login-form" action="post">
+        <label htmlFor="username">Username</label>
         <input
-          type="email"
-          name="email"
-          id="email"
-          value={email}
-          required
+          type="text"
+          id="username"
+          name="username"
+          value={username}
           onChange={(e) => {
-            setEmail(e.target.value);
+            setUserName(e.target.value);
           }}
+          required
         />
+        <label htmlFor="password">Password</label>
         <input
           type="password"
-          name="password"
           id="password"
+          name="password"
           value={password}
-          required
           onChange={(e) => {
             setPassword(e.target.value);
           }}
+          required
         />
-        <input type="submit" onClick={submit} />
+        <button type="submit" onClick={submit}>
+          Login
+        </button>
       </form>
     </div>
   );
