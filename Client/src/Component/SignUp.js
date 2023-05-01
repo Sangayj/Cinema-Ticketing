@@ -14,6 +14,8 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [role, setRole] = useState("");
+  const [secretKey, setSecretKey] = useState("");
 
   const handlePasswordChange = (e) => {
     const { value } = e.target;
@@ -37,46 +39,82 @@ const SignUp = () => {
 
   const submit = async (e) => {
     e.preventDefault();
+    if (role === "Admin" && secretKey !== "12345") {
+      e.preventDefault();
+      alert("Invalid Admin");
+    } else {
+      e.preventDefault();
 
-    try {
-      const response = await fetch("http://localhost:8000/api/SignUp", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          username,
-          gender,
-          email,
-          phone,
-          password,
-          confirmPassword,
-        }),
-      });
+      try {
+        const response = await fetch("http://localhost:8000/api/SignUp", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            role,
+            name,
+            username,
+            gender,
+            email,
+            phone,
+            password,
+            confirmPassword,
+          }),
+        });
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (response.ok) {
-        // Successful signup
-        console.log(data);
-        history("/Login");
-      } else {
-        // Signup failed
-        if (response.status === 409) {
-          alert("User already exists.");
+        if (response.ok) {
+          // Successful signup
+          console.log(data);
+          history("/Login");
         } else {
-          alert("Signup failed.");
+          // Signup failed
+          if (response.status === 409) {
+            alert("User already exists.");
+          } else {
+            alert("Signup failed.");
+          }
         }
+      } catch (error) {
+        console.error("Error signing up:", error);
       }
-    } catch (error) {
-      console.error("Error signing up:", error);
     }
   };
 
   return (
     <div className="signin-form-container">
+      <div className="radio">
+        Register As
+        <input
+          type="radio"
+          name="role"
+          value="user"
+          onChange={(e) => setRole(e.target.value)}
+        />
+        User
+        <input
+          type="radio"
+          name="role"
+          value="admin"
+          onChange={(e) => setRole(e.target.value)}
+        />
+        Admin
+      </div>
+
       <form className="signin-form " action="post" onSubmit={submit}>
+        {role === "admin" ? (
+          <div className="mb-3">
+            <label>Secret Key</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Secret Key"
+              onChange={(e) => setSecretKey(e.target.value)}
+            />
+          </div>
+        ) : null}
         <label htmlFor="name">Name</label>
         <input
           type="text"

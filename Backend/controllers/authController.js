@@ -4,10 +4,20 @@ const jwt = require("jsonwebtoken");
 
 const User = require("../models/Users");
 
+const JWT_SECRET = "cmnvgfdh87t4benrf7e6qgbdh";
+
 async function SignUp(req, res) {
   try {
-    const { name, username, gender, email, phone, password, confirmPassword } =
-      req.body;
+    const {
+      role,
+      name,
+      username,
+      gender,
+      email,
+      phone,
+      password,
+      confirmPassword,
+    } = req.body;
 
     // Check if the email already exists
     const existingUser = await User.findOne({ username });
@@ -22,6 +32,7 @@ async function SignUp(req, res) {
 
     // Create a new user
     const newUser = new User({
+      role,
       name,
       username,
       gender,
@@ -56,11 +67,14 @@ async function Login(req, res) {
     if (!isMatch) {
       return res.status(400).json({ message: "Incorrect password" });
     }
+    let secretKey = "secretKey";
+    if (user.role === "admin") {
+      secretKey = "adminSecretKey";
+    }
+    const token = jwt.sign({ id: user._id, role: user.role }, secretKey);
 
-    const { _id, name, role } = user;
-
-    const jwtToken = jwt.sign({ userId: _id }, process.env.JWT_SECRET);
-    res.json({ user: { id: _id, name, username, role, token: jwtToken } });
+    // Send the token and user type in the response
+    return res.status(200).json({ token, userType: user.role });
   } catch (error) {
     console.error("Error logging in:", error);
     return res.status(500).json({ error: "Login failed" });
