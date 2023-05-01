@@ -21,23 +21,28 @@ const Login = () => {
       });
 
       const data = await response.json();
-
       if (response.ok) {
-        history("/");
-        // Successful login
-        console.log(data);
-      } else {
-        // Login failed
-        if (response.status === 404) {
-          alert("User not found.");
-        } else if (response.status === 401) {
-          alert("Incorrect password.");
+        // Verify user role and redirect to the corresponding panel
+        if (data.userType === "admin") {
+          window.location.href = "http://localhost:3000";
+        } else if (data.userType === "user") {
+          history("/");
         } else {
-          alert("Login failed.");
+          console.error("Invalid user role");
+        }
+      } else {
+        if (response.status === 400) {
+          // Incorrect password
+          alert("Incorrect password");
+        } else if (response.status === 404) {
+          // User does not exist
+          alert("User does not exist");
+        } else {
+          console.error(data.error);
         }
       }
-    } catch (error) {
-      console.error("Error logging in:", error);
+    } catch (err) {
+      console.error(err);
     }
   };
   return (

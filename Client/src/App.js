@@ -1,18 +1,17 @@
 import { Routes, Route, } from "react-router-dom";
 import Navbar from "./Component/Navbar";
-import Landing from "./Component/Landing";
 import SignUp from "./Component/SignUp";
 import Login from "./Component/Login";
 import Footer from "./Component/Footer";
-import Ticket from "./Component/Ticket";
-import Movie2 from "./Component/Movie2";
-import Movie3 from "./Component/Movie3";
-import Movie4 from "./Component/Movie4";
-import Movie5 from "./Component/Movie5";
-import Movie6 from "./Component/Movie6";
-import Movie1 from "./Component/Movie1";
 import Home from "./Component/Home";
 import AddMovie from "./Component/AddMovies";
+import Movie1 from "./Component/Movie3";
+import Movie2 from "./Component/Movie3";
+import Movie3 from "./Component/Movie3";
+import Movie4 from "./Component/Movie3";
+import Movie5 from "./Component/Movie3";
+import Movie6 from "./Component/Movie3";
+
 
 function App() {
   const isAdminPage = false; // Define isAdminPage as a boolean variable
