@@ -14,6 +14,7 @@ import Movie5 from "./Component/Movie5";
 import Movie6 from "./Component/Movie6";
 import Movie1 from "./Component/Movie1";
 import Home from "./Component/Home";
+import AddMovie from "./Component/AddMovies";
 
 function App() {
   
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/Home" element={<Home />} />
+        <Route path="/AddMovies" element={<AddMovie />} />
         <Route path="/Signin" element={<Signin />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/View" element={<View />} />
