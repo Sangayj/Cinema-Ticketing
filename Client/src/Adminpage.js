@@ -1,30 +1,45 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const MovieForm = () => {
-  const [movieData, setMovieData] = useState({
-    movieName: "",
-    actors: "",
-    producers: "",
-    description: "",
-    startDate: "",
-    endDate: "",
-  });
+function MovieForm() {
+  const [movieName, setMovieName] = useState("");
+  const [actor, setActor] = useState("");
+  const [actress, setActress] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [image, setImage] = useState(null);
 
-  const handleChange = (event) => {
-    setMovieData({ ...movieData, [event.target.name]: event.target.value });
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    axios
-      .post("http://localhost:5000/api/MovieForm", movieData)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append("movieName", movieName);
+      formData.append("actor", actor);
+      formData.append("actress", actress);
+      formData.append("startDate", startDate);
+      formData.append("image", image);
+
+      await axios.post("/api/movies", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
+
+      alert("Movie details uploaded successfully!");
+
+      // Clear form fields after successful submission
+      setMovieName("");
+      setActor("");
+      setActress("");
+      setStartDate("");
+      setImage(null);
+    } catch (error) {
+      console.error(error);
+      alert("An error occurred while uploading movie details.");
+    }
   };
 
   return (
@@ -33,38 +48,26 @@ const MovieForm = () => {
         Movie Name:
         <input
           type="text"
-          name="movieName"
-          value={movieData.movieName}
-          onChange={handleChange}
+          value={movieName}
+          onChange={(e) => setMovieName(e.target.value)}
         />
       </label>
       <br />
       <label>
-        Actors:
+        Actor:
         <input
           type="text"
-          name="actors"
-          value={movieData.actors}
-          onChange={handleChange}
+          value={actor}
+          onChange={(e) => setActor(e.target.value)}
         />
       </label>
       <br />
       <label>
-        Producers:
+        Actress:
         <input
           type="text"
-          name="producers"
-          value={movieData.producers}
-          onChange={handleChange}
-        />
-      </label>
-      <br />
-      <label>
-        Description:
-        <textarea
-          name="description"
-          value={movieData.description}
-          onChange={handleChange}
+          value={actress}
+          onChange={(e) => setActress(e.target.value)}
         />
       </label>
       <br />
@@ -72,25 +75,19 @@ const MovieForm = () => {
         Start Date:
         <input
           type="date"
-          name="startDate"
-          value={movieData.startDate}
-          onChange={handleChange}
+          value={startDate}
+          onChange={(e) => setStartDate(e.target.value)}
         />
       </label>
       <br />
       <label>
-        End Date:
-        <input
-          type="date"
-          name="endDate"
-          value={movieData.endDate}
-          onChange={handleChange}
-        />
+        Image:
+        <input type="file" onChange={handleImageChange} />
       </label>
       <br />
       <button type="submit">Submit</button>
     </form>
   );
-};
+}
 
 export default MovieForm;

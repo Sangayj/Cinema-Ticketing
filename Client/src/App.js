@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route,  } from "react-router-dom";
 import Navbar from "./Component/Navbar";
 import Landing from "./Component/Landing";
 import SignUp from "./Component/SignUp";
@@ -13,7 +13,8 @@ import Movie6 from "./Component/Movie6";
 import Movie1 from "./Component/Movie1";
 import Home from "./Component/Home";
 import Adminpage from "./Adminpage";
-import AddMovieForm from './AddMovieForm';
+import Movies from "./Component/Movies";
+
 
 function App() {
   const isAdminPage = false; // Define isAdminPage as a boolean variable
@@ -34,7 +35,9 @@ function App() {
         <Route path="/Movie5" element={<Movie5 />} />
         <Route path="/Movie6" element={<Movie6 />} />
         <Route path="/admin" element={<Adminpage />} />
-        <Route path="/movieform" element={<AddMovieForm />} />
+        <Route path="/Movies" element={<Movies />} />
+
+
       </Routes>
       {isAdminPage ? null : <Footer />}
     </div>
