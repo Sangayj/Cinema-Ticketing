@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import "./View.css";
 
-function View() {
+function View2() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
 
@@ -42,14 +42,13 @@ function View() {
           <p className="description">{movie.description}</p>
         </div>
         <div className="button">
-          <Link to="/login">
-            <button className="login-button">Login</button>
+          <Link to="/">
+            <button className="book-tickets">Book</button>
           </Link>
         </div>
       </div>
     </div>
-    
   );
 }
 
-export default View;
+export default View2;
