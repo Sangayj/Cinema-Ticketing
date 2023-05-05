@@ -4,8 +4,6 @@ const jwt = require("jsonwebtoken");
 
 const User = require("../models/Users");
 
-const JWT_SECRET = "cmnvgfdh87t4benrf7e6qgbdh";
-
 async function SignUp(req, res) {
   try {
     const {
@@ -49,7 +47,15 @@ async function SignUp(req, res) {
     res.status(500).json({ error: "An error occurred while signing up" });
   }
 }
-
+// Get all users
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.find({}, "name username email phone");
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
 async function Login(req, res) {
   try {
     const { username, password } = req.body;
@@ -84,4 +90,5 @@ async function Login(req, res) {
 module.exports = {
   SignUp,
   Login,
+  getUsers,
 };

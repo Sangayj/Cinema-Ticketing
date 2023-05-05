@@ -9,5 +9,5 @@ router.post("/SignUp", authController.SignUp);
 
 // Login route
 router.post("/Login", authController.Login);
-
+router.get("/users", authController.getUsers);
 module.exports = router;

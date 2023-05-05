@@ -1,10 +1,9 @@
-// server.js
-
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require("path");
 const authRoutes = require("./routes/authRoutes");
-
+const movieRoutes = require("./routes/movieRoutes");
 require("dotenv").config();
 
 const app = express();
@@ -27,10 +26,12 @@ mongoose
     console.error("Error connecting to MongoDB:", error);
   });
 
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 // Routes
 app.use("/api", authRoutes);
+app.use(movieRoutes);
 
-// Start the server
 app.listen(8000, () => {
   console.log("Server listening on port 8000");
 });

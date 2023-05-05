@@ -1,78 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 import "./Home.css";
 
-const movieData = [
-  {
-    title: "Doro Zam",
-    imageUrl: "./Image/image1.jpg",
-  },
-  {
-    title: "Dema Tsho",
-    imageUrl: "./Image/Dema.jpg",
-  },
-  {
-    title: "Nigthob",
-    imageUrl: "./Image/Nigtob.jpg",
-  },
-  {
-    title: "Super Star",
-    imageUrl: "./Image/Star.jpg",
-  },
-  {
-    title: "Rolong",
-    imageUrl: "./Image/rolong.jpg",
-  },
-  {
-    title: "Lekzin",
-    imageUrl: "./Image/one.jpg",
-  },
-  {
-    title: "Dorozam",
-    imageUrl: "./Image/dorozam.jpg",
-  },
-  {
-    title: "Upalama",
-    imageUrl: "./Image/image1  .jpg",
-  },
-  {
-    title: "Yalama Nga",
-    imageUrl: "./Image/Yalama.jpg",
-  },
-  {
-    title: "One Night In Thimphu",
-    imageUrl: "./Image/one.jpg",
-  },
-];
+function Home() {
+  const [movies, setMovies] = useState([]);
 
-function MovieCard({ title, imageUrl }) {
-  const [isHovering, setIsHovering] = React.useState(false);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/movies")
+      .then((response) => {
+        setMovies(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
-    <div
-      className="card"
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
-    >
-      <img
-        src={imageUrl}
-        alt={title}
-        className={isHovering ? "card-img zoom-in" : "card-img"}
-      />
-      <h4>{title}</h4>
-    </div>
-  );
-}
-
-export default function Home() {
-  return (
-    <div className="movie-container">
-      {movieData.map((movie) => (
-        <MovieCard
-          key={movie.title}
-          title={movie.title}
-          imageUrl={movie.imageUrl}
-        />
+    <div className="card-container">
+      {movies.map((movie) => (
+        <div className="card" key={movie._id}>
+          <img
+            className="card-image"
+            src={`http://localhost:8000/uploads/${movie.filename}`}
+            alt={movie.originalname}
+          />{" "}
+          <div className="card-title">{movie.title}</div>
+          <Link to={`/View/${movie._id}`} className="view-button">
+            View Details
+          </Link>
+        </div>
       ))}
     </div>
   );
 }
+
+export default Home;

@@ -24,7 +24,7 @@ const Login = () => {
       if (response.ok) {
         // Verify user role and redirect to the corresponding panel
         if (data.userType === "admin") {
-          window.location.href = "http://localhost:3000";
+          history("/AdminDashboard");
         } else if (data.userType === "user") {
           history("/");
         } else {
