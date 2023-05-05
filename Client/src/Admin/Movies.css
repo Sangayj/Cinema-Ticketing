@@ -1,0 +1,74 @@
+.movies-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.movies-form .form-group {
+  margin-bottom: 15px;
+}
+
+.movies-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.movies-form input[type="text"],
+.movies-form textarea {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.movies-form button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.movies-form button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Optional styling for the movie card */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.card img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.card-body {
+  flex-grow: 1;
+  margin-top: 10px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.card-text {
+  margin-bottom: 10px;
+}
+
+.card p {
+  margin: 5px 0;
+}

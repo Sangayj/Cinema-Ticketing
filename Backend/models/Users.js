@@ -3,6 +3,11 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
+  role: {
+    type: String,
+    required: true,
+  },
+
   name: {
     type: String,
     required: true,
@@ -35,7 +40,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // additional fields for user data
 });
 
 module.exports = mongoose.model("User", userSchema);

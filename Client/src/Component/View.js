@@ -1,39 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 import "./View.css";
 
 function View() {
+  const { id } = useParams();
+  const [movie, setMovie] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/api/movies/${id}`)
+      .then((response) => {
+        setMovie(response.data);
+        console.log(response.data); // Log the movie data to the console
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [id]);
+
+  if (!movie) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div>
-      <div className="card">
-        <div className="movie-banner">
+    <div className="view-container">
+      <div className="container">
+        <div className="image-container">
           <img
-            src="./Images/download.jpeg"
-            alt="banner"
-            className="movie-banner-image"
+            className="movie-image"
+            src={`http://localhost:8000/uploads/${movie.filename}`}
+            alt={movie.originalname}
           />
-          <div className="movie-banner-body">
-            <p className="movie-banner-title">Druk</p>
-            <p className="movie-banner-director"> Karma Jerry</p>
-            <p className="movie-banner-actor">Tshering Gyeltshen</p>
-            <p className="movie-banner-actress">Tandin Bhida</p>
-            <p className="movie-banner-description">
-              It is a story that will educate every student, Individuals and the
-              nation about their existence.
-            </p>
-          </div>
         </div>
-        <div className="ticket">
-          <div className="label">Date:</div>
-          <div className="value">2nd Sept, 2023</div>
-
-          <div className="label">Time:</div>
-          <div className="value">5pm-8pm</div>
-
-          <div className="label">Theatre:</div>
-          <div className="value">Lugar Theatre</div>
-
-          <div className="label">Ticket Price:</div>
-          <div className="value">Nu. 400</div>
+        <div className="text-container">
+          <h2 className="title">{movie.title}</h2>
+          <div className="separator"></div>
+          <p className="director">Director: {movie.director}</p>
+          <p className="actor">Actor: {movie.actor}</p>
+          <p className="actress">Actress: {movie.actress}</p>
+          <div className="separator"></div>
+          <p className="description">{movie.description}</p>
         </div>
       </div>
     </div>

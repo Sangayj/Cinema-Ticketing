@@ -1,39 +1,90 @@
-const Movie = require("../models/Movie");
+const Movie = require("../models/movies");
 
-// POST /api/movies
-exports.createMovie = async (req, res) => {
-  try {
-    const {
-      movieName,
-      actors,
-      producer,
-      description,
-      startDate,
-      endDate,
-    } = req.body;
+exports.uploadMovie = (req, res) => {
+  const { title, director, actor, actress, description } = req.body;
+  const { filename, originalname } = req.file;
 
-    // create new movie object
-    const newMovie = new Movie({
-      movieName,
-      actors,
-      producer,
-      description,
-      startDate,
-      endDate,
+  const movie = new Movie({
+    title,
+    director,
+    actor,
+    actress,
+    description,
+    filename,
+    originalname,
+  });
+
+  movie
+    .save()
+    .then((savedMovie) => {
+      res.json({ message: "Movie uploaded successfully" });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ error: "Failed to save movie" });
     });
+};
 
-    // add poster to new movie object
-    if (req.file) {
-      newMovie.poster = req.file.filename;
-    }
+exports.getMovies = (req, res) => {
+  Movie.find()
+    .then((movies) => {
+      res.json(movies);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ error: "Failed to retrieve movies" });
+    });
+};
 
-    // save the new movie object to the database
-    const savedMovie = await newMovie.save();
+exports.getMovieById = (req, res) => {
+  const movieId = req.params.id;
 
-    // send the saved movie object as response
-    res.status(201).json(savedMovie);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Server error" });
-  }
+  exports.getMovieById = (req, res) => {
+    const movieId = req.params.id;
+
+    Movie.findById(movieId)
+      .then((movie) => {
+        if (!movie) {
+          return res.status(404).json({ error: "Movie not found" });
+        }
+
+        // Create the image URL using the filename property
+        const imageUrl = `http://localhost:8000/uploads/${movie.filename}`;
+
+        // Modify this response structure based on your movie data
+        const movieData = {
+          title: movie.title,
+          director: movie.director,
+          actor: movie.actor,
+          actress: movie.actress,
+          description: movie.description,
+          image: {
+            url: imageUrl,
+            alt: movie.originalname,
+          },
+          // Add other movie properties as needed
+        };
+
+        res.json(movieData);
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+      });
+  };
+};
+exports.getMovieById = (req, res) => {
+  const { id } = req.params;
+
+  Movie.findById(id)
+    .then((movie) => {
+      if (!movie) {
+        return res.status(404).json({ error: "Movie not found" });
+      }
+      res.json(movie);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
+    });
 };

@@ -1,11 +1,10 @@
-// server.js
-
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require("path");
 const authRoutes = require("./routes/authRoutes");
-const movieRoutes = require("./routes/movieRoute");
-
+const movieRoutes = require("./routes/movieRoutes");
+require("dotenv").config();
 
 const app = express();
 
@@ -15,7 +14,7 @@ app.use(express.json());
 
 // Connect to the database
 mongoose
-  .connect("mongodb+srv://jamtsho:sangay@cinema.cupetj2.mongodb.net/data", {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -27,13 +26,12 @@ mongoose
     console.error("Error connecting to MongoDB:", error);
   });
 
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 // Routes
 app.use("/api", authRoutes);
-app.use("/api/Movies", movieRoutes);
+app.use(movieRoutes);
 
-
-
-// Start the server
 app.listen(8000, () => {
   console.log("Server listening on port 8000");
 });
