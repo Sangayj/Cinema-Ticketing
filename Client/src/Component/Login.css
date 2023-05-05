@@ -44,3 +44,28 @@
 .login-form button:hover {
   background-color: #3e8e41;
 }
+
+.login-form-links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4rem;
+}
+
+.login-form-links a {
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.login-form-links a.SignUp {
+  color: #f39c12; /* Orange color */
+  margin-right: 1rem;
+}
+
+.login-form-links a.forgot-password {
+  color: #2980b9;
+  font-size: small; /* Blue color */
+}
+
+.login-form-links a:hover {
+  text-decoration: underline;
+}

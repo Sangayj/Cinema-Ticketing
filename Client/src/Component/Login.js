@@ -45,6 +45,7 @@ const Login = () => {
       console.error(err);
     }
   };
+
   return (
     <div className="login-form-container">
       <form className="login-form" action="post">
@@ -73,6 +74,11 @@ const Login = () => {
         <button type="submit" onClick={submit}>
           Login
         </button>
+        <div className="login-form-links">
+          <a href="/forgotpassword">Forgot Password?</a>
+
+          <a href="/signup">Sign Up</a>
+        </div>
       </form>
     </div>
   );

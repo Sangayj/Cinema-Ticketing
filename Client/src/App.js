@@ -8,16 +8,21 @@ import AdminDashboard from "./Admin/AdminDashboard";
 import Customer from "./Admin/Customer";
 import Movies from "./Admin/Movies";
 import View from "./Component/View";
+import MovieDetails from "./Admin/MovieDetails";
 
 function App() {
   const location = useLocation();
   const isDashboardPage = location.pathname === "/AdminDashboard";
   const isCustomerPage = location.pathname === "/Customer";
   const isMoviesPage = location.pathname === "/Movies";
+  const isMovieDetailsPage = location.pathname.includes("/MovieDetails");
 
   return (
     <div>
-      {!isDashboardPage && !isCustomerPage && !isMoviesPage && <Navbar />}
+      {!isDashboardPage &&
+        !isCustomerPage &&
+        !isMoviesPage &&
+        !isMovieDetailsPage && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/SignUp" element={<SignUp />} />
@@ -25,9 +30,13 @@ function App() {
         <Route path="/AdminDashboard" element={<AdminDashboard />} />
         <Route path="/Customer" element={<Customer />} />
         <Route path="/Movies" element={<Movies />} />
-        <Route path="/View/:id" element={<View />} />{" "}
+        <Route path="/View/:id" element={<View />} />
+        <Route path="/MovieDetails" element={<MovieDetails />} />
       </Routes>
-      {!isDashboardPage && !isCustomerPage && !isMoviesPage && <Footer />}
+      {!isDashboardPage &&
+        !isCustomerPage &&
+        !isMoviesPage &&
+        !isMovieDetailsPage && <Footer />}
     </div>
   );
 }

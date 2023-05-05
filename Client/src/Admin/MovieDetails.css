@@ -1,0 +1,32 @@
+.view-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  max-width: 600px;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.movie-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.movie-table td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.movie-table td:first-child {
+  font-weight: bold;
+}
+
+.movie-table tr:last-child td {
+  border-bottom: none;
+}
