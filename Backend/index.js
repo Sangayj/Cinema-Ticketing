@@ -29,7 +29,7 @@ mongoose
 
 // Routes
 app.use("/api", authRoutes);
-app.use("/api", movieRoutes);
+app.use("/api/Movies", movieRoutes);
 
 
 
