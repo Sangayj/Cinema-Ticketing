@@ -37,8 +37,7 @@ function View() {
           <h2 className="title">{movie.title}</h2>
           <div className="separator"></div>
           <p className="director">Director: {movie.director}</p>
-          <p className="actor">Actor: {movie.actor}</p>
-          <p className="actress">Actress: {movie.actress}</p>
+          <p className="cast">cast: {movie.cast}</p>
           <div className="separator"></div>
           <p className="description">{movie.description}</p>
         </div>

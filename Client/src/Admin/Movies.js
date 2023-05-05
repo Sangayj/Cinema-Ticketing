@@ -4,8 +4,7 @@ import axios from "axios";
 function Movies() {
   const [title, setTitle] = useState("");
   const [director, setDirector] = useState("");
-  const [actor, setActor] = useState("");
-  const [actress, setActress] = useState("");
+  const [cast, setCast] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
 
@@ -15,8 +14,7 @@ function Movies() {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("director", director);
-    formData.append("actor", actor);
-    formData.append("actress", actress);
+    formData.append("cast", cast);
     formData.append("description", description);
     formData.append("image", image);
 
@@ -27,8 +25,7 @@ function Movies() {
         // Clear form fields
         setTitle("");
         setDirector("");
-        setActor("");
-        setActress("");
+        setCast("");
         setDescription("");
         setImage(null);
       })
@@ -60,20 +57,11 @@ function Movies() {
           />
         </div>
         <div>
-          <label>Actor:</label>
+          <label>cast:</label>
           <input
             type="text"
-            value={actor}
-            onChange={(e) => setActor(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Actress:</label>
-          <input
-            type="text"
-            value={actress}
-            onChange={(e) => setActress(e.target.value)}
+            value={cast}
+            onChange={(e) => setCast(e.target.value)}
             required
           />
         </div>

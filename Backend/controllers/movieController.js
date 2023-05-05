@@ -1,14 +1,13 @@
 const Movie = require("../models/movies");
 
 exports.uploadMovie = (req, res) => {
-  const { title, director, actor, actress, description } = req.body;
+  const { title, director, cast, description } = req.body;
   const { filename, originalname } = req.file;
 
   const movie = new Movie({
     title,
     director,
-    actor,
-    actress,
+    cast,
     description,
     filename,
     originalname,
@@ -55,8 +54,7 @@ exports.getMovieById = (req, res) => {
         const movieData = {
           title: movie.title,
           director: movie.director,
-          actor: movie.actor,
-          actress: movie.actress,
+          cast: movie.cast,
           description: movie.description,
           image: {
             url: imageUrl,
