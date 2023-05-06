@@ -7,6 +7,10 @@ const movieSchema = new mongoose.Schema({
   description: String,
   filename: String,
   originalname: String,
+  date: Date,
+  time: String,
+  theatre: String,
+  price: Number,
 });
 
 module.exports = mongoose.model("Movie", movieSchema);

@@ -37,9 +37,13 @@ function View() {
           <h2 className="title">{movie.title}</h2>
           <div className="separator"></div>
           <p className="director">Director: {movie.director}</p>
-          <p className="cast">cast: {movie.cast}</p>
-          <div className="separator"></div>
+          <p className="cast">Cast: {movie.cast}</p>
           <p className="description">{movie.description}</p>
+          <div className="separator"></div>
+          <p className="date">Date: {movie.date}</p>
+          <p className="time">Time: {movie.time}</p>
+          <p className="theatre">Theatre: {movie.theatre}</p>
+          <p className="price">Price: {movie.price}</p>
         </div>
       </div>
     </div>

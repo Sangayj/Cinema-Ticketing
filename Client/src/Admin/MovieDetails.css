@@ -1,32 +1,21 @@
-.view-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.container {
-  max-width: 600px;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
-}
-
-.movie-table {
+.movies-table {
   width: 100%;
   border-collapse: collapse;
+  text-align: center;
 }
 
-.movie-table td {
+.movies-table th,
+.movies-table td {
   padding: 0.5rem;
-  border-bottom: 1px solid #ccc;
+  border: 1px solid #ccc;
 }
 
-.movie-table td:first-child {
-  font-weight: bold;
+.movies-table td img {
+  max-height: 5rem;
+  width: auto;
 }
 
-.movie-table tr:last-child td {
-  border-bottom: none;
+.description {
+  white-space: pre-wrap;
+  max-width: 400px;
 }
