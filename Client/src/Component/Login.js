@@ -26,7 +26,7 @@ const Login = () => {
         if (data.userType === "admin") {
           history("/AdminDashboard");
         } else if (data.userType === "user") {
-          history("/");
+          history("/Homepage");
         } else {
           console.error("Invalid user role");
         }

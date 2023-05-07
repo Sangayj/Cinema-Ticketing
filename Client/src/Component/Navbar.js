@@ -1,23 +1,41 @@
-import { useRef } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
 function Navbar() {
-  const navRef = useRef();
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+    navigate("/Login");
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    navigate("/");
+  };
 
   return (
     <div className="navbar-container">
       <a href="/#" className="navbar-logo">
         <img src="./Image/logo.png" alt="Logo" className="navbar-logo-img" />
       </a>
-      <nav ref={navRef} className="navbar">
+      <nav className="navbar">
         <input
           type="text"
           className="search-input"
           placeholder="Search for movies"
         />
-        <a className="nav-item" href="/Login">
-          Login
-        </a>
+        {isLoggedIn ? (
+          <button className="nav-item" onClick={handleLogout}>
+            Logout
+          </button>
+        ) : (
+          <button className="nav-item" onClick={handleLogin}>
+            Login
+          </button>
+        )}
       </nav>
     </div>
   );

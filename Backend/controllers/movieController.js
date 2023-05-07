@@ -1,7 +1,7 @@
 const Movie = require("../models/movies");
 
 exports.uploadMovie = (req, res) => {
-  const { title, director, cast, description } = req.body;
+  const { title, director, cast, description, } = req.body;
   const { filename, originalname } = req.file;
 
   const movie = new Movie({

@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, Navigate } from "react-router-dom";
 import SignUp from "./Component/SignUp";
 import Footer from "./Component/Footer";
 import Navbar from "./Component/Navbar";
@@ -37,6 +37,11 @@ function App() {
         <Route path="/Home" element={<Home />} />
         <Route path="/Homepage" element={<Homepage />} />
         <Route path="/View2/:id" element={<View2 />} />
+        {/* add the following route */}
+        <Route
+          path="*"
+          element={<Navigate to="/" replace />}
+        />
       </Routes>
       {!isDashboardPage &&
         !isCustomerPage &&
