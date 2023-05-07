@@ -1,21 +1,56 @@
+.add-users-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.add-users-button:hover {
+  background-color: #0062cc;
+}
+
 .movies-table {
-  width: 100%;
   border-collapse: collapse;
-  text-align: center;
+  margin-top: 4rem;
 }
 
 .movies-table th,
 .movies-table td {
-  padding: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
+  padding: 8px;
 }
 
-.movies-table td img {
-  max-height: 5rem;
+.movies-table th {
+  text-align: left;
+  background-color: lightgoldenrodyellow;
+}
+
+.card-image {
+  height: 100px;
   width: auto;
 }
 
-.description {
-  white-space: pre-wrap;
-  max-width: 400px;
+.delete-button,
+.edit-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.edit-button {
+  background-color: #28a745;
+}
+
+.delete-button:hover,
+.edit-button:hover {
+  opacity: 0.8;
 }

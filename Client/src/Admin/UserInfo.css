@@ -1,0 +1,85 @@
+table td {
+  border: 1px solid #ccc;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table th,
+table td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+
+table th {
+  background-color: lightgoldenrodyellow;
+  color: black;
+}
+
+table td {
+  background-color: #fff;
+  color: #555;
+  border: 1px solid #ccc;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.add-users-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 16px 24px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-decoration: none; /* remove underline */
+}
+
+.add-users-button:hover {
+  background-color: #0062cc;
+}
+
+.delete-button,
+.edit-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.edit-button {
+  background-color: #28a745;
+}
+
+.delete-button:hover,
+.edit-button:hover {
+  opacity: 0.8;
+}

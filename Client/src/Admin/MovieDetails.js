@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./MovieDetails.css";
+import EditDialog from "./EditDialog";
+import { Link } from "react-router-dom";
 
 function MovieDetails() {
   const [movies, setMovies] = useState([]);
   const [editingMovie, setEditingMovie] = useState(null);
-  const [dialogOpen, setDialogOpen] = useState(false);
 
   const handleEdit = (movie) => {
     setEditingMovie(movie);
-    setDialogOpen(true);
   };
 
   const handleSave = (updatedMovie) => {
     handleUpdate(updatedMovie._id, updatedMovie);
-    setDialogOpen(false);
   };
 
   const handleCancel = () => {
@@ -66,6 +65,9 @@ function MovieDetails() {
 
   return (
     <div>
+      <Link to="/Movies" className="add-users-button">
+        Upload Movies
+      </Link>
       <table className="movies-table">
         <thead>
           <tr>
@@ -74,6 +76,8 @@ function MovieDetails() {
             <th>Director</th>
             <th>Cast</th>
             <th>Date</th>
+            <th>Time</th>
+
             <th>Description</th>
             <th>Price</th>
             <th>Image</th>
@@ -88,6 +92,8 @@ function MovieDetails() {
               <td>{movie.director}</td>
               <td>{movie.cast}</td>
               <td>{movie.date}</td>
+              <td>{movie.time}</td>
+
               <td>{movie.description}</td>
               <td>{movie.price}</td>
               <td>
@@ -108,7 +114,7 @@ function MovieDetails() {
                   onClick={() => handleEdit(movie)}
                   className="edit-button"
                 >
-                  Edit
+                  Update
                 </button>
               </td>
             </tr>
@@ -120,96 +126,8 @@ function MovieDetails() {
           movie={editingMovie}
           onSave={handleSave}
           onCancel={handleCancel}
-          open={dialogOpen}
         />
       )}
-    </div>
-  );
-}
-
-function EditDialog(props) {
-  const { movie, onSave, onCancel } = props;
-
-  const [title, setTitle] = useState(movie.title);
-  const [director, setDirector] = useState(movie.director);
-  const [cast, setCast] = useState(movie.cast);
-  const [date, setDate] = useState(movie.date);
-  const [description, setDescription] = useState(movie.description);
-  const [price, setPrice] = useState(movie.price);
-
-  const handleSave = () => {
-    const updatedMovie = {
-      ...movie,
-      title: title,
-      director: director,
-      cast: cast,
-      date: date,
-      description: description,
-      price: price,
-    };
-    onSave(updatedMovie);
-  };
-  return (
-    <div className="edit-dialog">
-      <h2>Edit Movie</h2>
-      <div className="form-row">
-        <label htmlFor="title">Title</label>
-        <input
-          type="text"
-          id="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-      </div>
-      <div className="form-row">
-        <label htmlFor="director">Director</label>
-        <input
-          type="text"
-          id="director"
-          value={director}
-          onChange={(e) => setDirector(e.target.value)}
-        />
-      </div>
-      <div className="form-row">
-        <label htmlFor="cast">Cast</label>
-        <input
-          type="text"
-          id="cast"
-          value={cast}
-          onChange={(e) => setCast(e.target.value)}
-        />
-      </div>
-      <div className="form-row">
-        <label htmlFor="date">Date</label>
-        <input
-          type="text"
-          id="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-        />
-      </div>
-      <div className="form-row">
-        <label htmlFor="description">Description</label>
-        <input
-          type="text"
-          id="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </div>
-      <div className="form-row">
-        <label htmlFor="price">Price</label>
-        <input
-          type="text"
-          id="price"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
-      </div>
-      <div className="button-row">
-        <button onClick={handleSave}>Save</button>
-        <button onClick={onCancel}>Cancel</button>
-      </div>
     </div>
   );
 }

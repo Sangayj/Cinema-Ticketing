@@ -23,7 +23,7 @@ function Movies() {
     formData.append("cast", cast);
     formData.append("description", description);
     formData.append("image", image);
-    formData.append("date", date.slice(0, 10));
+    formData.append("date", date);
     formData.append("time", time);
     formData.append("theatre", theatre);
     formData.append("price", price);
