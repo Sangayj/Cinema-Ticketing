@@ -39,11 +39,7 @@ function View() {
           <p className="cast">Cast: {movie.cast}</p>
           <p className="description">{movie.description}</p>
         </div>
-        <div className="button">
-          <Link to="/login">
-            <button className="login-button">Login</button>
-          </Link>
-        </div>
+        
       </div>
       <div className="separator"></div>
 
@@ -55,7 +51,11 @@ function View() {
           <p className="showing-details">Theatre: {movie.theatre}</p>
           <p className="showing-details">Price: {movie.price}</p>
         </div>
-        <button className="book-now-button">Book Now</button>
+        <div className="button">
+          <Link to="/login">
+            <button className="login-button">Login</button>
+          </Link>
+        </div>
       </div>
     </div>
     
