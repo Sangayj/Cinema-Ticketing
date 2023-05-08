@@ -1,74 +1,72 @@
-.movies-container {
-  max-width: 400px;
+/* Movie Form Styles */
+.movie-form {
+  max-width: 600px;
   margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.movies-form .form-group {
-  margin-bottom: 15px;
-}
-
-.movies-form label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.movies-form input[type="text"],
-.movies-form textarea {
-  width: 100%;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.movies-form button[type="submit"] {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.movies-form button[type="submit"]:hover {
-  background-color: #0056b3;
-}
-
-/* Optional styling for the movie card */
-.card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 300px;
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
 }
 
-.card img {
-  width: 100%;
-  max-height: 300px;
-  object-fit: cover;
-  border-radius: 5px;
+.movie-form h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
-.card-body {
-  flex-grow: 1;
-  margin-top: 10px;
-}
-
-.card-title {
-  font-size: 18px;
+.movie-form label {
+  display: block;
+  margin-bottom: 0.5rem;
   font-weight: bold;
 }
 
-.card-text {
-  margin-bottom: 10px;
+.movie-form input[type="text"],
+.movie-form input[type="date"],
+.movie-form input[type="time"],
+.movie-form input[type="number"],
+.movie-form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
 }
 
-.card p {
-  margin: 5px 0;
+.movie-form input[type="file"] {
+  margin-bottom: 1rem;
+}
+
+.movie-form button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  align-self: center;
+}
+
+.movie-form button[type="submit"]:hover {
+  background-color: #0069d9;
+}
+
+.movie-form .form-field {
+  margin-bottom: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.movie-form select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.movie-form select option {
+  font-size: 1rem;
 }

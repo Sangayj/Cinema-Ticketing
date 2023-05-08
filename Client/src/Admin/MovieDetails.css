@@ -1,32 +1,56 @@
-.view-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+.add-users-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
 }
 
-.container {
-  max-width: 600px;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
+.add-users-button:hover {
+  background-color: #0062cc;
 }
 
-.movie-table {
-  width: 100%;
+.movies-table {
   border-collapse: collapse;
+  margin-top: 4rem;
 }
 
-.movie-table td {
-  padding: 0.5rem;
-  border-bottom: 1px solid #ccc;
+.movies-table th,
+.movies-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
 }
 
-.movie-table td:first-child {
-  font-weight: bold;
+.movies-table th {
+  text-align: left;
+  background-color: lightgoldenrodyellow;
 }
 
-.movie-table tr:last-child td {
-  border-bottom: none;
+.card-image {
+  height: 100px;
+  width: auto;
+}
+
+.delete-button,
+.edit-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.edit-button {
+  background-color: #28a745;
+}
+
+.delete-button:hover,
+.edit-button:hover {
+  opacity: 0.8;
 }

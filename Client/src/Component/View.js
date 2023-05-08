@@ -25,7 +25,7 @@ function View() {
 
   return (
     <div className="view-container">
-      <div className="container">
+      <div className="movie-container">
         <div className="image-container">
           <img
             className="movie-image"
@@ -35,10 +35,8 @@ function View() {
         </div>
         <div className="text-container">
           <h2 className="title">{movie.title}</h2>
-          <div className="separator"></div>
           <p className="director">Director: {movie.director}</p>
-          <p className="cast">cast: {movie.cast}</p>
-          <div className="separator"></div>
+          <p className="cast">Cast: {movie.cast}</p>
           <p className="description">{movie.description}</p>
         </div>
         <div className="button">
@@ -46,6 +44,18 @@ function View() {
             <button className="login-button">Login</button>
           </Link>
         </div>
+      </div>
+      <div className="separator"></div>
+
+      <div className="showing-container">
+        <h2 className="showing-header">Showing On:</h2>
+        <div className="showing-details-container">
+          <p className="showing-details">Date: {movie.date}</p>
+          <p className="showing-details">Time: {movie.time}</p>
+          <p className="showing-details">Theatre: {movie.theatre}</p>
+          <p className="showing-details">Price: {movie.price}</p>
+        </div>
+        <button className="book-now-button">Book Now</button>
       </div>
     </div>
     

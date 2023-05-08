@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
-const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
 const movieRoutes = require("./routes/movieRoutes");
 require("dotenv").config();
 
@@ -29,7 +29,7 @@ mongoose
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Routes
-app.use("/api", authRoutes);
+app.use("/api", userRoutes);
 app.use(movieRoutes);
 
 app.listen(8000, () => {

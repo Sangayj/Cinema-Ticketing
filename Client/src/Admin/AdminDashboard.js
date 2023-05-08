@@ -18,16 +18,13 @@ const AdminDashboard = () => {
   return (
     <div className="admin-dashboard">
       <div className="left-panel">
-        <Link to="/Movies" className="nav-link">
-          Upload Movies
-        </Link>
         <Link to="/MovieDetails" className="nav-link">
-          Movie Details
+          Movies
         </Link>
         <Link to="/bookings" className="nav-link">
           Bookings
         </Link>
-        <Link to="/Customer" className="nav-link">
+        <Link to="/UserInfo" className="nav-link">
           Users
         </Link>
         <button className="nav-link logout-btn" onClick={handleLogout}>

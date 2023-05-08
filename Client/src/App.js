@@ -5,7 +5,7 @@ import Navbar from "./Component/Navbar";
 import Login from "./Component/Login";
 import Home from "./Component/Home";
 import AdminDashboard from "./Admin/AdminDashboard";
-import Customer from "./Admin/Customer";
+import UserInfo from "./Admin/UserInfo"; // Remove extra space
 import Movies from "./Admin/Movies";
 import View from "./Component/View";
 import MovieDetails from "./Admin/MovieDetails";
@@ -15,22 +15,26 @@ import View2 from "./Component/View2";
 function App() {
   const location = useLocation();
   const isDashboardPage = location.pathname === "/AdminDashboard";
-  const isCustomerPage = location.pathname === "/Customer";
+  const isUserInfoPage = location.pathname === "/UserInfo";
   const isMoviesPage = location.pathname === "/Movies";
   const isMovieDetailsPage = location.pathname.includes("/MovieDetails");
+  const isLoginPage = location.pathname === "/Login";
+  const isSignUpPage = location.pathname === "/SignUp";
 
   return (
     <div>
       {!isDashboardPage &&
-        !isCustomerPage &&
+        !isUserInfoPage &&
         !isMoviesPage &&
-        !isMovieDetailsPage && <Navbar />}
+        !isMovieDetailsPage &&
+        !isLoginPage &&
+        !isSignUpPage && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/AdminDashboard" element={<AdminDashboard />} />
-        <Route path="/Customer" element={<Customer />} />
+        <Route path="/UserInfo" element={<UserInfo />} />
         <Route path="/Movies" element={<Movies />} />
         <Route path="/View/:id" element={<View />} />
         <Route path="/MovieDetails" element={<MovieDetails />} />
@@ -44,9 +48,11 @@ function App() {
         />
       </Routes>
       {!isDashboardPage &&
-        !isCustomerPage &&
+        !isUserInfoPage &&
         !isMoviesPage &&
-        !isMovieDetailsPage && <Footer />}
+        !isMovieDetailsPage &&
+        !isLoginPage &&
+        !isSignUpPage && <Footer />}
     </div>
   );
 }
