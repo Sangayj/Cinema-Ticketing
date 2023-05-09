@@ -1,20 +1,38 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation, useMatch } from "react-router-dom";
 import "./Navbar.css";
 
 function Navbar() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const match = useMatch('/');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
-    navigate("/Login");
+    navigate("/");
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
     navigate("/");
   };
+
+  // Set isLoggedIn state based on current location
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setIsLoggedIn(false);
+    } else {
+      setIsLoggedIn(true);
+    }
+  }, [location]);
+
+  // Disable forward button if user is going back to landing page
+  useEffect(() => {
+    if (match) {
+      navigate('/');
+    }
+  }, [match, navigate]);
 
   return (
     <div className="navbar-container">
