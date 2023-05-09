@@ -9,6 +9,8 @@ import UserInfo from "./Admin/UserInfo"; // Remove extra space
 import Movies from "./Admin/Movies";
 import View from "./Component/View";
 import MovieDetails from "./Admin/MovieDetails";
+import Book from "./Component/Book";
+import Seat from "./Admin/Seat";
 
 function App() {
   const location = useLocation();
@@ -36,6 +38,8 @@ function App() {
         <Route path="/Movies" element={<Movies />} />
         <Route path="/View/:id" element={<View />} />
         <Route path="/MovieDetails" element={<MovieDetails />} />
+        <Route path="/Book" element={<Book />} />
+        <Route path="/Seat" element={<Seat />} />
       </Routes>
       {!isDashboardPage &&
         !isUserInfoPage &&

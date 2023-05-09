@@ -80,6 +80,7 @@
   border-radius: 5px;
   cursor: pointer;
   margin-top: 20px;
+  text-decoration: none;
 }
 
 .book-now-button:hover {
