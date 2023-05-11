@@ -1,48 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import "./Seat.css";
 
 function Seat() {
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const [cinemaHallName, setCinemaHallName] = useState("");
+  const [cinemaHallSeats, setCinemaHallSeats] = useState("");
 
-    const formData = new FormData(event.target);
-    const body = {
-      number: formData.get("number"),
-      price: formData.get("price"),
-    };
-
-    try {
-      const response = await fetch("http://localhost:8000/api/seats/create", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
+  const createCinemaHall = () => {
+    axios
+      .post("http://localhost:8000/api/cinema-halls", {
+        name: cinemaHallName,
+        seats: cinemaHallSeats,
+      })
+      .then((response) => {
+        console.log("Cinema hall created:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error creating cinema hall:", error);
       });
-
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || "Failed to add seat");
-      }
-
-      const seat = await response.json();
-      alert(`Seat ${seat.number} added successfully!`);
-      event.target.reset();
-    } catch (error) {
-      console.error(error);
-      alert(error.message);
-    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Seat Number:
-        <input type="number" name="number" required />
-      </label>
-      <label>
-        Price:
-        <input type="number" name="price" required />
-      </label>
-      <button type="submit">Add Seat</button>
-    </form>
+    <div>
+      <div className="form">
+        <h2>Create Cinema Hall</h2>
+        <label>
+          Name:
+          <input
+            type="text"
+            value={cinemaHallName}
+            onChange={(event) => setCinemaHallName(event.target.value)}
+          />
+        </label>
+        <label>
+          Seats:
+          <input
+            type="number"
+            value={cinemaHallSeats}
+            onChange={(event) => setCinemaHallSeats(event.target.value)}
+          />
+        </label>
+        <button onClick={createCinemaHall}>Create</button>
+      </div>
+    </div>
   );
 }
 

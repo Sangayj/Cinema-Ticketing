@@ -1,120 +1,76 @@
 import React, { useState, useEffect } from "react";
-import "./Book.css";
+import axios from "axios";
 
-const Seat = ({ seatNumber, price, status, isSelected, onSelect }) => {
-  const rowNumber = Math.floor((seatNumber - 1) / 20) + 1;
-  const columnNumber = ((seatNumber - 1) % 20) + 1;
-  const columnName = String.fromCharCode(64 + parseInt(columnNumber));
-  const seat = `${columnName}${rowNumber}`;
-
-  let className = "seat";
-  if (isSelected) {
-    className += " selected";
-  } else if (status === "booked") {
-    className += " booked";
-  }
-
-  return (
-    <div className={className} onClick={() => onSelect(seatNumber)}>
-      <span className="seat-number">{seat}</span>
-      <span className="price">{price}</span>
-    </div>
-  );
-};
-
-const Book = () => {
-  const [seats, setSeats] = useState([]);
-  const [selectedSeats, setSelectedSeats] = useState([]);
+function Book() {
+  const [cinemaHalls, setCinemaHalls] = useState([]);
+  const [selectedCinemaHall, setSelectedCinemaHall] = useState(null);
 
   useEffect(() => {
-    const numRows = 15;
-    const numCols = 20;
-    const initialSeats = [];
-    for (let i = 1; i <= 300; i++) {
-      const price = 10;
-      const status = "available";
-      initialSeats.push({
-        id: i,
-        number: i,
-        price: price,
-        status: status,
+    // Fetch all cinema halls from the backend
+    axios
+      .get("http://localhost:8000/api/cinema-halls")
+      .then((response) => {
+        setCinemaHalls(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching cinema halls:", error);
       });
-    }
-    setSeats(initialSeats);
   }, []);
 
-  const handleSeatClick = (seatNumber) => {
-    setSelectedSeats((prevSelectedSeats) => {
-      if (prevSelectedSeats.includes(seatNumber)) {
-        return prevSelectedSeats.filter((seat) => seat !== seatNumber);
-      } else {
-        return [...prevSelectedSeats, seatNumber];
-      }
-    });
-  };
-
-  const handleBookSeats = () => {
-    fetch("http://localhost:8000/api/seats/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ seats: selectedSeats }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setSelectedSeats([]);
-        setSeats(data);
-        alert("Seats booked successfully!");
+  const assignSeatToCinemaHall = (seatNumber) => {
+    // Make a POST request to the backend to assign the seat to the selected cinema hall
+    axios
+      .post("http://localhost:8000/api/cinema-halls/assign-seat", {
+        seatNumber: seatNumber,
+        cinemaHallId: selectedCinemaHall._id,
       })
-      .catch((error) => console.error(error));
+      .then((response) => {
+        console.log("Seat assigned to cinema hall:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error assigning seat to cinema hall:", error);
+      });
   };
 
   return (
-    <div className="book-container">
-      <div className="screen">SCREEN</div>
-      <div className="seats-container">
-        {Array.isArray(seats) &&
-          seats.map((seat) => (
-            <Seat
-              key={seat.id}
-              seatNumber={seat.number}
-              price={seat.price}
-              status={seat.status}
-              isSelected={selectedSeats.includes(seat.number)}
-              onSelect={handleSeatClick}
-            />
-          ))}
-      </div>
-      <div className="booking-details">
-        <h2>Booking Summary</h2>
-        <div className="selected-seats">
-          {selectedSeats.length === 0 ? (
-            <p>No seats selected</p>
-          ) : (
-            <>
-              <p>You have selected {selectedSeats.length} seat(s):</p>
-              <ul>
-                {selectedSeats.map((seatNumber) => (
-                  <li key={seatNumber}>Seat {seatNumber}</li>
-                ))}
-              </ul>
-            </>
-          )}
-        </div>
-        {selectedSeats.length === 0 ? (
-          <p>Please select at least one seat to book</p>
-        ) : (
-          <p>
-            <button onClick={handleBookSeats}>
-              Book {selectedSeats.length} seat(s)
+    <div>
+      <h2>Cinema Halls</h2>
+      <ul>
+        {cinemaHalls.map((cinemaHall) => (
+          <li key={cinemaHall._id}>
+            {cinemaHall.name} ({cinemaHall.seats} seats)
+            <button onClick={() => setSelectedCinemaHall(cinemaHall)}>
+              Select
             </button>
-          </p>
-        )}
-      </div>
+          </li>
+        ))}
+      </ul>
+
+      {selectedCinemaHall && (
+        <div>
+          <h2>Seats for {selectedCinemaHall.name}</h2>
+          <ul>
+            {[...Array(selectedCinemaHall.seats)].map((_, index) => {
+              const seatNumber = index + 1;
+              const assignedSeat = selectedCinemaHall.assignedSeats.find(
+                (seat) => seat.seatNumber === seatNumber
+              );
+              return (
+                <li key={seatNumber}>
+                  Seat {seatNumber}
+                  {!assignedSeat && (
+                    <button onClick={() => assignSeatToCinemaHall(seatNumber)}>
+                      Assign
+                    </button>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
     </div>
   );
-};
+}
 
 export default Book;
