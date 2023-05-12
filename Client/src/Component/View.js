@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import "./View.css";
 
@@ -55,7 +54,7 @@ function View() {
         <Link
           to={{
             pathname: "/Book",
-            state: { movieId: id },
+            state: { id: id, theatre: movie.theatre },
           }}
           className="book-now-button"
         >
