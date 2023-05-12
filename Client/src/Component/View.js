@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 import "./View.css";
 
 function View() {
@@ -51,7 +53,15 @@ function View() {
           <p className="showing-details">Theatre: {movie.theatre}</p>
           <p className="showing-details">Price: {movie.price}</p>
         </div>
-        <button className="book-now-button">Book Now</button>
+        <Link
+          to={{
+            pathname: "/Book",
+            state: { movieId: id },
+          }}
+          className="book-now-button"
+        >
+          Book Now
+        </Link>
       </div>
     </div>
     

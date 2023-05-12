@@ -63,11 +63,15 @@ exports.getAllSeatsForCinemaHall = async (req, res) => {
   }
 };
 
-exports.getAllMovies = async (req, res) => {
+exports.getCinemaHallById = async (req, res) => {
   try {
-    const movies = await Movie.find();
-    res.json(movies);
+    const cinemaHall = await CinemaHall.findById(req.params.id);
+    if (!cinemaHall) {
+      return res.status(404).json({ error: "Cinema hall not found" });
+    }
+    return res.json(cinemaHall);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    console.error(err);
+    return res.status(500).json({ error: "Server error" });
   }
 };
