@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import "./Movies.css";
@@ -13,6 +13,18 @@ function Movies() {
   const [time, setTime] = useState("");
   const [theatre, setTheatre] = useState("");
   const [price, setPrice] = useState("");
+  const [theatreOptions, setTheatreOptions] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/cinema-halls")
+      .then((response) => {
+        setTheatreOptions(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -25,7 +37,13 @@ function Movies() {
     formData.append("image", image);
     formData.append("date", date);
     formData.append("time", time);
-    formData.append("theatre", theatre);
+
+    // Add theatre name to form data
+    const selectedTheatre = theatreOptions.find(
+      (theatreOption) => theatreOption._id === theatre
+    );
+    formData.append("theatre", selectedTheatre.name);
+
     formData.append("price", price);
 
     axios
@@ -49,99 +67,115 @@ function Movies() {
   };
 
   return (
-    <div className="movie-form">
+    <div className="Movies">
+      <h1>Add a New Movie</h1>
       <form onSubmit={handleFormSubmit}>
-        <div>
-          <label>Title:</label>
+        <div className="form-group">
+          <label htmlFor="title">Title:</label>
           <input
             type="text"
+            id="title"
+            name="title"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(event) => setTitle(event.target.value)}
             required
           />
         </div>
-        <div>
-          <label>Director:</label>
+        <div className="form-group">
+          <label htmlFor="director">Director:</label>
           <input
             type="text"
+            id="director"
+            name="director"
             value={director}
-            onChange={(e) => setDirector(e.target.value)}
+            onChange={(event) => setDirector(event.target.value)}
             required
           />
         </div>
-        <div>
-          <label>Cast:</label>
+        <div className="form-group">
+          <label htmlFor="cast">Cast:</label>
           <input
             type="text"
+            id="cast"
+            name="cast"
             value={cast}
-            onChange={(e) => setCast(e.target.value)}
+            onChange={(event) => setCast(event.target.value)}
             required
           />
         </div>
-        <div>
-          <label>Description:</label>
+        <div className="form-group">
+          <label htmlFor="description">Description:</label>
           <textarea
+            id="description"
+            name="description"
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(event) => setDescription(event.target.value)}
             required
           />
         </div>
-        <div>
-          <label>Date:</label>
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Time:</label>
-          <input
-            type="time"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-field">
-          <label>Theatre:</label>
-          <select
-            value={theatre}
-            onChange={(e) => setTheatre(e.target.value)}
-            required
-          >
-            <option value="">Select theatre</option>
-            <option value="Lugar Theatre">Lugar Theatre</option>
-            <option value="City Cinema 1">City Cinema 1</option>
-            <option value="City Cinema 2">City Cinema 2</option>
-            <option value="Trowa Theatre">Trowa Theatre</option>
-          </select>
-        </div>
-        <div>
-          <label>Price:</label>
-          <input
-            type="number"
-            min="0"
-            step="0.01"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Image:</label>
+        <div className="form-group">
+          <label htmlFor="image">Image:</label>
           <input
             type="file"
+            id="image"
+            name="image"
             accept="image/*"
-            onChange={(e) => setImage(e.target.files[0])}
+            onChange={(event) => setImage(event.target.files[0])}
             required
           />
         </div>
-
-        <div className="movie-form">
-          <button type="submit">Upload</button>
+        <div className="form-group">
+          <label htmlFor="date">Date:</label>
+          <input
+            type="date"
+            id="date"
+            name="date"
+            value={date}
+            onChange={(event) => setDate(event.target.value)}
+            required
+          />
         </div>
+        <div className="form-group">
+          <label htmlFor="time">Time:</label>
+          <input
+            type="time"
+            id="time"
+            name="time"
+            value={time}
+            onChange={(event) => setTime(event.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="theatre">Theatre:</label>
+          <select
+            id="theatre"
+            name="theatre"
+            value={theatre}
+            onChange={(event) => setTheatre(event.target.value)}
+            required
+          >
+            <option value="">Select a theatre</option>
+            {theatreOptions.map((theatreOption) => (
+              <option key={theatreOption._id} value={theatreOption._id}>
+                {theatreOption.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="price">Price:</label>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            min="0"
+            value={price}
+            onChange={(event) => setPrice(event.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );

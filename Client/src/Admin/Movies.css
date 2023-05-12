@@ -1,72 +1,55 @@
-/* Movie Form Styles */
-.movie-form {
+.Movies {
   max-width: 600px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: auto;
 }
 
-.movie-form h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+.Movies h1 {
   text-align: center;
 }
 
-.movie-form label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-}
-
-.movie-form input[type="text"],
-.movie-form input[type="date"],
-.movie-form input[type="time"],
-.movie-form input[type="number"],
-.movie-form textarea {
-  width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-.movie-form input[type="file"] {
-  margin-bottom: 1rem;
-}
-
-.movie-form button[type="submit"] {
-  background-color: #007bff;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  align-self: center;
-}
-
-.movie-form button[type="submit"]:hover {
-  background-color: #0069d9;
-}
-
-.movie-form .form-field {
-  margin-bottom: 1rem;
-  width: 100%;
+.Movies form {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
-.movie-form select {
+
+.Movies .form-group {
+  margin-bottom: 1rem;
+}
+
+.Movies label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.Movies input[type="text"],
+.Movies input[type="number"],
+.Movies input[type="date"],
+.Movies input[type="time"],
+.Movies select,
+.Movies textarea {
   width: 100%;
   padding: 0.5rem;
-  margin-bottom: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
 }
 
-.movie-form select option {
+.Movies input[type="file"] {
+  margin-top: 0.5rem;
+}
+
+.Movies button[type="submit"] {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
   font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.Movies button[type="submit"]:hover {
+  background-color: #0069d9;
 }
