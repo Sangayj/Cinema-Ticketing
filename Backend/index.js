@@ -4,6 +4,7 @@ const cors = require("cors");
 const path = require("path");
 const userRoutes = require("./routes/userRoutes");
 const movieRoutes = require("./routes/movieRoutes");
+const seatRoutes = require("./routes/seatRoutes");
 require("dotenv").config();
 
 const app = express();
@@ -31,6 +32,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // Routes
 app.use("/api", userRoutes);
 app.use(movieRoutes);
+app.use(seatRoutes);
 
 app.listen(8000, () => {
   console.log("Server listening on port 8000");

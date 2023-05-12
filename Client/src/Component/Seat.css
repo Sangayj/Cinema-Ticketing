@@ -1,0 +1,40 @@
+.seat-map {
+  display: grid;
+  grid-template-columns: repeat(20, 30px);
+  grid-template-rows: repeat(15, 30px);
+  gap: 10px;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.seat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #ddd;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.seat.selected {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.seat.booked {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.seat-number {
+  margin-right: 5px;
+}
+
+.price {
+  font-size: 12px;
+  color: #888;
+}

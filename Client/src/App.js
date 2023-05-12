@@ -9,8 +9,6 @@ import UserInfo from "./Admin/UserInfo"; // Remove extra space
 import Movies from "./Admin/Movies";
 import View from "./Component/View";
 import MovieDetails from "./Admin/MovieDetails";
-import Homepage from "./Component/Homepage";
-import View2 from "./Component/View2";
 
 function App() {
   const location = useLocation();
@@ -38,12 +36,6 @@ function App() {
         <Route path="/Movies" element={<Movies />} />
         <Route path="/View/:id" element={<View />} />
         <Route path="/MovieDetails" element={<MovieDetails />} />
-        <Route path="/Home" element={<Home />} />
-        <Route path="/Homepage" element={<Homepage />} />
-        <Route path="/View2/:id" element={<View2 />} />
-        {/* add the following route */}
-      
-  
       </Routes>
       {!isDashboardPage &&
         !isUserInfoPage &&
