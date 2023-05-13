@@ -17,7 +17,7 @@ function Movies() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/cinema-halls")
+      .get("http://localhost:8000/api/theatres")
       .then((response) => {
         setTheatreOptions(response.data);
       })
@@ -37,12 +37,11 @@ function Movies() {
     formData.append("image", image);
     formData.append("date", date);
     formData.append("time", time);
-
-    // Add theatre name to form data
-    const selectedTheatre = theatreOptions.find(
-      (theatreOption) => theatreOption._id === theatre
-    );
-    formData.append("theatre", selectedTheatre.name);
+    formData.append("theatreId", theatre); // send theatre ID to server
+    formData.append(
+      "theatreName",
+      theatreOptions.find((theatreOption) => theatreOption._id === theatre).name
+    ); // send theatre name to server
 
     formData.append("price", price);
 
@@ -65,7 +64,6 @@ function Movies() {
         console.error(error);
       });
   };
-
   return (
     <div className="Movies">
       <h1>Add a New Movie</h1>

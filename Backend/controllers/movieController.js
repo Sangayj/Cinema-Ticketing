@@ -2,35 +2,36 @@ const Movie = require("../models/movies");
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
 
-exports.uploadMovie = (req, res) => {
-  const { title, director, cast, description, date, time, theatre, price } =
-    req.body;
-  const { filename, originalname } = req.file;
+const Theatre = require("../models/theatre");
 
-  const movie = new Movie({
-    title,
-    director,
-    cast,
-    description,
-    date,
-    time,
-    theatre,
-    price,
-    filename,
-    originalname,
-  });
+exports.uploadMovie = async (req, res) => {
+  try {
+    const theatre = await Theatre.findById(req.body.theatreId);
+    if (!theatre) {
+      return res.status(404).json({ error: "Theatre not found" });
+    }
 
-  movie
-    .save()
-    .then((savedMovie) => {
-      res.json({ message: "Movie uploaded successfully" });
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).json({ error: "Failed to save movie" });
+    const movie = new Movie({
+      title: req.body.title,
+      director: req.body.director,
+      cast: req.body.cast,
+      description: req.body.description,
+      filename: req.file.filename,
+      originalname: req.file.originalname,
+      date: req.body.date,
+      time: req.body.time,
+      theatre: theatre.name,
+      theatreId: theatre._id,
+      price: req.body.price,
     });
-};
 
+    await movie.save();
+
+    res.status(201).json({ message: "Movie uploaded successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 exports.getMovies = (req, res) => {
   Movie.find()
     .then((movies) => {

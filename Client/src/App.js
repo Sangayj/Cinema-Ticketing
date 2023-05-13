@@ -38,7 +38,7 @@ function App() {
         <Route path="/Movies" element={<Movies />} />
         <Route path="/View/:id" element={<View />} />
         <Route path="/MovieDetails" element={<MovieDetails />} />
-        <Route path="/Book" element={<Book />} />
+        <Route path="/Book/:id" element={<Book />} />
         <Route path="/Seat" element={<Seat />} />
       </Routes>
       {!isDashboardPage &&
@@ -50,5 +50,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
