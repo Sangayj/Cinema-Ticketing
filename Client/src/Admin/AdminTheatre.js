@@ -44,8 +44,8 @@ function AdminTheatre() {
                           : "seat-occupied"
                       }`}
                     >
-                      <span>{seat.seatNumber}</span>
-                      <span>{seat.status}</span>
+                      <span className="seat-number">{seat.seatNumber}</span>
+                      <span className="seat-status">{seat.status}</span>
                     </div>
                   ))}
                 </div>
