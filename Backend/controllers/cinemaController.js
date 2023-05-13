@@ -79,3 +79,35 @@ exports.bookSeat = (req, res) => {
       res.status(500).send("Internal server error");
     });
 };
+
+exports.updateTheatre = (req, res) => {
+  const theatreId = req.params.id;
+  const updatedTheatre = req.body;
+
+  // Update the theatre in the database with an empty assignedSeats array
+  Theatre.findByIdAndUpdate(theatreId, {
+    assignedSeats: [],
+  })
+    .then(() => {
+      res.send("Theatre updated successfully");
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error updating theatre");
+    });
+};
+exports.makeTheatreAvailable = (req, res) => {
+  const theatreId = req.params.id;
+
+  // Update the theatre in the database with an empty assignedSeats array
+  Theatre.findByIdAndUpdate(theatreId, {
+    assignedSeats: [],
+  })
+    .then(() => {
+      res.send("Theatre is now available for booking");
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error updating theatre");
+    });
+};
