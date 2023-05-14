@@ -42,7 +42,6 @@ function Movies() {
       "theatreName",
       theatreOptions.find((theatreOption) => theatreOption._id === theatre).name
     ); // send theatre name to server
-
     formData.append("price", price);
 
     axios
@@ -59,9 +58,11 @@ function Movies() {
         setTime("");
         setTheatre("");
         setPrice("");
+        window.alert("Movie uploaded successfully");
       })
       .catch((error) => {
         console.error(error);
+        window.alert("Error uploading movie");
       });
   };
   return (

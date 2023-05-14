@@ -13,6 +13,7 @@ function Seat() {
         seats: theatreHallSeats,
       })
       .then((response) => {
+        alert("Theatre hall created successfully!");
         console.log("Theatre hall created:", response.data);
       })
       .catch((error) => {
@@ -33,7 +34,7 @@ function Seat() {
           />
         </label>
         <label>
-          Seats:
+          Total no of Seats:
           <input
             type="number"
             value={theatreHallSeats}
