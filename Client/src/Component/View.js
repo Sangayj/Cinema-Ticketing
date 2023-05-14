@@ -60,7 +60,11 @@ function View() {
           <p className="showing-details">Price: {movie.price} BTN</p>
         </div>
         <Link
-          to={`/Book/${theatre._id}?price=${movie.price}`}
+          to={`/Book/${theatre._id}?price=${
+            movie.price
+          }&title=${encodeURIComponent(movie.title)}&date=${encodeURIComponent(
+            movie.date
+          )}&time=${encodeURIComponent(movie.time)}`}
           className="book-now-button"
         >
           Book

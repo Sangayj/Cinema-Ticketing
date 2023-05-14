@@ -13,6 +13,7 @@ import MovieDetails from "./Admin/MovieDetails";
 import Book from "./Component/Book";
 import Seat from "./Admin/Seat";
 import AdminTheatre from "./Admin/AdminTheatre";
+import Ticket from "./Component/Ticket";
 
 function App() {
   const location = useLocation();
@@ -45,6 +46,7 @@ function App() {
         <Route path="/Book/:id" element={<Book />} />
         <Route path="/Seat" element={<Seat />} />
         <Route path="/AdminTheatre" element={<AdminTheatre />} />
+        <Route path="/Ticket" element={<Ticket />} />
       </Routes>
       {!isDashboardPage &&
         !isUserInfoPage &&

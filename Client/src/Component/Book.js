@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 import "./Book.css";
 
 function Book() {
@@ -9,6 +11,7 @@ function Book() {
   const price = parseFloat(new URLSearchParams(location.search).get("price"));
   const [theatre, setTheatre] = useState(null);
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const history = useNavigate();
 
   useEffect(() => {
     axios
@@ -70,12 +73,20 @@ function Book() {
         data
       )
       .then((response) => {
-        alert("Booking Successful!");
-        setSelectedSeats(
-          selectedSeats.map((seat) => {
-            return { seatNumber: seat, status: "booked" };
+        // Save the booking details in local storage so they can be displayed on the ticket page
+        localStorage.setItem(
+          "bookingDetails",
+          JSON.stringify({
+            selectedSeats,
+            totalPrice,
           })
         );
+
+        // Navigate to the ticket page
+        history(`/Ticket`);
+
+        // Reset the selected seats state
+        setSelectedSeats([]);
       })
       .catch((error) => {
         console.error(error);
