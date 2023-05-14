@@ -1,14 +1,18 @@
-import { Route, Routes, useLocation, } from "react-router-dom";
-import SignUp from "./Component/SignUp";
-import Footer from "./Component/Footer";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "./Component/Navbar";
+import Footer from "./Component/Footer";
+
+import SignUp from "./Component/SignUp";
 import Login from "./Component/Login";
 import Home from "./Component/Home";
 import AdminDashboard from "./Admin/AdminDashboard";
-import UserInfo from "./Admin/UserInfo"; // Remove extra space
+import UserInfo from "./Admin/UserInfo";
 import Movies from "./Admin/Movies";
 import View from "./Component/View";
 import MovieDetails from "./Admin/MovieDetails";
+import Book from "./Component/Book";
+import Seat from "./Admin/Seat";
+// import AdminTheatre from "./Admin/AdminTheatre";
 
 function App() {
   const location = useLocation();
@@ -18,6 +22,7 @@ function App() {
   const isMovieDetailsPage = location.pathname.includes("/MovieDetails");
   const isLoginPage = location.pathname === "/Login";
   const isSignUpPage = location.pathname === "/SignUp";
+  const isAdminTheatrePage = location.pathname === "/AdminTheatre";
 
   return (
     <div>
@@ -26,7 +31,8 @@ function App() {
         !isMoviesPage &&
         !isMovieDetailsPage &&
         !isLoginPage &&
-        !isSignUpPage && <Navbar />}
+        !isSignUpPage &&
+        !isAdminTheatrePage && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/SignUp" element={<SignUp />} />
@@ -36,13 +42,17 @@ function App() {
         <Route path="/Movies" element={<Movies />} />
         <Route path="/View/:id" element={<View />} />
         <Route path="/MovieDetails" element={<MovieDetails />} />
+        <Route path="/Book/:id" element={<Book />} />
+        <Route path="/Seat" element={<Seat />} />
+        {/* <Route path="/AdminTheatre" element={<AdminTheatre />} /> */}
       </Routes>
       {!isDashboardPage &&
         !isUserInfoPage &&
         !isMoviesPage &&
         !isMovieDetailsPage &&
         !isLoginPage &&
-        !isSignUpPage && <Footer />}
+        !isSignUpPage &&
+        !isAdminTheatrePage && <Footer />}
     </div>
   );
 }

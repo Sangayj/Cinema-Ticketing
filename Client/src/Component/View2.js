@@ -1,31 +1,40 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
+
 import "./View.css";
 
-function View2() {
+function View() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
+  const [theatre, setTheatre] = useState(null);
 
   useEffect(() => {
     axios
       .get(`http://localhost:8000/api/movies/${id}`)
       .then((response) => {
         setMovie(response.data);
-        console.log(response.data); // Log the movie data to the console
+        axios
+          .get(`http://localhost:8000/api/theatres/${response.data.theatreId}`)
+          .then((response) => {
+            setTheatre(response.data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       })
       .catch((error) => {
         console.error(error);
       });
   }, [id]);
 
-  if (!movie) {
+  if (!movie || !theatre) {
     return <div>Loading...</div>;
   }
 
   return (
     <div className="view-container">
-      <div className="container">
+      <div className="movie-container">
         <div className="image-container">
           <img
             className="movie-image"
@@ -35,20 +44,30 @@ function View2() {
         </div>
         <div className="text-container">
           <h2 className="title">{movie.title}</h2>
-          <div className="separator"></div>
           <p className="director">Director: {movie.director}</p>
-          <p className="cast">cast: {movie.cast}</p>
-          <div className="separator"></div>
+          <p className="cast">Cast: {movie.cast}</p>
           <p className="description">{movie.description}</p>
         </div>
-        <div className="button">
-          <Link to="/">
-            <button className="book-tickets">Book</button>
-          </Link>
+      </div>
+      <div className="separator"></div>
+
+      <div className="showing-container">
+        <h2 className="showing-header">Showing On:</h2>
+        <div className="showing-details-container">
+          <p className="showing-details">Date: {movie.date}</p>
+          <p className="showing-details">Time: {movie.time}</p>
+          <p className="showing-details">Theatre: {theatre.name}</p>
+          <p className="showing-details">Price: {movie.price} BTN</p>
         </div>
+        <Link
+          to={`/Book/${theatre._id}?price=${movie.price}`}
+          className="book-now-button"
+        >
+          Book
+        </Link>
       </div>
     </div>
   );
 }
 
-export default View2;
+export default View;
