@@ -69,7 +69,7 @@ function View() {
           )}&theatre=${encodeURIComponent(theatre.name)}`}
           className="book-now-button"
         >
-          Book
+          Book Now
         </Link>
       </div>
     </div>

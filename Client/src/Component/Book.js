@@ -117,7 +117,7 @@ function Book() {
         The total price for your booking is <strong>{formattedPrice}</strong>.
       </p>
       <button className="book-button" onClick={handleBooking}>
-        Book Now
+        Confirm
       </button>
     </div>
   );
