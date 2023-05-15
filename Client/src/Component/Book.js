@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import queryString from "query-string";
 
 import "./Book.css";
 
@@ -74,26 +75,38 @@ function Book() {
       )
       .then((response) => {
         // Save the booking details in local storage so they can be displayed on the ticket page
+        const query = queryString.parse(location.search);
+        const movieTitle = query.title;
+        const date = query.date;
+        const time = query.time;
+        const theatreName = query.theatre;
+
         localStorage.setItem(
           "bookingDetails",
           JSON.stringify({
             selectedSeats,
             totalPrice,
+            movieTitle,
+            date,
+            time,
+            theatreName,
           })
         );
 
-        // Navigate to the ticket page
-        history(`/Ticket`);
-
         // Reset the selected seats state
         setSelectedSeats([]);
+
+        // Display a success message
+        alert("Booking Successful.");
+
+        // Navigate to the ticket page
+        history("/Ticket");
       })
       .catch((error) => {
         console.error(error);
         alert("Booking Failed.");
       });
   };
-
   const seatSummary = (
     <div className="seat-summary">
       <p>
@@ -112,6 +125,7 @@ function Book() {
   const seatLegend = (
     <div className="seat-legend">
       <span className="available"></span>
+
       <span>Available</span>
       <span className="selected"></span>
       <span>Selected</span>

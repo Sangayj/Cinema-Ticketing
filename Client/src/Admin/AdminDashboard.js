@@ -21,7 +21,7 @@ const AdminDashboard = () => {
         <Link to="/MovieDetails" className="nav-link">
           Movies
         </Link>
-        <Link to="/bookings" className="nav-link">
+        <Link to="/Booking" className="nav-link">
           Bookings
         </Link>
         <Link to="/AdminTheatre" className="nav-link">

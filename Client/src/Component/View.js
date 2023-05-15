@@ -64,7 +64,9 @@ function View() {
             movie.price
           }&title=${encodeURIComponent(movie.title)}&date=${encodeURIComponent(
             movie.date
-          )}&time=${encodeURIComponent(movie.time)}`}
+          )}&time=${encodeURIComponent(
+            movie.time
+          )}&theatre=${encodeURIComponent(theatre.name)}`}
           className="book-now-button"
         >
           Book
