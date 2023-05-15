@@ -4,17 +4,19 @@
   margin-right: auto;
   padding: 15px;
 }
+
 .card-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 20px;
 }
+
 .card {
   width: calc(25% - 20px);
-  max-width: 240px; /* Adjust the max-width as per your preference */
-  height: 300px; /* Adjust the height as per your preference */
+  max-width: 240px;
+  height: 300px;
   margin-bottom: 20px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -27,6 +29,9 @@
   margin-bottom: 15px;
   margin-left: 15px;
   margin-right: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Update justify-content to space-between */
 }
 
 .card:hover {
@@ -35,26 +40,32 @@
 
 .card img {
   width: 100%;
-  height: 70%;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   margin-bottom: 10px;
 }
 
 .card .title {
   font-weight: bold;
   margin-bottom: 10px;
+  color: #333;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
 }
 
 .card .view-button {
-  display: inline-block;
-  padding: 8px 16px;
-  background-color: #c2e5c2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #007bff;
   border: 1px solid #ccc;
   border-radius: 4px;
   text-decoration: none;
-  color: #333;
+  color: white;
+  width: 50%;
+  margin: 0 auto; /* Add margin: 0 auto to center the button horizontally */
 }
 
 .card .view-button:hover {
-  background-color: #a1d8a1;
+  background-color: #4caf50;
 }
