@@ -25,7 +25,7 @@ td button {
   font-size: 14px;
 }
 
-.delete-button {
+.deletes-button {
   background-color: #f44336; /* Red color */
   color: #fff; /* White text color */
   border: none;
@@ -39,7 +39,7 @@ td button {
   border-radius: 5px;
 }
 
-.delete-button:hover {
+.deletes-button:hover {
   background-color: #c62828; /* Dark red color on hover */
 }
 

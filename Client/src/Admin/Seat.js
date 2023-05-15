@@ -23,7 +23,7 @@ function Seat() {
 
   return (
     <div>
-      <div className="form">
+      <div className="former">
         <h2>Create Theatre Hall</h2>
         <label>
           Name:

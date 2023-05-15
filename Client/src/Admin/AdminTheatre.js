@@ -109,7 +109,7 @@ function AdminTheatre() {
               </td>
               <td>
                 <button
-                  className="delete-button"
+                  className="deletes-button"
                   onClick={() => handleDeleteTheatre(theatre._id)}
                 >
                   Delete theatre
