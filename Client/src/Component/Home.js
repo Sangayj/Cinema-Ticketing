@@ -21,12 +21,12 @@ function Home() {
     <div className="card-container">
       {movies.map((movie) => (
         <div className="card" key={movie._id}>
+          <div className="title">{movie.title}</div>
           <img
             className="card-image"
             src={`http://localhost:8000/uploads/${movie.filename}`}
             alt={movie.originalname}
           />{" "}
-          <div className="title">{movie.title}</div>
           <Link to={`/View/${movie._id}`} className="view-button">
             View Details
           </Link>
