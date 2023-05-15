@@ -1,48 +1,46 @@
-.booking-container {
+.booking {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.movie-container {
+.movies {
+  width: 240px; /* Reduce the width of the card */
   margin: 20px;
-  padding: 0;
+  padding: 10px;
   background-color: #f2f2f2;
   border-radius: 5px;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
-.movie-image {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  margin-bottom: 10px;
-  border-radius: 5px 5px 0 0;
-}
-
-.movie-title {
+.moviess {
   font-size: 18px;
-  margin: 10px 0;
+  margin-top: 0;
+  margin-bottom: 10px;
   text-align: center;
 }
 
-.view-booking-button {
-  padding: 3px 6px;
-  font-size: 14px;
+.cards-images {
+  width: 100%;
+  height: auto; /* Remove the fixed height to allow the image to fully fit */
+  object-fit: contain; /* Use contain to fit the image without cropping */
+  margin-bottom: 10px;
+}
+
+.booking-button {
+  padding: 5px 10px;
   background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+  width: 100%;
   box-sizing: border-box;
-  margin: 1rem;
+  margin-top: auto;
   text-decoration: none;
 }
 
-.view-booking-button:hover {
+.booking-button:hover {
   background-color: #0056b3;
 }

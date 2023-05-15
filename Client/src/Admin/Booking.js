@@ -18,16 +18,16 @@ function Booking() {
   }, []);
 
   return (
-    <div className="booking-container">
+    <div className="booking">
       {movies.map((movie) => (
-        <div className="movie-container" key={movie._id}>
-          <h2 className="movie-title">{movie.title}</h2>
+        <div className="movies" key={movie._id}>
+          <h2 className="moviess">{movie.title}</h2>
           <img
-            className="card-image"
+            className="cards-images"
             src={`http://localhost:8000/uploads/${movie.filename}`}
             alt={movie.originalname}
           />
-          <Link to="/ViewBooking" className="view-booking-button">
+          <Link to="/ViewBooking" className="booking-button">
             View Booking
           </Link>
         </div>
