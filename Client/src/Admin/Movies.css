@@ -1,6 +1,8 @@
 .Movies {
   max-width: 600px;
-  margin: auto;
+  margin: 0 auto; /* Add margin: 0 auto to center the form horizontally */
+  margin-top: 3rem;
+  margin-bottom: 4rem;
 }
 
 .Movies h1 {
