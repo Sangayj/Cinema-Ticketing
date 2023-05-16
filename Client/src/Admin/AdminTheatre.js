@@ -112,13 +112,13 @@ function AdminTheatre() {
                   className="deletes-button"
                   onClick={() => handleDeleteTheatre(theatre._id)}
                 >
-                  Delete theatre
+                  Delete
                 </button>
                 <button
                   className="reset-button"
                   onClick={() => handleResetTheatre(theatre._id)}
                 >
-                  Reset theatre
+                  Reset
                 </button>
               </td>
             </tr>

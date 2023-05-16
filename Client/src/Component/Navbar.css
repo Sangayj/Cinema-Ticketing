@@ -48,3 +48,38 @@
 .nav-item:hover {
   background-color: #555;
 }
+/* Navbar.css */
+
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.search-button {
+  padding: 8px 16px;
+  background-color: #c2e5c2;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #a1d8a1;
+  cursor: pointer;
+}

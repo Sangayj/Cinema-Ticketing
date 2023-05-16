@@ -14,7 +14,6 @@ import Book from "./Component/Book";
 import Seat from "./Admin/Seat";
 import AdminTheatre from "./Admin/AdminTheatre";
 import Ticket from "./Component/Ticket";
-import Booking from "./Admin/Booking";
 import ViewBooking from "./Admin/ViewBooking";
 
 function App() {
@@ -26,7 +25,6 @@ function App() {
   const isLoginPage = location.pathname === "/Login";
   const isSignUpPage = location.pathname === "/SignUp";
   const isAdminTheatrePage = location.pathname === "/AdminTheatre";
-  const isBookingPage = location.pathname === "/Booking";
   const isViewBookingPage = location.pathname === "/ViewBooking";
   return (
     <div>
@@ -35,7 +33,6 @@ function App() {
         !isMoviesPage &&
         !isMovieDetailsPage &&
         !isLoginPage &&
-        !isBookingPage &&
         !isViewBookingPage &&
         !isSignUpPage &&
         !isAdminTheatrePage && <Navbar />}
@@ -52,7 +49,6 @@ function App() {
         <Route path="/Seat" element={<Seat />} />
         <Route path="/AdminTheatre" element={<AdminTheatre />} />
         <Route path="/Ticket" element={<Ticket />} />
-        <Route path="/Booking" element={<Booking />} />
         <Route path="/ViewBooking" element={<ViewBooking />} />
       </Routes>
       {!isDashboardPage &&
@@ -61,7 +57,6 @@ function App() {
         !isMovieDetailsPage &&
         !isLoginPage &&
         !isViewBookingPage &&
-        !isBookingPage &&
         !isSignUpPage &&
         !isAdminTheatrePage && <Footer />}
     </div>

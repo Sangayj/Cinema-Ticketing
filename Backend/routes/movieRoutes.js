@@ -16,4 +16,6 @@ router.delete("/api/movies/:id", movieController.deleteMovieById);
 // Update movie by ID
 router.put("/api/movies/:id", movieController.updateMovieById);
 
+router.get("/movies", movieController.searchMovies);
+
 module.exports = router;

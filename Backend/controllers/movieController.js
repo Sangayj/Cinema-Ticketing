@@ -152,3 +152,17 @@ exports.updateMovieById = async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 };
+
+exports.searchMovies = async (req, res) => {
+  const searchQuery = req.query.search;
+
+  try {
+    const movies = await Movie.find({
+      title: { $regex: searchQuery, $options: "i" },
+    });
+    res.json(movies);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An error occurred" });
+  }
+};
