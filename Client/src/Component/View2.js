@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "./View.css";
 
-function View() {
+function View2() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [theatre, setTheatre] = useState(null);
@@ -48,6 +49,7 @@ function View() {
           <p className="cast">Cast: {movie.cast}</p>
           <p className="description">{movie.description}</p>
         </div>
+        
       </div>
       <div className="separator"></div>
 
@@ -60,14 +62,15 @@ function View() {
           <p className="showing-details">Price: {movie.price} BTN</p>
         </div>
         <Link
-          to={`/Book/${theatre._id}?price=${movie.price}`}
-          className="book-now-button"
+          to={`/Login`}
+          className="login-button"
         >
-          Book
+          Login
         </Link>
       </div>
     </div>
+    
   );
 }
 
-export default View;
+export default View2;

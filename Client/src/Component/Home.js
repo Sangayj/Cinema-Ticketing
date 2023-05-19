@@ -27,7 +27,7 @@ function Home() {
             alt={movie.originalname}
           />{" "}
           <div className="card-title">{movie.title}</div>
-          <Link to={`/View/${movie._id}`} className="view-button">
+          <Link to={`/View2/${movie._id}`} className="view-button">
             View Details
           </Link>
         </div>
