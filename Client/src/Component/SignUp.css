@@ -45,9 +45,15 @@
   background-color: #3e8e41;
 }
 
-.radio {
+.radios {
   display: flex;
   flex-direction: row;
   position: absolute;
-  top: 4rem;
+  top: 3rem;
+}
+
+/* Add the following code to make the button size small */
+.radios button {
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
 }

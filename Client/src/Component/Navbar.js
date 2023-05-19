@@ -1,10 +1,13 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./Navbar.css";
 
 function Navbar() {
   const [errorMessage, setErrorMessage] = useState("");
   const searchInputRef = useRef();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const searchMovies = async () => {
     const searchQuery = searchInputRef.current.value;
@@ -35,6 +38,37 @@ function Navbar() {
     }
   };
 
+  const handleLogout = () => {
+    // Clear any authentication data (e.g., token) from local storage or state
+    // Example: localStorage.removeItem("token");
+    // Example: setAuthenticated(false);
+
+    // Redirect to the login page
+    navigate("/Login");
+  };
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      event.returnValue = ""; // Prevent the browser from navigating away
+    };
+
+    const handlePopstate = () => {
+      // Redirect to the login page if not authenticated
+      if (location.pathname !== "/Login") {
+        navigate("/Login");
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("popstate", handlePopstate);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("popstate", handlePopstate);
+    };
+  }, [navigate, location.pathname]);
+
   return (
     <div className="navbar-container">
       <a href="/#" className="navbar-logo">
@@ -50,8 +84,8 @@ function Navbar() {
         <button className="search-button" onClick={handleSearchButtonClick}>
           Search
         </button>
-        <a className="nav-item" href="/Login">
-          Login
+        <a className="nav-item" href="/Login" onClick={handleLogout}>
+          Logout
         </a>
       </div>
       {errorMessage && <div className="error-message">{errorMessage}</div>}

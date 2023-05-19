@@ -98,9 +98,7 @@ const UserInfo = () => {
               <td>{user.name}</td>
               <td>{user.username}</td>
               <td>{user.email}</td>
-              <td>
-                <input type="password" defaultValue={user.password} readOnly />
-              </td>
+              <td>{user.password}</td>
               <td>{user.phone}</td>
               <td>
                 <button

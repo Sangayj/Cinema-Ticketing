@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const config = require("config");
 
 const User = require("../models/Users");
 
@@ -104,7 +105,9 @@ exports.updateUser = async (req, res) => {
 
 exports.Login = async (req, res) => {
   try {
-    const { username, password } = req.body; // Check if the user exists
+    const { username, password } = req.body;
+
+    // Check if the user exists
     const user = await User.findOne({ username });
     if (!user) {
       return res.status(404).json({ message: "User does not exist" });
@@ -117,11 +120,16 @@ exports.Login = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ message: "Incorrect password" });
     }
-    let secretKey = "secretKey";
-    if (user.role === "admin") {
-      secretKey = "adminSecretKey";
-    }
-    const token = jwt.sign({ id: user._id, role: user.role }, secretKey);
+
+    const secretKey =
+      user.role === "admin"
+        ? config.get("adminSecretKey")
+        : config.get("jwtSecret");
+
+    // Generate the JWT token
+    const token = jwt.sign({ id: user._id, role: user.role }, secretKey, {
+      expiresIn: "1h",
+    });
 
     // Send the token and user type in the response
     return res.status(200).json({ token, userType: user.role });

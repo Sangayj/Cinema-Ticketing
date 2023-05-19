@@ -1,0 +1,5 @@
+{
+    "jwtSecret": "erpojklvhbjveuorg387049fbhvj08f8bh",
+    "adminSecretKey": "your-admin-secret-key"
+  }
+  

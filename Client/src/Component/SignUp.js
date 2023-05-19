@@ -85,7 +85,7 @@ const SignUp = () => {
 
   return (
     <div className="signin-form-container">
-      <div className="radio">
+      <div className="radios">
         Register As
         <input
           type="radio"

@@ -104,7 +104,7 @@ function Book() {
       })
       .catch((error) => {
         console.error(error);
-        alert("Booking Failed.");
+        alert("No seats selected.");
       });
   };
   const seatSummary = (
