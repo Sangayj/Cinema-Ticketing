@@ -12,7 +12,6 @@ import View from "./Component/View";
 import MovieDetails from "./Admin/MovieDetails";
 import Book from "./Component/Book";
 import Seat from "./Admin/Seat";
-// import AdminTheatre from "./Admin/AdminTheatre";
 
 function App() {
   const location = useLocation();
@@ -44,7 +43,6 @@ function App() {
         <Route path="/MovieDetails" element={<MovieDetails />} />
         <Route path="/Book/:id" element={<Book />} />
         <Route path="/Seat" element={<Seat />} />
-        {/* <Route path="/AdminTheatre" element={<AdminTheatre />} /> */}
       </Routes>
       {!isDashboardPage &&
         !isUserInfoPage &&

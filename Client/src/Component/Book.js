@@ -1,49 +1,145 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Seat from "./Seat";
+import { useParams, useLocation } from "react-router-dom";
+import "./Book.css";
 
 function Book() {
+  const { id } = useParams();
+  const location = useLocation();
+  const price = parseFloat(new URLSearchParams(location.search).get("price"));
   const [theatre, setTheatre] = useState(null);
-  const [bookingInfo, setBookingInfo] = useState(null);
+  const [selectedSeats, setSelectedSeats] = useState([]);
 
-  const fetchTheatre = async () => {
-    try {
-      const response = await axios.get("http://localhost:8000/api/theatre");
-      setTheatre(response.data);
-    } catch (error) {
-      console.error("Error fetching theatre:", error);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/api/theatres/${id}`)
+      .then((response) => {
+        setTheatre(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [id]);
+
+  if (!theatre) {
+    return <div>Loading...</div>;
+  }
+
+  const handleSeatClick = (seat) => {
+    if (isSeatBooked(seat)) {
+      alert("Seat already booked");
+    } else if (selectedSeats.includes(seat)) {
+      setSelectedSeats(selectedSeats.filter((s) => s !== seat));
+    } else {
+      setSelectedSeats([...selectedSeats, seat]);
     }
   };
 
-  const handleBookingSuccess = (data) => {
-    setBookingInfo(data); // Store the booking information in state
+  const isSeatSelected = (seat) => {
+    return selectedSeats.includes(seat);
   };
 
-  useEffect(() => {
-    fetchTheatre();
-  }, []);
+  const isSeatBooked = (seat) => {
+    return theatre.assignedSeats.some((assignedSeat) => {
+      return (
+        assignedSeat.seatNumber === seat && assignedSeat.status === "booked"
+      );
+    });
+  };
+
+  const formatter = new Intl.NumberFormat("en-Nu", {
+    style: "currency",
+    currency: "BTN",
+    minimumFractionDigits: 2,
+  });
+
+  const totalPrice = !isNaN(price) ? price * selectedSeats.length : 0;
+
+  const formattedPrice = formatter.format(totalPrice);
+
+  const seatNumbers = selectedSeats.join(", ");
+
+  const handleBooking = () => {
+    const data = {
+      seats: selectedSeats,
+    };
+
+    axios
+      .put(
+        `http://localhost:8000/api/theatres/${id}/seat/${selectedSeats}`,
+        data
+      )
+      .then((response) => {
+        alert("Booking Successful!");
+        setSelectedSeats(
+          selectedSeats.map((seat) => {
+            return { seatNumber: seat, status: "booked" };
+          })
+        );
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Booking Failed.");
+      });
+  };
+
+  const seatSummary = (
+    <div className="seat-summary">
+      <p>
+        You have selected <strong>{selectedSeats.length}</strong> seats with
+        seat number: <strong>{seatNumbers}</strong>.
+      </p>
+      <p>
+        The total price for your booking is <strong>{formattedPrice}</strong>.
+      </p>
+      <button className="book-button" onClick={handleBooking}>
+        Book Now
+      </button>
+    </div>
+  );
+
+  const seatLegend = (
+    <div className="seat-legend">
+      <span className="available"></span>
+      <span>Available</span>
+      <span className="selected"></span>
+      <span>Selected</span>
+      <span className="booked"></span>
+      <span>Booked</span>
+    </div>
+  );
+
+  const bookedSeatCSS = `
+    .seat.booked {
+      background-color: red;
+    }
+  `;
 
   return (
     <div>
-      <h1>Booking Page</h1>
-      {theatre ? (
-        <div>
-          <p>You have selected {theatre} theatre.</p>
-          {bookingInfo ? (
-            <p>
-              Booking successful! Name: {bookingInfo.name}, Seats:{" "}
-              {bookingInfo.seats}
-            </p>
-          ) : (
-            <Seat
-              theatre={theatre}
-              onSuccess={handleBookingSuccess}
-            />
-          )}
-        </div>
-      ) : (
-        <p>No theatre selected</p>
-      )}
+      <div className="seat-grid">
+        <div className="screen">SCREEN</div>
+        {Array.from(Array(theatre.seats).keys()).map((seat) => {
+          const seatNumber = seat + 1;
+          const seatStatus = isSeatBooked(seatNumber)
+            ? "booked"
+            : isSeatSelected(seatNumber)
+            ? "selected"
+            : "available";
+          return (
+            <div
+              key={seatNumber}
+              className={`seat ${seatStatus}`}
+              onClick={() => handleSeatClick(seatNumber)}
+            >
+              {seatNumber}
+            </div>
+          );
+        })}
+      </div>
+      {seatLegend}
+      {seatSummary}
+      <style>{bookedSeatCSS}</style>
     </div>
   );
 }

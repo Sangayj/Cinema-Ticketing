@@ -8,20 +8,28 @@ import "./View.css";
 function View() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
+  const [theatre, setTheatre] = useState(null);
 
   useEffect(() => {
     axios
       .get(`http://localhost:8000/api/movies/${id}`)
       .then((response) => {
         setMovie(response.data);
-        console.log(response.data); // Log the movie data to the console
+        axios
+          .get(`http://localhost:8000/api/theatres/${response.data.theatreId}`)
+          .then((response) => {
+            setTheatre(response.data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       })
       .catch((error) => {
         console.error(error);
       });
   }, [id]);
 
-  if (!movie) {
+  if (!movie || !theatre) {
     return <div>Loading...</div>;
   }
 
@@ -50,17 +58,14 @@ function View() {
         <div className="showing-details-container">
           <p className="showing-details">Date: {movie.date}</p>
           <p className="showing-details">Time: {movie.time}</p>
-          <p className="showing-details">Theatre: {movie.theatre}</p>
-          <p className="showing-details">Price: {movie.price}</p>
+          <p className="showing-details">Theatre: {theatre.name}</p>
+          <p className="showing-details">Price: {movie.price} BTN</p>
         </div>
         <Link
-          to={{
-            pathname: "/Book",
-            state: { movieId: id },
-          }}
+          to={`/Book/${theatre._id}?price=${movie.price}`}
           className="book-now-button"
         >
-          Book Now
+          Book
         </Link>
       </div>
     </div>

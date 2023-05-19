@@ -10,6 +10,10 @@ const movieSchema = new mongoose.Schema({
   date: Date,
   time: String,
   theatre: String,
+  theatreId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Theatre",
+  },
   price: Number,
 });
 
