@@ -16,6 +16,18 @@ function ViewBooking() {
       });
   }, []);
 
+  const handleApprove = (bookingId) => {
+    // Handle the approval of the booking
+    // You can perform any necessary actions here
+    console.log("Booking approved:", bookingId);
+  };
+
+  const handleCancel = (bookingId) => {
+    // Handle the cancellation of the booking
+    // You can perform any necessary actions here
+    console.log("Booking canceled:", bookingId);
+  };
+
   return (
     <div className="view-booking-container">
       <h1>Booking Details</h1>
@@ -26,9 +38,10 @@ function ViewBooking() {
             <th>Username</th>
             <th>Phone</th>
             <th>Seat Number</th>
-            <th>Total Seat</th>
             <th>Total Price</th>
+            <th>Journal Code</th>
             <th>Theatre</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -38,9 +51,17 @@ function ViewBooking() {
               <td>{booking.username}</td>
               <td>{booking.phone}</td>
               <td>{booking.seatNumber}</td>
-              <td>{booking.totalSeat}</td>
               <td>{booking.totalPrice}</td>
+              <td>{booking.journalCode}</td>
               <td>{booking.theatre}</td>
+              <td>
+                <button onClick={() => handleApprove(booking._id)}>
+                  Approve
+                </button>
+                <button onClick={() => handleCancel(booking._id)}>
+                  Cancel
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>

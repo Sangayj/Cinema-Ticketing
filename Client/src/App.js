@@ -15,6 +15,7 @@ import Seat from "./Admin/Seat";
 import AdminTheatre from "./Admin/AdminTheatre";
 import Ticket from "./Component/Ticket";
 import ViewBooking from "./Admin/ViewBooking";
+import Payment from "./Component/Payment";
 
 function App() {
   const location = useLocation();
@@ -50,6 +51,7 @@ function App() {
         <Route path="/AdminTheatre" element={<AdminTheatre />} />
         <Route path="/Ticket" element={<Ticket />} />
         <Route path="/ViewBooking" element={<ViewBooking />} />
+        <Route path="/Payment" element={<Payment />} />
       </Routes>
       {!isDashboardPage &&
         !isUserInfoPage &&
