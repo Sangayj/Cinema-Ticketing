@@ -36,7 +36,6 @@ function Navbar() {
           type="text"
           className="search-input"
           placeholder="Search for movies"
-          ref={searchInputRef}
         />
         {isLoggedIn ? (
           <button className="nav-item" onClick={handleLogout}>

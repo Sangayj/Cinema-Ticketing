@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Home.css";
 import { AuthContext } from "../context/Authcontext";
+
 function Homepage() {
   const { currentUser } = useContext(AuthContext);
-  console.log(currentUser.username);
+  console.log(currentUser.username, currentUser.name, currentUser.phone);
 
   const [movies, setMovies] = useState([]);
 
@@ -28,9 +29,19 @@ function Homepage() {
             className="card-image"
             src={`http://localhost:8000/uploads/${movie.filename}`}
             alt={movie.originalname}
-          />{" "}
+          />
           <div className="card-title">{movie.title}</div>
-          <Link to={`/View/${movie._id}`} className="view-button">
+          <Link
+            to={{
+              pathname: `/View/${movie._id}`,
+              state: {
+                name: currentUser.name,
+                username: currentUser.username,
+                phone: currentUser.phone,
+              },
+            }}
+            className="view-button"
+          >
             View Details
           </Link>
         </div>

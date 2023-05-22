@@ -7,7 +7,7 @@ function ViewBooking() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/bookings")
+      .get("http://localhost:8000/bookings")
       .then((response) => {
         setBookings(response.data);
       })

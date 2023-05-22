@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import queryString from "query-string";
-import { useNavigate } from "react-router-dom";
 
 import "./Book.css";
 
-function Book() {
+function Book(props) {
+  const { name, username, phone } = props;
   const { id } = useParams();
   const location = useLocation();
-  const price = parseFloat(new URLSearchParams(location.search).get("price"));
+  const price = parseFloat(queryString.parse(location.search).price);
   const [theatre, setTheatre] = useState(null);
   const [selectedSeats, setSelectedSeats] = useState([]);
   const navigate = useNavigate();
-
+  const movieId = location?.state?.movieId;
   useEffect(() => {
     axios
       .get(`http://localhost:8000/api/theatres/${id}`)
@@ -68,25 +68,36 @@ function Book() {
     const movieTitle = query.title;
     const date = query.date;
     const time = query.time;
-    const theatreName = query.theatre;
+    const theatre = query.theatre;
 
-    localStorage.setItem(
-      "bookingDetails",
-      JSON.stringify({
-        selectedSeats,
-        totalPrice,
-        movieTitle,
-        date,
-        time,
-        theatreName,
-      })
-    );
+    const bookingDetails = {
+      selectedSeats,
+      totalPrice,
+      movieId,
+      movieTitle,
+      date,
+      time,
+      theatre,
+      name,
+      username,
+      phone,
+    };
+
+    localStorage.setItem("bookingDetails", JSON.stringify(bookingDetails));
 
     // Reset the selected seats state
     setSelectedSeats([]);
 
     // Navigate to the payment page
-    navigate("/Payment");
+    navigate("/Payment", {
+      state: {
+        theatre,
+        name,
+        username,
+        phone,
+        movieId: movieId,
+      },
+    });
   };
 
   const seatSummary = (

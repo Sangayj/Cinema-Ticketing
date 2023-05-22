@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Payment.css";
 
-function Payment() {
+function Payment({ theatre, name, username, phone, movieId }) {
   const [journalCode, setJournalCode] = useState("");
   const bookingDetails = JSON.parse(localStorage.getItem("bookingDetails"));
 
@@ -18,13 +18,18 @@ function Payment() {
 
   const handleSubmit = () => {
     const bookingData = {
-      journalCode: journalCode,
+      theatre,
+      name,
+      username,
+      phone,
+      journalCode,
       seatNumber: selectedSeats.join(", "),
-      totalPrice: totalPrice,
+      totalPrice,
+      movieId,
     };
 
     axios
-      .post("http://localhost:8000/api/bookings", bookingData)
+      .post("http://localhost:8000/bookings", bookingData)
       .then((response) => {
         console.log("Booking data sent to admin:", response.data);
         // Perform any necessary actions after successful submission

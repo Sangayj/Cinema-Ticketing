@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import "./View.css";
 
-function View() {
+function View(props) {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [theatre, setTheatre] = useState(null);
+  const { name, username, phone } = props;
+
+  useEffect(() => {
+    console.log("Received name:", name);
+    console.log("Received username:", username);
+    console.log("Received phone:", phone);
+  }, [name, username, phone]);
 
   useEffect(() => {
     axios
@@ -49,10 +55,8 @@ function View() {
           <p className="cast">Cast: {movie.cast}</p>
           <p className="description">{movie.description}</p>
         </div>
-        
       </div>
       <div className="separator"></div>
-
       <div className="showing-container">
         <h2 className="showing-header">Showing On:</h2>
         <div className="showing-details-container">
@@ -62,20 +66,26 @@ function View() {
           <p className="showing-details">Price: {movie.price} BTN</p>
         </div>
         <Link
-          to={`/Book/${theatre._id}?price=${
-            movie.price
-          }&title=${encodeURIComponent(movie.title)}&date=${encodeURIComponent(
-            movie.date
-          )}&time=${encodeURIComponent(
-            movie.time
-          )}&theatre=${encodeURIComponent(theatre.name)}`}
+          to={{
+            pathname: `/Book/${theatre._id}`,
+            search: `?price=${movie.price}&title=${encodeURIComponent(
+              movie.title
+            )}&date=${encodeURIComponent(movie.date)}&time=${encodeURIComponent(
+              movie.time
+            )}&theatre=${encodeURIComponent(theatre.name)}`,
+            state: {
+              movieId: movie._id,
+              name: name,
+              username: username,
+              phone: phone,
+            },
+          }}
           className="book-now-button"
         >
           Book Now
         </Link>
-      </div>
+      </div>{" "}
     </div>
-    
   );
 }
 

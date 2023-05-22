@@ -1,7 +1,7 @@
 import { Route, Routes, useLocation } from "react-router-dom";
+import { AuthProvider } from "./context/Authcontext";
 import Navbar from "./Component/Navbar";
 import Footer from "./Component/Footer";
-
 import SignUp from "./Component/SignUp";
 import Login from "./Component/Login";
 import Home from "./Component/Home";
@@ -30,44 +30,44 @@ function App() {
   const isAdminTheatrePage = location.pathname === "/AdminTheatre";
   const isViewBookingPage = location.pathname === "/ViewBooking";
   return (
-    <div>
-      {!isDashboardPage &&
-        !isUserInfoPage &&
-        !isMoviesPage &&
-        !isMovieDetailsPage &&
-        !isLoginPage &&
-        !isViewBookingPage &&
-        !isSignUpPage &&
-        !isAdminTheatrePage && <Navbar />}
-      <Routes>
-        {/* <Route element={<PrivateRoutes />}> */}
-        <Route path="/AdminDashboard" element={<AdminDashboard />} />
-        {/* </Route> */}
-        <Route path="/" element={<Home />} />
-        <Route path="/Homepage" element={<Homepage />} />
-        <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/UserInfo" element={<UserInfo />} />
-        <Route path="/Movies" element={<Movies />} />
-        <Route path="/View/:id" element={<View />} />
-        <Route path="/View2/:id" element={<View2 />} />
-        <Route path="/MovieDetails" element={<MovieDetails />} />
-        <Route path="/Book/:id" element={<Book />} />
-        <Route path="/Seat" element={<Seat />} />
-        <Route path="/AdminTheatre" element={<AdminTheatre />} />
-        <Route path="/Ticket" element={<Ticket />} />
-        <Route path="/ViewBooking" element={<ViewBooking />} />
-        <Route path="/Payment" element={<Payment />} />
-      </Routes>
-      {!isDashboardPage &&
-        !isUserInfoPage &&
-        !isMoviesPage &&
-        !isMovieDetailsPage &&
-        !isLoginPage &&
-        !isViewBookingPage &&
-        !isSignUpPage &&
-        !isAdminTheatrePage && <Footer />}
-    </div>
+    <AuthProvider>
+      <div>
+        {!isDashboardPage &&
+          !isUserInfoPage &&
+          !isMoviesPage &&
+          !isMovieDetailsPage &&
+          !isLoginPage &&
+          !isViewBookingPage &&
+          !isSignUpPage &&
+          !isAdminTheatrePage && <Navbar />}
+        <Routes>
+          <Route path="/AdminDashboard" element={<AdminDashboard />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/Homepage" element={<Homepage />} />
+          <Route path="/View/:id" element={<View />} />
+          <Route path="/View2/:id" element={<View2 />} />
+          <Route path="/Book/:id" element={<Book />} />
+          <Route path="/SignUp" element={<SignUp />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/UserInfo" element={<UserInfo />} />
+          <Route path="/Movies" element={<Movies />} />
+          <Route path="/MovieDetails" element={<MovieDetails />} />
+          <Route path="/Seat" element={<Seat />} />
+          <Route path="/AdminTheatre" element={<AdminTheatre />} />
+          <Route path="/Ticket" element={<Ticket />} />
+          <Route path="/ViewBooking" element={<ViewBooking />} />
+          <Route path="/Payment" element={<Payment />} />
+        </Routes>
+        {!isDashboardPage &&
+          !isUserInfoPage &&
+          !isMoviesPage &&
+          !isMovieDetailsPage &&
+          !isLoginPage &&
+          !isViewBookingPage &&
+          !isSignUpPage &&
+          !isAdminTheatrePage && <Footer />}
+      </div>
+    </AuthProvider>
   );
 }
 
