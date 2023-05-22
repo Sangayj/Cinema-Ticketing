@@ -137,6 +137,7 @@ async function authenticate(req, res, next) {
 
     req.user = {
       username: user.username,
+      name: user.name,
       gender: user.gender,
       email: user.email,
       phone: user.phone,
@@ -164,8 +165,11 @@ async function authenticate(req, res, next) {
         return res.status(400).json({ message: "Incorrect password" });
       }
 
-      const { username, email, phone, role } = req.user;
-      const token = jwt.sign({ username, email, phone, role }, randomCode);
+      const { username, name, email, phone, role } = req.user;
+      const token = jwt.sign(
+        { username, name, email, phone, role },
+        randomCode
+      );
 
       res.json({ token });
     } catch (error) {

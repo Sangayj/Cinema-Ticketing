@@ -5,6 +5,7 @@ const path = require("path");
 const userRoutes = require("./routes/userRoutes");
 const movieRoutes = require("./routes/movieRoutes");
 const seatRoutes = require("./routes/seatRoutes");
+const bookingsRoutes = require("./routes/bookings");
 const generateRandomCode = require("./controllers/random_code");
 const User = require("./models/Users");
 const bcrypt = require("bcrypt");
@@ -39,6 +40,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api", userRoutes);
 app.use(movieRoutes);
 app.use(seatRoutes);
+app.use(bookingsRoutes);
 
 async function authenticate(req, res, next) {
   const { username, password } = req.body;
