@@ -6,14 +6,14 @@ import queryString from "query-string";
 import "./Book.css";
 
 function Book(props) {
-  const { name, username, phone } = props;
+  const { userId, movieId } = props;
   const { id } = useParams();
   const location = useLocation();
   const price = parseFloat(queryString.parse(location.search).price);
   const [theatre, setTheatre] = useState(null);
   const [selectedSeats, setSelectedSeats] = useState([]);
   const navigate = useNavigate();
-  const movieId = location?.state?.movieId;
+
   useEffect(() => {
     axios
       .get(`http://localhost:8000/api/theatres/${id}`)
@@ -68,7 +68,7 @@ function Book(props) {
     const movieTitle = query.title;
     const date = query.date;
     const time = query.time;
-    const theatre = query.theatre;
+    const theatreId = query.theatre;
 
     const bookingDetails = {
       selectedSeats,
@@ -77,10 +77,8 @@ function Book(props) {
       movieTitle,
       date,
       time,
-      theatre,
-      name,
-      username,
-      phone,
+      theatreId,
+      userId,
     };
 
     localStorage.setItem("bookingDetails", JSON.stringify(bookingDetails));
@@ -91,11 +89,9 @@ function Book(props) {
     // Navigate to the payment page
     navigate("/Payment", {
       state: {
-        theatre,
-        name,
-        username,
-        phone,
-        movieId: movieId,
+        userId, // Pass the userId prop
+        movieId, // Pass the movieId prop
+        theatreId,
       },
     });
   };

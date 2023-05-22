@@ -1,22 +1,12 @@
 const mongoose = require("mongoose");
 
 const bookingSchema = new mongoose.Schema({
-  theatre: {
+  theatreId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Movie",
     required: true,
   },
-  name: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
-  username: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
-  phone: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,

@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 
 import "./View.css";
 
-function View(props) {
+function View() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [theatre, setTheatre] = useState(null);
-  const { name, username, phone } = props;
+  const location = useLocation();
+  const userId = location?.state?.userId || ""; // Fallback to an empty string if userId is undefined
 
   useEffect(() => {
-    console.log("Received name:", name);
-    console.log("Received username:", username);
-    console.log("Received phone:", phone);
-  }, [name, username, phone]);
+    console.log("Received user ID:", userId);
+  }, [userId]);
 
   useEffect(() => {
     axios
@@ -75,16 +74,14 @@ function View(props) {
             )}&theatre=${encodeURIComponent(theatre.name)}`,
             state: {
               movieId: movie._id,
-              name: name,
-              username: username,
-              phone: phone,
+              userId: userId,
             },
           }}
           className="book-now-button"
         >
           Book Now
         </Link>
-      </div>{" "}
+      </div>
     </div>
   );
 }

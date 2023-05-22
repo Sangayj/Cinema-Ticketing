@@ -2,27 +2,24 @@ const Booking = require("../models/bookings");
 
 exports.createBooking = async (req, res) => {
   try {
-    const {
-      theatre,
-      name,
-      username,
-      phone,
-      journalCode,
-      seatNumber,
-      totalPrice,
-      movieId,
-    } = req.body;
+    const { userId, movieId, theatreId } = req.body; // Use req.body to access the values directly
 
-    if (!theatre || !name || !username || !phone || !movieId) {
+    const { journalCode, seatNumber, totalPrice } = req.body;
+
+    if (
+      !theatreId ||
+      !userId ||
+      !journalCode ||
+      !seatNumber ||
+      !totalPrice ||
+      !movieId
+    ) {
       return res.status(400).json({ error: "Missing required fields." });
     }
 
-    // Create a new booking
     const booking = await Booking.create({
-      theatre,
-      name,
-      username,
-      phone,
+      theatreId,
+      userId,
       journalCode,
       seatNumber,
       totalPrice,
@@ -37,7 +34,6 @@ exports.createBooking = async (req, res) => {
       .json({ error: "An error occurred while creating the booking." });
   }
 };
-
 exports.getBookings = async (req, res) => {
   try {
     const bookings = await Booking.find();

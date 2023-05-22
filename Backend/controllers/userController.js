@@ -129,20 +129,23 @@ exports.Login = async (req, res) => {
 
 async function authenticate(req, res, next) {
   const { username, password } = req.body;
-  const user = await User.findOne({ username });
   try {
+    const user = await User.findOne({ username });
+
     if (!user) {
       return res.status(401).json({ error: "Invalid Credentials" });
     }
 
     req.user = {
       username: user.username,
-      name: user.name,
       gender: user.gender,
       email: user.email,
       phone: user.phone,
       role: user.role,
+      id: user._id, // Add the user ID to the request object
     };
+
+    console.log("User ID:", user._id); // Log the user ID in the console
     return next();
   } catch (error) {
     console.error("Error authenticating user:", error);
@@ -151,7 +154,6 @@ async function authenticate(req, res, next) {
       .json({ error: "An error occurred during authentication" });
   }
 }
-
 (exports.Login = authenticate),
   async (req, res) => {
     try {
@@ -165,11 +167,8 @@ async function authenticate(req, res, next) {
         return res.status(400).json({ message: "Incorrect password" });
       }
 
-      const { username, name, email, phone, role } = req.user;
-      const token = jwt.sign(
-        { username, name, email, phone, role },
-        randomCode
-      );
+      const { username, email, phone, role } = req.user;
+      const token = jwt.sign({ username, email, phone, role }, randomCode);
 
       res.json({ token });
     } catch (error) {

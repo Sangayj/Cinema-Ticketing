@@ -6,7 +6,7 @@ import { AuthContext } from "../context/Authcontext";
 
 function Homepage() {
   const { currentUser } = useContext(AuthContext);
-  console.log(currentUser.username, currentUser.name, currentUser.phone);
+  console.log("User ID:", currentUser._id); // Display user ID in the console
 
   const [movies, setMovies] = useState([]);
 
@@ -35,9 +35,7 @@ function Homepage() {
             to={{
               pathname: `/View/${movie._id}`,
               state: {
-                name: currentUser.name,
-                username: currentUser.username,
-                phone: currentUser.phone,
+                userId: currentUser._id, // Pass the user ID as a state parameter
               },
             }}
             className="view-button"

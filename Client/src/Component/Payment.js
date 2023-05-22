@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Payment.css";
 
-function Payment({ theatre, name, username, phone, movieId }) {
+function Payment({ userId, movieId, theatreId }) {
   const [journalCode, setJournalCode] = useState("");
   const bookingDetails = JSON.parse(localStorage.getItem("bookingDetails"));
 
@@ -18,16 +18,13 @@ function Payment({ theatre, name, username, phone, movieId }) {
 
   const handleSubmit = () => {
     const bookingData = {
-      theatre,
-      name,
-      username,
-      phone,
+      userId,
+      theatreId,
       journalCode,
       seatNumber: selectedSeats.join(", "),
       totalPrice,
       movieId,
     };
-
     axios
       .post("http://localhost:8000/bookings", bookingData)
       .then((response) => {
