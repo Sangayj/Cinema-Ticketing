@@ -1,7 +1,6 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "./Component/Navbar";
 import Footer from "./Component/Footer";
-
 import SignUp from "./Component/SignUp";
 import Login from "./Component/Login";
 import Home from "./Component/Home";
@@ -29,6 +28,8 @@ function App() {
   const isSignUpPage = location.pathname === "/SignUp";
   const isAdminTheatrePage = location.pathname === "/AdminTheatre";
   const isViewBookingPage = location.pathname === "/ViewBooking";
+  const isViewSeatPage = location.pathname === "/Seat";
+
 
 
   return (

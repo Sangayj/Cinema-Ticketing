@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useRef } from 'react';
+
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Navbar.css";
 
@@ -6,6 +8,7 @@ function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const searchInputRef = useRef(null);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
