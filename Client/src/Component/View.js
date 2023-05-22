@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "./View.css";
 
@@ -48,6 +49,7 @@ function View() {
           <p className="cast">Cast: {movie.cast}</p>
           <p className="description">{movie.description}</p>
         </div>
+        
       </div>
       <div className="separator"></div>
 
@@ -73,6 +75,7 @@ function View() {
         </Link>
       </div>
     </div>
+    
   );
 }
 
