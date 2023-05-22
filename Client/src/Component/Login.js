@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { decodeToken } from "react-jwt";
+
+import axios from "axios";
 
 import "./Login.css";
 
 const Login = () => {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -12,74 +15,59 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/api/Login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
+      const response = await axios.post("http://localhost:8000/api/Login", {
+        username,
+        password,
       });
+      const { token } = response.data;
+      console.log(token);
+      // Set the JWT token in local storage
+      localStorage.setItem("token", token);
 
-      const data = await response.json();
-      if (response.ok) {
-        // Verify user role and redirect to the corresponding panel
-        if (data.userType === "admin") {
-          history("/AdminDashboard");
-        } else if (data.userType === "user") {
-          history("/");
-        } else {
-          console.error("Invalid user role");
-        }
-      } else {
-        if (response.status === 400) {
-          // Incorrect password
-          alert("Incorrect password");
-        } else if (response.status === 404) {
-          // User does not exist
-          alert("User does not exist");
-        } else {
-          console.error(data.error);
-        }
+      // Navigate to the appropriate page based on the user's role
+      if (decodeToken(token).role === "admin") {
+        navigate("/AdminDashboard");
+        window.location.reload();
+      } else if (decodeToken(token).role === "user") {
+        navigate("/Homepage");
+        window.location.reload();
       }
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.log("Invalid credentials");
     }
   };
 
   return (
-    <div className="login-form-container">
-      <form className="login-form" action="post">
-        <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={username}
-          onChange={(e) => {
-            setUserName(e.target.value);
-          }}
-          required
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          required
-        />
-        <button type="submit" onClick={submit}>
-          Login
-        </button>
-        <div className="login-form-links">
-          <a href="/forgotpassword">Forgot Password?</a>
-
-          <a href="/SignUp">Sign Up</a>
-        </div>
-      </form>
+    <div>
+      <div className="login-form-container">
+        <form className="login-form" action="post">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={username}
+            onChange={(e) => setUserName(e.target.value)}
+            required
+          />
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit" onClick={submit}>
+            Login
+          </button>
+          <div className="login-form-links">
+            <a href="/forgotpassword">Forgot Password?</a>
+            <a href="/SignUp">Sign Up</a>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

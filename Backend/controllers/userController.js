@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const config = require("config");
-
+const generateRandomCode = require("./random_code");
+const randomCode = generateRandomCode();
 const User = require("../models/Users");
 
 exports.SignUp = async (req, res) => {
@@ -15,18 +15,20 @@ exports.SignUp = async (req, res) => {
       phone,
       password,
       confirmPassword,
-    } = req.body; // Check if the email already exists
+    } = req.body;
+
     const existingUser = await User.findOne({ username });
     if (existingUser) {
       return res.status(409).json({ error: "Email already exists" });
     }
 
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-    const encrypt = await bcrypt.genSalt(10);
-    const hashedconfirmPassword = await bcrypt.hash(confirmPassword, encrypt);
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const hashedConfirmPassword = await bcrypt.hash(
+      confirmPassword,
+      saltRounds
+    );
 
-    // Create a new user
     const newUser = new User({
       role,
       name,
@@ -35,7 +37,7 @@ exports.SignUp = async (req, res) => {
       email,
       phone,
       password: hashedPassword,
-      confirmPassword: hashedconfirmPassword,
+      confirmPassword: hashedConfirmPassword,
     });
     await newUser.save();
 
@@ -48,7 +50,7 @@ exports.SignUp = async (req, res) => {
 
 exports.getUsers = async (req, res) => {
   try {
-    const users = await User.find({}, "name username email  phone password ");
+    const users = await User.find({}, "name username email phone password");
     res.json(users);
   } catch (error) {
     res.status(500).json({ message: "Server error" });
@@ -76,23 +78,21 @@ exports.updateUser = async (req, res) => {
     const { userId } = req.params;
     const { name, username, email, password, phone } = req.body;
 
-    // Check if the user exists
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Update user properties
     user.name = name || user.name;
     user.username = username || user.username;
     user.email = email || user.email;
     user.phone = phone || user.phone;
+
     if (password) {
-      const salt = await bcrypt.genSalt(10);
-      user.password = await bcrypt.hash(password, salt);
+      const saltRounds = 10;
+      user.password = await bcrypt.hash(password, saltRounds);
     }
 
-    // Save updated user to the database
     const updatedUser = await user.save();
     res.json({ message: "User updated successfully", updatedUser });
   } catch (error) {
@@ -107,34 +107,69 @@ exports.Login = async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    // Check if the user exists
     const user = await User.findOne({ username });
     if (!user) {
       return res.status(404).json({ message: "User does not exist" });
     }
 
-    // Compare passwords
     const isMatch = await bcrypt.compare(password, user.password);
-
-    // Check if passwords match
     if (!isMatch) {
       return res.status(400).json({ message: "Incorrect password" });
     }
 
-    const secretKey =
-      user.role === "admin"
-        ? config.get("adminSecretKey")
-        : config.get("jwtSecret");
+    const secretKey = user.role === "admin" ? "adminSecretKey" : "secretKey";
+    const token = jwt.sign({ id: user._id, role: user.role }, secretKey);
 
-    // Generate the JWT token
-    const token = jwt.sign({ id: user._id, role: user.role }, secretKey, {
-      expiresIn: "1h",
-    });
-
-    // Send the token and user type in the response
     return res.status(200).json({ token, userType: user.role });
   } catch (error) {
     console.error("Error logging in:", error);
     return res.status(500).json({ error: "Login failed" });
   }
 };
+
+async function authenticate(req, res, next) {
+  const { username, password } = req.body;
+  const user = await User.findOne({ username });
+  try {
+    if (!user) {
+      return res.status(401).json({ error: "Invalid Credentials" });
+    }
+
+    req.user = {
+      username: user.username,
+      gender: user.gender,
+      email: user.email,
+      phone: user.phone,
+      role: user.role,
+    };
+    return next();
+  } catch (error) {
+    console.error("Error authenticating user:", error);
+    return res
+      .status(500)
+      .json({ error: "An error occurred during authentication" });
+  }
+}
+
+(exports.Login = authenticate),
+  async (req, res) => {
+    try {
+      const user = await User.findOne({ username });
+      if (!user) {
+        return res.status(404).json({ message: "User does not exist" });
+      }
+
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(400).json({ message: "Incorrect password" });
+      }
+
+      const { username, email, phone, role } = req.user;
+      const token = jwt.sign({ username, email, phone, role }, randomCode);
+
+      res.json({ token });
+    } catch (error) {
+      console.error("Error logging in:", error);
+      return res.status(500).json({ error: "Login failed" });
+    }
+  };
