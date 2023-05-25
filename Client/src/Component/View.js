@@ -73,7 +73,7 @@ function View() {
           state={{ ...ids, theatreId: theatre._id }}
           className="book-now-button"
         >
-          Book Nowss
+          Booking now 
         </Link>
       </div>
     </div>
