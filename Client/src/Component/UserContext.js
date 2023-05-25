@@ -1,26 +1,14 @@
-import React, { createContext, useState, useEffect } from "react";
-import axios from "axios";
+// // UserContext.js
+// import React, { createContext, useState } from "react";
 
-export const UserContext = createContext();
+// export const UserContext = createContext();
 
-export const UserProvider = ({ children }) => {
-  const [users, setUsers] = useState([]);
+// export const UserProvider = ({ children }) => {
+//   const [userData, setUserData] = useState(null);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get("http://localhost:8000/api/users");
-        const userData = response.data;
-        setUsers(userData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchUsers();
-  }, []);
-
-  return (
-    <UserContext.Provider value={{ users }}>{children}</UserContext.Provider>
-  );
-};
+//   return (
+//     <UserContext.Provider value={{ userData, setUserData }}>
+//       {children}
+//     </UserContext.Provider>
+//   );
+// };

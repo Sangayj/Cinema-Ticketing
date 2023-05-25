@@ -1,51 +1,27 @@
-import React, { useRef, useState, useEffect } from "react";
-import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import "./Navbar.css";
 
 function Navbar() {
   const [errorMessage, setErrorMessage] = useState("");
-  const searchInputRef = useRef();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
 
-  const searchMovies = async () => {
-    const searchQuery = searchInputRef.current.value;
-    try {
-      const response = await axios.get(
-        `http://localhost:8000/movies?search=${searchQuery}`
-      );
-      if (response.data.length === 0) {
-        setErrorMessage("Movie not found");
-      } else {
-        setErrorMessage("");
-        const movie = response.data[0]; // Assuming the first movie is the desired result
-        window.open(`/movies/${movie.id}`, "_blank");
-      }
-    } catch (error) {
-      setErrorMessage("An error occurred");
-      console.error(error);
-    }
-  };
-
-  const handleSearchButtonClick = () => {
-    const searchQuery = searchInputRef.current.value;
-    if (searchQuery) {
-      // Perform movie search
-      searchMovies();
-    } else {
-      setErrorMessage("Please enter a search query");
-    }
-  };
-
   const handleLogout = () => {
-    // Clear any authentication data (e.g., token) from local storage or state
-    // Example: localStorage.removeItem("token");
-    // Example: setAuthenticated(false);
-
-    // Redirect to the login page
-    navigate("/Login");
+    setIsLoggedIn(false);
+    navigate("/");
   };
+
+  // Set isLoggedIn state based on current location
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setIsLoggedIn(false);
+    } else {
+      setIsLoggedIn(true);
+    }
+  }, [location]);
 
   useEffect(() => {
     const handleBeforeUnload = (event) => {
@@ -69,25 +45,30 @@ function Navbar() {
     };
   }, [navigate, location.pathname]);
 
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
   return (
     <div className="navbar-container">
       <a href="/#" className="navbar-logo">
         <img src="./Image/logo.png" alt="Logo" className="navbar-logo-img" />
       </a>
-      <div className="navbar">
+      <nav className="navbar">
         <input
           type="text"
           className="search-input"
           placeholder="Search for movies"
-          ref={searchInputRef}
+          value={searchQuery}
+          onChange={handleSearchInputChange}
         />
-        <button className="search-button" onClick={handleSearchButtonClick}>
+        <Link className="search-button" to="/search" state={ searchQuery } >
           Search
-        </button>
+        </Link>
         <a className="nav-item" href="/Login" onClick={handleLogout}>
           Logout
         </a>
-      </div>
+      </nav>
       {errorMessage && <div className="error-message">{errorMessage}</div>}
     </div>
   );

@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import { AuthContext } from "../context/Authcontext";
 import "./AdminDashboard.css";
 
 const AdminDashboard = () => {
+  const {currentUser} = useContext(AuthContext)
+  console.log(currentUser)
   const history = useNavigate();
 
   const handleLogout = () => {

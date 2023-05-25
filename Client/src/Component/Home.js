@@ -27,7 +27,8 @@ function Home() {
             src={`http://localhost:8000/uploads/${movie.filename}`}
             alt={movie.originalname}
           />{" "}
-          <Link to={`/View/${movie._id}`} className="view-button">
+          <div className="card-title">{movie.title}</div>
+          <Link to={`/View2/${movie._id}`} className="view-button">
             View Details
           </Link>
         </div>

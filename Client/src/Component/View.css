@@ -87,3 +87,23 @@
 .book-now-button:hover {
   background-color: #0062cc;
 }
+
+.login-button {
+  color: red;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.book-tickets {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.view-details:hover {
+  background-color: #0069d9;
+}
