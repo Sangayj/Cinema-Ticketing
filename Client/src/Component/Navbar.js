@@ -3,8 +3,7 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import "./Navbar.css";
 
 function Navbar() {
-  const [errorMessage, setErrorMessage] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [, setIsLoggedIn] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
@@ -62,14 +61,13 @@ function Navbar() {
           value={searchQuery}
           onChange={handleSearchInputChange}
         />
-        <Link className="search-button" to="/search" state={ searchQuery } >
+        <Link className="search-button" to="/search" state={searchQuery}>
           Search
         </Link>
         <a className="nav-item" href="/Login" onClick={handleLogout}>
           Logout
         </a>
       </nav>
-      {errorMessage && <div className="error-message">{errorMessage}</div>}
     </div>
   );
 }

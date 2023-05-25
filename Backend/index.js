@@ -5,7 +5,7 @@ const path = require("path");
 const userRoutes = require("./routes/userRoutes");
 const movieRoutes = require("./routes/movieRoutes");
 const seatRoutes = require("./routes/seatRoutes");
-const bookingsRoutes = require("./routes/bookingsRoutes")
+const bookingsRoutes = require("./routes/bookingsRoutes");
 const generateRandomCode = require("./controllers/random_code");
 const User = require("./models/Users");
 const Booking = require("./models/Bookings");
@@ -39,7 +39,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api", userRoutes);
 app.use(movieRoutes);
 app.use(seatRoutes);
-app.use(bookingsRoutes)
+app.use(bookingsRoutes);
 
 async function authenticate(req, res, next) {
   const { username, password } = req.body;
@@ -48,7 +48,6 @@ async function authenticate(req, res, next) {
     if (!user) {
       return res.status(401).json({ error: "Invalid Credentials" });
     }
-
 
     req.user = {
       userId: user._id.toString(), // Assign the ObjectId as a string
@@ -70,7 +69,6 @@ async function authenticate(req, res, next) {
 app.post("/api/Login", authenticate, async (req, res) => {
   const { userId, username, gender, email, phone, role } = req.user;
 
- 
   const token = jwt.sign(
     { userId, username, gender, email, phone, role },
     process.env.TOKEN
@@ -78,7 +76,6 @@ app.post("/api/Login", authenticate, async (req, res) => {
 
   res.json({ token });
 });
-
 
 app.get("/api/user/", (req, res) => {
   const token = req.headers.authorization?.split(" ")[1];
@@ -130,41 +127,43 @@ app.post("/api/booking/", async (req, res) => {
   }
 });
 
-app.put('/api/bookings/:id/approve', async (req, res) => {
+app.put("/api/bookings/:id/approve", async (req, res) => {
   const bookingId = req.params.id;
 
-  
   try {
     // Update the booking status to "approved" in the database
     const updatedBooking = await Booking.findByIdAndUpdate(
       bookingId,
-      { status: 'approved' },
+      { status: "approved" },
       { new: true }
     );
 
     res.status(200).json(updatedBooking);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'An error occurred while updating the booking.' });
+    res
+      .status(500)
+      .json({ error: "An error occurred while updating the booking." });
   }
 });
 
-app.put('/api/bookings/:bookingId/cancel', (req, res) => {
+app.put("/api/bookings/:bookingId/cancel", (req, res) => {
   const bookingId = req.params.bookingId;
 
   // Find the booking by ID and delete it
   Booking.findByIdAndDelete(bookingId)
     .then(() => {
       // Send a response indicating the success of the cancellation
-      res.json({ message: 'Booking canceled successfully' });
+      res.json({ message: "Booking canceled successfully" });
     })
     .catch((error) => {
       // Handle any errors that occur during the deletion
-      console.error('An error occurred while canceling the booking:', error);
-      res.status(500).json({ error: 'An error occurred while canceling the booking' });
+      console.error("An error occurred while canceling the booking:", error);
+      res
+        .status(500)
+        .json({ error: "An error occurred while canceling the booking" });
     });
 });
-
 
 app.listen(8000, () => {
   console.log("Server listening on port 8000");

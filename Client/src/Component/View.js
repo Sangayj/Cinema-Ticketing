@@ -8,10 +8,8 @@ function View() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [theatre, setTheatre] = useState(null);
-  const locate = useLocation()
-  const ids = locate.state
-
-
+  const locate = useLocation();
+  const ids = locate.state;
 
   useEffect(() => {
     axios
@@ -73,7 +71,7 @@ function View() {
           state={{ ...ids, theatreId: theatre._id }}
           className="book-now-button"
         >
-          Booking now 
+          Booking now
         </Link>
       </div>
     </div>

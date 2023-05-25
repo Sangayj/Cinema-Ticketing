@@ -112,8 +112,6 @@ exports.updateUser = async (req, res) => {
   }
 };
 
-const { v4: uuidv4 } = require("uuid");
-
 exports.Login = async (req, res) => {
   try {
     const { username, password } = req.body;

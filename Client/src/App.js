@@ -21,6 +21,7 @@ import ViewBooking from "./Admin/ViewBooking";
 import Payment from "./Component/Payment";
 import Profile from "./Component/Profile";
 import Search from "./Component/Search";
+import Pending from "./Component/Pending";
 
 function App() {
   const location = useLocation();
@@ -34,40 +35,49 @@ function App() {
   const isViewBookingPage = location.pathname === "/ViewBooking";
 
   return (
-    <div>
-      {!isDashboardPage &&
-        !isUserInfoPage &&
-        !isMoviesPage &&
-        !isMovieDetailsPage &&
-        !isLoginPage &&
-        !isViewBookingPage &&
-        !isSignUpPage &&
-        !isAdminTheatrePage && <Navbar />}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/AdminDashboard" element={<AdminDashboard />} />
-        <Route path="/UserInfo" element={<UserInfo />} />
-        <Route path="/Movies" element={<Movies />} />
-        <Route path="/View/:id" element={<View />} />
-        <Route path="/MovieDetails" element={<MovieDetails />} />
-        <Route path="/Book/:id" element={<Book />} />
-        <Route path="/Seat" element={<Seat />} />
-        <Route path="/AdminTheatre" element={<AdminTheatre />} />
-        <Route path="/Ticket" element={<Ticket />} />
-        <Route path="/ViewBooking" element={<ViewBooking />} />
-        <Route path="/Payment" element={<Payment />} />
-      </Routes>
-      {!isDashboardPage &&
-        !isUserInfoPage &&
-        !isMoviesPage &&
-        !isMovieDetailsPage &&
-        !isLoginPage &&
-        !isViewBookingPage &&
-        !isSignUpPage &&
-        !isAdminTheatrePage && <Footer />}
-    </div>
+    <AuthProvider>
+      <div>
+        {!isDashboardPage &&
+          !isUserInfoPage &&
+          !isMoviesPage &&
+          !isMovieDetailsPage &&
+          !isLoginPage &&
+          !isViewBookingPage &&
+          !isSignUpPage &&
+          !isAdminTheatrePage && <Navbar />}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/SignUp" element={<SignUp />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/AdminDashboard" element={<AdminDashboard />} />
+          <Route path="/UserInfo" element={<UserInfo />} />
+          <Route path="/Movies" element={<Movies />} />
+          <Route path="/View/:id" element={<View />} />
+          <Route path="/MovieDetails" element={<MovieDetails />} />
+          <Route path="/Book/:id" element={<Book />} />
+          <Route path="/Seat" element={<Seat />} />
+          <Route path="/AdminTheatre" element={<AdminTheatre />} />
+          <Route path="/Ticket" element={<Ticket />} />
+          <Route path="/ViewBooking" element={<ViewBooking />} />
+          <Route path="/Payment" element={<Payment />} />
+          <Route path="/View2/:id" element={<View2 />} />{" "}
+          {/* Add the parameter :id to match the route */}
+          <Route path="/Homepage" element={<Homepage />} />
+          <Route path="/Payment" element={<Payment />} />
+          <Route path="/Profile" element={<Profile />} />
+          <Route path="/Search" element={<Search />} />
+          <Route path="/Pending" element={<Pending />} />
+        </Routes>
+        {!isDashboardPage &&
+          !isUserInfoPage &&
+          !isMoviesPage &&
+          !isMovieDetailsPage &&
+          !isLoginPage &&
+          !isViewBookingPage &&
+          !isSignUpPage &&
+          !isAdminTheatrePage && <Footer />}
+      </div>
+    </AuthProvider>
   );
 }
 

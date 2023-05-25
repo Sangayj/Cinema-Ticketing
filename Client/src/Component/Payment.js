@@ -6,11 +6,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 function Payment() {
   const [journalCode, setJournalCode] = useState("");
   const bookingDetails = JSON.parse(localStorage.getItem("bookingDetails"));
-  const navigate = useNavigate()
-  const locate = useLocation()
-  const ids = locate.state
+  const navigate = useNavigate();
+  const locate = useLocation();
+  const ids = locate.state;
 
-  console.log(ids)
+  console.log(ids);
 
   if (!bookingDetails) {
     return <div>No booking details found.</div>;
@@ -24,9 +24,9 @@ function Payment() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userId = ids.userId
-    const theatreId = ids.theatreId
-    const movieId = ids.movieId
+    const userId = ids.userId;
+    const theatreId = ids.theatreId;
+    const movieId = ids.movieId;
 
     const bookingData = {
       userId,
@@ -37,14 +37,14 @@ function Payment() {
       movieId,
     };
 
-    console.log(bookingData)
-    await axios.post("http://localhost:8000/api/booking/", bookingData).then(() => {
-      alert("Payment Sucessful");
-      navigate('/')
-
-    }).catch((err) => alert(err))
-   
-
+    console.log(bookingData);
+    await axios
+      .post("http://localhost:8000/api/booking/", bookingData)
+      .then(() => {
+        alert("Submission Successful");
+        navigate("/Pending"); // Redirect to the pending page
+      })
+      .catch((err) => alert(err));
   };
 
   return (
@@ -61,19 +61,17 @@ function Payment() {
         <p className="account-holder">Account Holder: ***********</p>
       </div>
       <div className="journal-input">
-      <form onSubmit={handleSubmit}>
-
-      
-        <label htmlFor="journalCode">Journal Code:</label>
-        <input
-          type="text"
-          id="journalCode"
-          value={journalCode}
-          onChange={handleJournalCodeChange}
-        />
-        <button className="submit-button" type="submit">
-          Submit
-        </button>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="journalCode">Journal Code:</label>
+          <input
+            type="text"
+            id="journalCode"
+            value={journalCode}
+            onChange={handleJournalCodeChange}
+          />
+          <button className="submit-button" type="submit">
+            Submit
+          </button>
         </form>
       </div>
     </div>
