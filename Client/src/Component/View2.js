@@ -49,7 +49,6 @@ function View2() {
           <p className="cast">Cast: {movie.cast}</p>
           <p className="description">{movie.description}</p>
         </div>
-        
       </div>
       <div className="separator"></div>
 
@@ -61,15 +60,11 @@ function View2() {
           <p className="showing-details">Theatre: {theatre.name}</p>
           <p className="showing-details">Price: {movie.price} BTN</p>
         </div>
-        <Link
-          to={`/Login`}
-          className="login-button"
-        >
-          Login
+        <Link to={`/Login`} className="login-button red-text">
+          Login to Start Booking
         </Link>
       </div>
     </div>
-    
   );
 }
 

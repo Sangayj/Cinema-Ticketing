@@ -1,19 +1,13 @@
-import { useState, useEffect } from "react";
-import { useRef } from 'react';
-
-import { useNavigate, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import "./Navbar.css";
 
 function Navbar() {
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const searchInputRef = useRef(null);
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-    navigate("/Login");
-  };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
@@ -29,6 +23,32 @@ function Navbar() {
     }
   }, [location]);
 
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      event.returnValue = ""; // Prevent the browser from navigating away
+    };
+
+    const handlePopstate = () => {
+      // Redirect to the login page if not authenticated
+      if (location.pathname !== "/Login") {
+        navigate("/Login");
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("popstate", handlePopstate);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("popstate", handlePopstate);
+    };
+  }, [navigate, location.pathname]);
+
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
   return (
     <div className="navbar-container">
       <a href="/#" className="navbar-logo">
@@ -39,18 +59,17 @@ function Navbar() {
           type="text"
           className="search-input"
           placeholder="Search for movies"
-          ref={searchInputRef}
+          value={searchQuery}
+          onChange={handleSearchInputChange}
         />
-        {isLoggedIn ? (
-          <button className="nav-item" onClick={handleLogout}>
-            Logout
-          </button>
-        ) : (
-          <button className="nav-item" onClick={handleLogin}>
-            Login
-          </button>
-        )}
+        <Link className="search-button" to="/search" state={ searchQuery } >
+          Search
+        </Link>
+        <a className="nav-item" href="/Login" onClick={handleLogout}>
+          Logout
+        </a>
       </nav>
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
     </div>
   );
 }

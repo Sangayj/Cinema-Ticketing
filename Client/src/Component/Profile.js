@@ -1,38 +1,102 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from 'react'
+import {useState, useEffect} from "react"
+import { AuthContext } from '../context/Authcontext';
+import axios from 'axios';
 
-const Profile = () => {
-  const [userData, setUserData] = useState(null);
+export default function Profile() {
+  const [users, setUsers] = useState([]);
+  const {currentUser} = useContext(AuthContext)
+  const [bookings, setBookings] = useState([]);
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    // Fetch user data from MongoDB and update state
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch("http://localhost:8000/api/users");
-        const data = await response.json();
-        setUserData(data);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
+    fetch("http://localhost:8000/api/users")
+      .then((res) => res.json())
+      .then((data) => setUsers(data))
+      .catch((err) => console.log(err));
 
-    fetchUserData();
+      axios
+      .get("http://localhost:8000/bookings")
+      .then((response) => {
+        console.log(response.data)
+        setBookings(response.data);
+        console.log(bookings)
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+      axios
+      .get("http://localhost:8000/movies")
+      .then((response) => {
+        setMovies(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
-  return (
-    <div>
-      {userData ? (
-        <div>
-          <h2>Profile</h2>
-          <p>Name: {userData.name}</p>
-          <p>Username: {userData.username}</p>
-          <p>Email: {userData.email}</p>
-          {/* Render other user data fields */}
-        </div>
-      ) : (
-        <p>Loading user data...</p>
-      )}
-    </div>
-  );
-};
+const currentBooking = bookings.find((i) => i.userId === currentUser.userId )
+console.log(currentBooking)
 
-export default Profile;
+const movie = movies.find((i) => i._id === currentBooking.movieId)
+console.log(movie)
+
+  return (
+    <>
+
+{users.filter((i) => i._id === currentUser.userId).map((user) => {
+
+return(
+
+  <>
+    <div>Welcome Back {user.name}</div>
+  <table>
+    <tr>
+      <th>
+        Username
+      </th>
+      <th>
+        name
+      </th>
+      <th>
+        Movie
+      </th>
+      <th>
+        Tickets
+      </th>
+      <th>
+        Status
+      </th>
+    </tr>
+    <tr>
+      <th>
+        {user.username}
+      </th>
+      <th>
+        {user.name}
+      </th>
+      <th>
+        {movie.title}
+      </th>
+      <th>
+        {currentBooking.seatNumber}
+      </th>
+      <th>
+        {currentBooking.status}
+      </th>
+    </tr>
+  </table>
+  </>
+
+  
+
+)
+
+})}
+
+    </>
+   
+    
+  )
+}

@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Home.css";
+import { AuthContext } from "../context/Authcontext";
 
 function Homepage() {
+  const {currentUser} = useContext(AuthContext)
+   // Display user ID in the console
+   console.log(currentUser)
+
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -25,9 +30,14 @@ function Homepage() {
             className="card-image"
             src={`http://localhost:8000/uploads/${movie.filename}`}
             alt={movie.originalname}
-          />{" "}
+          />
           <div className="card-title">{movie.title}</div>
-          <Link to={`/View/${movie._id}`} className="view-button">
+          <Link
+            to={`/View/${movie._id}`}
+            state={{movieId: movie._id,
+             userId: currentUser.userId}}
+            className="view-button"
+          >
             View Details
           </Link>
         </div>

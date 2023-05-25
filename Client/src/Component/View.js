@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 
 import "./View.css";
 
@@ -9,6 +8,10 @@ function View() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [theatre, setTheatre] = useState(null);
+  const locate = useLocation()
+  const ids = locate.state
+
+
 
   useEffect(() => {
     axios
@@ -49,10 +52,8 @@ function View() {
           <p className="cast">Cast: {movie.cast}</p>
           <p className="description">{movie.description}</p>
         </div>
-        
       </div>
       <div className="separator"></div>
-
       <div className="showing-container">
         <h2 className="showing-header">Showing On:</h2>
         <div className="showing-details-container">
@@ -69,13 +70,13 @@ function View() {
           )}&time=${encodeURIComponent(
             movie.time
           )}&theatre=${encodeURIComponent(theatre.name)}`}
+          state={{ ...ids, theatreId: theatre._id }}
           className="book-now-button"
         >
           Book Now
         </Link>
       </div>
     </div>
-    
   );
 }
 

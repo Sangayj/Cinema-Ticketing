@@ -90,6 +90,7 @@ exports.bookSeats = (req, res) => {
       res.status(500).send("Internal server error");
     });
 };
+
 exports.deleteTheatre = async (req, res) => {
   try {
     const theatre = await Theatre.findByIdAndDelete(req.params.id);

@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams, useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import queryString from "query-string";
 
 import "./Book.css";
 
 function Book() {
+  
   const { id } = useParams();
   const location = useLocation();
-  const price = parseFloat(new URLSearchParams(location.search).get("price"));
+  const ids = location.state
+  console.log(ids)
+  const userId = ids.userId
+  const movieId = ids.movieId
+  const price = parseFloat(queryString.parse(location.search).price);
   const [theatre, setTheatre] = useState(null);
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -44,11 +48,10 @@ function Book() {
   };
 
   const isSeatBooked = (seat) => {
-    return theatre.assignedSeats.some((assignedSeat) => {
-      return (
+    return theatre.assignedSeats.some(
+      (assignedSeat) =>
         assignedSeat.seatNumber === seat && assignedSeat.status === "booked"
-      );
-    });
+    );
   };
 
   const formatter = new Intl.NumberFormat("en-Nu", {
@@ -64,49 +67,40 @@ function Book() {
   const seatNumbers = selectedSeats.join(", ");
 
   const handleBooking = () => {
-    const data = {
-      seats: selectedSeats,
+    // Save the booking details in local storage so they can be accessed in the Payment component
+    const query = queryString.parse(location.search);
+    const movieTitle = query.title;
+    const date = query.date;
+    const time = query.time;
+    const theatreId = ids.theatreId;
+
+    const bookingDetails = {
+      selectedSeats,
+      totalPrice,
+      movieId,
+      movieTitle,
+      date,
+      time,
+      theatreId,
+      userId,
     };
 
-    axios
-      .put(
-        `http://localhost:8000/api/theatres/${id}/seat/${selectedSeats}`,
-        data
-      )
-      .then((response) => {
-        // Save the booking details in local storage so they can be displayed on the ticket page
-        const query = queryString.parse(location.search);
-        const movieTitle = query.title;
-        const date = query.date;
-        const time = query.time;
-        const theatreName = query.theatre;
+    localStorage.setItem("bookingDetails", JSON.stringify(bookingDetails));
 
-        localStorage.setItem(
-          "bookingDetails",
-          JSON.stringify({
-            selectedSeats,
-            totalPrice,
-            movieTitle,
-            date,
-            time,
-            theatreName,
-          })
-        );
+    // Reset the selected seats state
+    setSelectedSeats([]);
 
-        // Reset the selected seats state
-        setSelectedSeats([]);
-
-        // Display a success message
-        alert("Booking Successful.");
-
-        // Navigate to the ticket page
-        history("/Ticket");
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("No seats selected.");
-      });
+    console.log(userId)
+    // Navigate to the payment page
+    navigate("/Payment", {
+      state: {
+        userId, // Pass the userId prop
+        movieId, // Pass the movieId prop
+        theatreId,
+      },
+    });
   };
+
   const seatSummary = (
     <div className="seat-summary">
       <p>
@@ -125,7 +119,6 @@ function Book() {
   const seatLegend = (
     <div className="seat-legend">
       <span className="available"></span>
-
       <span>Available</span>
       <span className="selected"></span>
       <span>Selected</span>
