@@ -4,7 +4,6 @@ const userController = require("../controllers/userController");
 
 router.post("/SignUp", userController.SignUp);
 
-
 router.get("/users", userController.getUsers);
 
 // DELETE user by ID
