@@ -13,5 +13,6 @@ router.delete("/users/:userId", userController.deleteUser);
 
 // PUT update user by ID
 router.put("/users/:userId", userController.updateUser);
+router.get("/users/:id", userController.getUserById);
 
 module.exports = router;

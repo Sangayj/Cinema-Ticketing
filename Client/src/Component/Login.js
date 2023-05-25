@@ -24,8 +24,14 @@ const Login = () => {
       if (response.ok) {
         // Verify user role and redirect to the corresponding panel
         if (data.userType === "admin") {
+          // Save user session to local storage
+          localStorage.setItem("user", JSON.stringify(data));
+          console.log("Token:", data.token); // Display token in the console
           history("/AdminDashboard");
         } else if (data.userType === "user") {
+          // Save user session to local storage
+          localStorage.setItem("user", JSON.stringify(data));
+          console.log("Token:", data.token); // Display token in the console
           history("/");
         } else {
           console.error("Invalid user role");
@@ -76,7 +82,6 @@ const Login = () => {
         </button>
         <div className="login-form-links">
           <a href="/forgotpassword">Forgot Password?</a>
-
           <a href="/SignUp">Sign Up</a>
         </div>
       </form>

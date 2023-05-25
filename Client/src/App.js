@@ -1,6 +1,7 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "./Component/Navbar";
 import Footer from "./Component/Footer";
+import { UserProvider } from "./Component/UserContext";
 
 import SignUp from "./Component/SignUp";
 import Login from "./Component/Login";
@@ -27,6 +28,7 @@ function App() {
   const isSignUpPage = location.pathname === "/SignUp";
   const isAdminTheatrePage = location.pathname === "/AdminTheatre";
   const isViewBookingPage = location.pathname === "/ViewBooking";
+
   return (
     <div>
       {!isDashboardPage &&
@@ -37,22 +39,24 @@ function App() {
         !isViewBookingPage &&
         !isSignUpPage &&
         !isAdminTheatrePage && <Navbar />}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/AdminDashboard" element={<AdminDashboard />} />
-        <Route path="/UserInfo" element={<UserInfo />} />
-        <Route path="/Movies" element={<Movies />} />
-        <Route path="/View/:id" element={<View />} />
-        <Route path="/MovieDetails" element={<MovieDetails />} />
-        <Route path="/Book/:id" element={<Book />} />
-        <Route path="/Seat" element={<Seat />} />
-        <Route path="/AdminTheatre" element={<AdminTheatre />} />
-        <Route path="/Ticket" element={<Ticket />} />
-        <Route path="/ViewBooking" element={<ViewBooking />} />
-        <Route path="/Payment" element={<Payment />} />
-      </Routes>
+      <UserProvider>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/SignUp" element={<SignUp />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/AdminDashboard" element={<AdminDashboard />} />
+          <Route path="/UserInfo" element={<UserInfo />} />
+          <Route path="/Movies" element={<Movies />} />
+          <Route path="/View/:id" element={<View />} />
+          <Route path="/MovieDetails" element={<MovieDetails />} />
+          <Route path="/Book/:id" element={<Book />} />
+          <Route path="/Seat" element={<Seat />} />
+          <Route path="/AdminTheatre" element={<AdminTheatre />} />
+          <Route path="/Ticket" element={<Ticket />} />
+          <Route path="/ViewBooking" element={<ViewBooking />} />
+          <Route path="/Payment" element={<Payment />} />
+        </Routes>
+      </UserProvider>
       {!isDashboardPage &&
         !isUserInfoPage &&
         !isMoviesPage &&

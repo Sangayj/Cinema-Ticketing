@@ -55,6 +55,15 @@ exports.getUsers = async (req, res) => {
   }
 };
 
+exports.getUserById = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = await User.findById(userId);
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
 exports.deleteUser = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -103,6 +112,8 @@ exports.updateUser = async (req, res) => {
   }
 };
 
+const { v4: uuidv4 } = require("uuid");
+
 exports.Login = async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -121,15 +132,8 @@ exports.Login = async (req, res) => {
       return res.status(400).json({ message: "Incorrect password" });
     }
 
-    const secretKey =
-      user.role === "admin"
-        ? config.get("adminSecretKey")
-        : config.get("jwtSecret");
-
-    // Generate the JWT token
-    const token = jwt.sign({ id: user._id, role: user.role }, secretKey, {
-      expiresIn: "1h",
-    });
+    // Generate a random token
+    const token = uuidv4();
 
     // Send the token and user type in the response
     return res.status(200).json({ token, userType: user.role });
