@@ -31,6 +31,7 @@ mongoose
   })
   .catch((error) => {
     console.error("Error connecting to MongoDB:", error);
+    process.exit(1); // Exit the application in case of connection error
   });
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));

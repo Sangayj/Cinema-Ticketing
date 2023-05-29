@@ -10,59 +10,59 @@ function ViewBooking() {
   const { currentUser } = useContext(AuthContext);
 
   console.log(currentUser);
+
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/bookings")
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/bookings");
         console.log(response.data);
         setBookings(response.data);
-        console.log(bookings);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error(error);
-      });
-    fetch("http://localhost:8000/api/users")
-      .then((res) => res.json())
-      .then((data) => setUsers(data))
-      .catch((err) => console.log(err));
+      }
 
-    axios
-      .get("http://localhost:8000/api/theatres")
-      .then((response) => {
+      try {
+        const res = await fetch("http://localhost:8000/api/users");
+        const data = await res.json();
+        setUsers(data);
+      } catch (error) {
+        console.log(error);
+      }
+
+      try {
+        const response = await axios.get("http://localhost:8000/api/theatres");
         setTheatres(response.data);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error(error);
-      });
-  }, [bookings]);
+      }
+    };
 
-  const handleApprove = (bookingId) => {
-    axios
-      .put(`http://localhost:8000/api/bookings/${bookingId}/approve`)
-      .then((response) => {
-        // Handle the success case
-        console.log("Booking approved:", bookingId);
-        alert("Booking Approved");
-      })
-      .catch((error) => {
-        // Handle the error case
-        console.error("An error occurred while approving the booking:", error);
-      });
+    fetchData();
+  }, []);
+
+  const handleApprove = async (bookingId) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8000/api/bookings/${bookingId}/approve`
+      );
+      console.log("Booking approved:", bookingId);
+      alert("Booking Approved");
+    } catch (error) {
+      console.error("An error occurred while approving the booking:", error);
+    }
   };
 
-  const handleCancel = (bookingId) => {
-    axios
-      .put(`http://localhost:8000/api/bookings/${bookingId}/cancel`)
-      .then((response) => {
-        // Handle the success case
-        console.log("Booking canceled:", bookingId);
-        alert("Booking Canceled");
-        window.location.reload();
-      })
-      .catch((error) => {
-        // Handle the error case
-        console.error("An error occurred while canceling the booking:", error);
-      });
+  const handleCancel = async (bookingId) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8000/api/bookings/${bookingId}/cancel`
+      );
+      console.log("Booking canceled:", bookingId);
+      alert("Booking Canceled");
+      window.location.reload();
+    } catch (error) {
+      console.error("An error occurred while canceling the booking:", error);
+    }
   };
 
   return (
@@ -83,13 +83,10 @@ function ViewBooking() {
         </thead>
         <tbody>
           {bookings.reverse().map((booking) => {
-            // Find the user object with the matching userId
             const user = users.find((user) => user._id === booking.userId);
-            console.log(theatres);
             const theatre = theatres.find(
               (theatre) => theatre._id === booking.theatreId
             );
-            console.log(theatre);
 
             return (
               <tr key={booking._id}>
